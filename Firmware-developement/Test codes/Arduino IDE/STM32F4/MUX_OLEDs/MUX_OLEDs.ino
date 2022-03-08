@@ -262,7 +262,7 @@ void displayScreen7()
 
 void displayScreen8()
 {
-  i2c_mux1.selectChannel(8);
+  i2c_mux1.selectChannel(7);
 
   // Clear the buffer
   display.clearDisplay();
