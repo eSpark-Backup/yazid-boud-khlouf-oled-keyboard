@@ -50,6 +50,7 @@ void setup() {
     displayScreen(&i2c_mux3, &display3 , i);
   }
 
+  i2c_mux1.setChannelMask(0);
 
   for (int i = 24; i < 30; i++)
   {
