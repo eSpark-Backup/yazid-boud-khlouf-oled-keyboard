@@ -23,7 +23,7 @@ Adafruit_SSD1306 display2(SCREEN_WIDTH, SCREEN_HEIGHT, &WireDisplay2, OLED_RESET
 Adafruit_SSD1306 display3(SCREEN_WIDTH, SCREEN_HEIGHT, &WireDisplay3, OLED_RESET);
 Adafruit_SSD1306 display4(SCREEN_WIDTH, SCREEN_HEIGHT, &WireDisplay1, OLED_RESET);
 
-char screens[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Z', '1', '2', '3', '4', '5', '6', '7'};
+char screens[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7'};
 
 void setup() {
   // put your setup code here, to run once:
@@ -51,11 +51,11 @@ void setup() {
   }
 
 
-  //  for (int i = 24; i < 30; i++)
-  //  {
-  //    initDisplay(&i2c_mux4, &display4 , i);
-  //    displayScreen(&i2c_mux4, &display4 , i);
-  //  }
+  for (int i = 24; i < 30; i++)
+  {
+    initDisplay(&i2c_mux4, &display4 , i);
+    displayScreen(&i2c_mux4, &display4 , i);
+  }
 
 }
 
@@ -69,6 +69,7 @@ void initDisplay(TI_TCA9548A* i2c_mux, Adafruit_SSD1306* Display, int channel)
 
   if ((channel >= 8) && (channel < 16)) channel -= 8;
   if ((channel >= 16) && (channel < 24))channel -= 16;
+  if ((channel >= 24) && (channel < 30))channel -= 24;
   i2c_mux->selectChannel(channel);
 
   // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
@@ -85,6 +86,7 @@ void displayScreen(TI_TCA9548A* i2c_mux, Adafruit_SSD1306* Display, int channel)
   int screen_number = channel;
   if ((channel >= 8) && (channel < 16)) channel -= 8;
   if ((channel >= 16) && (channel < 24))channel -= 16;
+  if ((channel >= 24) && (channel < 30))channel -= 24;
   i2c_mux->selectChannel(channel);
 
   // Clear the buffer
