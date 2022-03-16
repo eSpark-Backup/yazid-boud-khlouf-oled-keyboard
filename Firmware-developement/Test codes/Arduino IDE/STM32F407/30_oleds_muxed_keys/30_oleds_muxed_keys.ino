@@ -2,12 +2,27 @@
 #include "Wire.h"
 #include "Adafruit_GFX.h"
 #include "Adafruit_SSD1306.h"
+#include "Keyboard.h"
 
 #define SCREEN_WIDTH 128 // OLED display width, in pixels
 #define SCREEN_HEIGHT 64 // OLED display height, in pixels
 
 #define OLED_RESET     4 // Reset pin # (or -1 if sharing Arduino reset pin)
 #define SCREEN_ADDRESS 0x3C ///< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
+
+#define INPUT1 PD9
+#define INPUT2 PD10
+#define INPUT3 PD11
+#define INPUT4 PD12
+
+#define OUTPUT1 PB4
+#define OUTPUT2 PB5
+#define OUTPUT3 PB6
+#define OUTPUT4 PB7
+
+#define KEY_DELAY 100
+#define REPEAT_DELAY 30
+#define REPEAT_DELAY_INITIAL 500
 
 TwoWire WireDisplay1(PB9, PB8);
 TwoWire WireDisplay2(PB11, PB10);
@@ -26,6 +41,15 @@ Adafruit_SSD1306 display4(SCREEN_WIDTH, SCREEN_HEIGHT, &WireDisplay1, OLED_RESET
 char screens[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4'};
 char screens2[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3', '4'};
 
+uint32_t output_pins[] = {OUTPUT1, OUTPUT2, OUTPUT3, OUTPUT4};
+char key_selected = NULL;
+char last_key_selected = NULL;
+uint16_t repeat_delay = 0;
+uint8_t repeat_first = false;
+uint8_t shift_key = false;
+uint8_t capitalized = false;
+uint8_t uncapitalized = false;
+
 void setup()
 // put your setup code here, to run once:
 {
@@ -37,7 +61,17 @@ void setup()
   WireDisplay2.setClock(100000);
   WireDisplay3.setClock(100000);
 
+  pinMode(INPUT1, INPUT_PULLDOWN);
+  pinMode(INPUT2, INPUT_PULLDOWN);
+  pinMode(INPUT3, INPUT_PULLDOWN);
+  pinMode(INPUT4, INPUT_PULLDOWN);
 
+  pinMode(PA0, INPUT);
+
+  pinMode(OUTPUT1, OUTPUT);
+  pinMode(OUTPUT2, OUTPUT);
+  pinMode(OUTPUT3, OUTPUT);
+  pinMode(OUTPUT4, OUTPUT);
 
   for (int i = 0; i < 8; i++)
   {
@@ -51,141 +85,54 @@ void setup()
     initDisplay(&i2c_mux4, &display4 , i);
   }
 
-
-  //  for (int i = 0; i < 8; i++)
-  //  {
-  //    initDisplay(&i2c_mux1, &display , i);
-  //    displayScreen(&i2c_mux1, &display , i, screens);
-  //  }
-  //
-  //  for (int i = 8; i < 16; i++)
-  //  {
-  //    initDisplay(&i2c_mux2, &display2 , i);
-  //    displayScreen(&i2c_mux2, &display2 , i, screens);
-  //  }
-  //
-  //  for (int i = 16; i < 24; i++)
-  //  {
-  //    initDisplay(&i2c_mux3, &display3 , i);
-  //    displayScreen(&i2c_mux3, &display3 , i, screens);
-  //  }
-  //
-  //  i2c_mux1.setChannelMask(0);
-  //
-  //  for (int i = 24; i < 30; i++)
-  //  {
-  //    initDisplay(&i2c_mux4, &display4 , i);
-  //    displayScreen(&i2c_mux4, &display4 , i, screens);
-  //  }
-
-  //  // Init displays
-  ////  for (int i = 0; i < 8; i++)
-  ////  {
-  ////    initDisplay(&i2c_mux1, &display , i);
-  ////  }
-  //
-  //
-  //  for (int i = 8; i < 16; i++)
-  //  {
-  //    initDisplay(&i2c_mux2, &display2 , i);
-  //  }
-  //  //
-  //  for (int i = 16; i < 24; i++)
-  //  {
-  //    initDisplay(&i2c_mux3, &display3 , i);
-  //  }
-  //  //
-  //  //i2c_mux1.setChannelMask(0);
-  //
-  //  for (int i = 24; i < 30; i++)
-  //  {
-  //    initDisplay(&i2c_mux4, &display4 , i);
-  //  }
-  //  //
-  //  //  i2c_mux1.setChannelMask(0xFF);
-  //
-  //  /*******************************************************************************************************************************************************************/
-  //
-  //  // Print Upper-case letters
-  ////  for (int i = 0; i < 8; i++)
-  ////  {
-  ////    displayScreen(&i2c_mux1, &display , i, screens);
-  ////  }
-  //
-  //  for (int i = 8; i < 16; i++)
-  //  {
-  //    displayScreen(&i2c_mux2, &display2 , i, screens);
-  //  }
-  //  //
-  //  for (int i = 16; i < 24; i++)
-  //  {
-  //    displayScreen(&i2c_mux3, &display3 , i, screens);
-  //  }
-  //  //
-  //  //  i2c_mux1.setChannelMask(0);
-  //  //
-  //  for (int i = 24; i < 30; i++)
-  //  {
-  //    displayScreen(&i2c_mux4, &display4 , i, screens);
-  //  }
+  Keyboard.begin();
 
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
 
-  i2c_mux1.setChannelMask(0);
+  //  Keyboard.write('A');
 
-  for (int i = 24; i < 30; i++)
+  if (digitalRead(PA0) == LOW)
   {
-    displayScreen(&i2c_mux4, &display4 , i, screens);
+    if (!capitalized)
+    {
+      capitalized = true;
+      uncapitalized = false;
+
+      capitalize();
+    }
+  } else
+  {
+    if (!uncapitalized)
+    {
+      uncapitalized = true;
+      capitalized = false;
+
+      uncapitalize();
+    }
   }
 
-  i2c_mux4.setChannelMask(0);
-
-  for (int i = 0; i < 8; i++)
-  {
-    displayScreen(&i2c_mux1, &display , i, screens);
-  }
-
-  for (int i = 8; i < 16; i++)
-  {
-    displayScreen(&i2c_mux2, &display2 , i, screens);
-  }
-
-  for (int i = 16; i < 24; i++)
-  {
-    displayScreen(&i2c_mux3, &display3 , i, screens);
-  }
-
-  delay(2000);
-
-  i2c_mux1.setChannelMask(0);
-
-  for (int i = 24; i < 30; i++)
-  {
-    displayScreen(&i2c_mux4, &display4 , i, screens2);
-  }
-
-  i2c_mux4.setChannelMask(0);
-
-  for (int i = 0; i < 8; i++)
-  {
-    displayScreen(&i2c_mux1, &display , i, screens2);
-  }
-
-  for (int i = 8; i < 16; i++)
-  {
-    displayScreen(&i2c_mux2, &display2 , i, screens2);
-  }
-
-  for (int i = 16; i < 24; i++)
-  {
-    displayScreen(&i2c_mux3, &display3 , i, screens2);
-  }
-
-  delay(2000);
-
+  //  checkKeys();
+  //  //
+  //  if (digitalRead(PA0) == LOW)
+  //  {
+  //    if (!capitalized)
+  //    {
+  //      capitalized = true;
+  //      uncapitalized = false;
+  //      capitalize();
+  //    }
+  //  } else
+  //  {
+  //    if (!uncapitalized)
+  //    {
+  //      uncapitalized = true;
+  //      capitalized = false;
+  //      uncapitalize();
+  //    }
+  //  }
 
 }
 
@@ -223,4 +170,285 @@ void displayScreen(TI_TCA9548A* i2c_mux, Adafruit_SSD1306* Display, int channel,
   Display->println(screen_local[screen_number]);
 
   Display->display();
+}
+
+void capitalize()
+{
+  i2c_mux1.setChannelMask(0);
+
+  for (int i = 24; i < 30; i++)
+  {
+    displayScreen(&i2c_mux4, &display4 , i, screens);
+  }
+
+  i2c_mux4.setChannelMask(0);
+
+  for (int i = 0; i < 8; i++)
+  {
+    displayScreen(&i2c_mux1, &display , i, screens);
+  }
+
+  for (int i = 8; i < 16; i++)
+  {
+    displayScreen(&i2c_mux2, &display2 , i, screens);
+  }
+
+  for (int i = 16; i < 24; i++)
+  {
+    displayScreen(&i2c_mux3, &display3 , i, screens);
+  }
+}
+
+void uncapitalize()
+{
+  i2c_mux1.setChannelMask(0);
+
+  for (int i = 24; i < 30; i++)
+  {
+    displayScreen(&i2c_mux4, &display4 , i, screens2);
+  }
+
+  i2c_mux4.setChannelMask(0);
+
+  for (int i = 0; i < 8; i++)
+  {
+    displayScreen(&i2c_mux1, &display , i, screens2);
+  }
+
+  for (int i = 8; i < 16; i++)
+  {
+    displayScreen(&i2c_mux2, &display2 , i, screens2);
+  }
+
+  for (int i = 16; i < 24; i++)
+  {
+    displayScreen(&i2c_mux3, &display3 , i, screens2);
+  }
+}
+
+void checkKeys()
+{
+  for (int output = 0; output < 4; output++)
+  {
+    digitalWrite(output_pins[0], output == 0);
+    digitalWrite(output_pins[1], output == 1);
+    digitalWrite(output_pins[2], output == 2);
+    digitalWrite(output_pins[3], output == 3);
+
+    if (output == 0)
+    {
+
+      if (digitalRead(INPUT1) == 1)
+      {
+        shift_key = true;
+      }
+      else {
+        shift_key = false;
+      }
+
+      if (digitalRead(INPUT3) == 1)
+      {
+        while (!digitalRead(INPUT3));
+
+        //        Serial.print("Button pressed: ");
+        //        Serial.println(3 + (output * 4));
+
+        key_selected = '3';
+        //        Keyboard.write(key_selected);
+
+      }
+
+      if (digitalRead(INPUT4) == 1)
+      {
+
+        //        Serial.print("Button pressed: ");
+        //        Serial.println(4 + (output * 4));
+
+        key_selected = '4';
+        //        Keyboard.write(key_selected);
+
+      }
+
+      continue;
+    }
+
+    if (output == 1)
+    {
+
+      if (digitalRead(INPUT1) == 1)
+      {
+
+        //        Serial.print("Button pressed: ");
+        //        Serial.println(1 + (output * 4));
+
+        key_selected = 'A';
+        //        Keyboard.write(key_selected);
+
+      }
+
+      if (digitalRead(INPUT2) == 1)
+      {
+
+        //        Serial.print("Button pressed: ");
+        //        Serial.println(2 + (output * 4));
+
+        key_selected = 'B';
+        //        Keyboard.write(key_selected);
+
+      }
+
+      if (digitalRead(INPUT3) == 1)
+      {
+
+        //        Serial.print("Button pressed: ");
+        //        Serial.println(3 + (output * 4));
+
+        key_selected = 'C';
+        //        Keyboard.write(key_selected);
+
+      }
+
+      if (digitalRead(INPUT4) == 1)
+      {
+
+        //        Serial.print("Button pressed: ");
+        //        Serial.println(4 + (output * 4));
+
+        key_selected = 'D';
+        //        Keyboard.write(key_selected);
+
+      }
+
+      continue;
+    }
+
+    if (output == 2)
+    {
+
+      if (digitalRead(INPUT1) == 1)
+      {
+
+        //        Serial.print("Button pressed: ");
+        //        Serial.println(1 + (output * 4));
+
+        key_selected = 'E';
+        //        Keyboard.write(key_selected);
+
+      }
+
+      if (digitalRead(INPUT2) == 1)
+      {
+
+        //        Serial.print("Button pressed: ");
+        //        Serial.println(2 + (output * 4));
+
+        key_selected = 'F';
+        //        Keyboard.write(key_selected);
+
+      }
+
+      if (digitalRead(INPUT3) == 1)
+      {
+
+        //        Serial.print("Button pressed: ");
+        //        Serial.println(3 + (output * 4));
+
+        key_selected = 'G';
+        //        Keyboard.write(key_selected);
+
+      }
+
+      if (digitalRead(INPUT4) == 1)
+      {
+        //        Serial.print("Button pressed: ");
+        //        Serial.println(4 + (output * 4));
+
+        key_selected = 'H';
+        //        Keyboard.write(key_selected);
+
+      }
+
+      continue;
+    }
+
+    if (output == 3)
+    {
+
+      if (digitalRead(INPUT1) == 1)
+      {
+
+        //        Serial.print("Button pressed: ");
+        //        Serial.println(1 + (output * 4));
+
+        key_selected = 'I';
+        //        Keyboard.write(key_selected);
+
+      }
+
+      if (digitalRead(INPUT2) == 1)
+      {
+
+        //        Serial.print("Button pressed: ");
+        //        Serial.println(2 + (output * 4));
+
+        key_selected = 'J';
+        //        Keyboard.write(key_selected);
+      }
+
+      if (digitalRead(INPUT3) == 1)
+      {
+
+        //        Serial.print("Button pressed: ");
+        //        Serial.println(3 + (output * 4));
+        key_selected = 'K';
+        //        Keyboard.write(key_selected);
+
+      }
+
+      if (digitalRead(INPUT4) == 1)
+      {
+
+        //        Serial.print("Button pressed: ");
+        //        Serial.println(4 + (output * 4));
+
+        key_selected = 'L';
+        //        Keyboard.write(key_selected);
+
+      }
+
+      continue;
+
+    }
+
+  }
+
+  if (last_key_selected == key_selected)
+  {
+    if (!repeat_first)
+    {
+      repeat_delay = REPEAT_DELAY_INITIAL;
+      repeat_first = true;
+    } else
+    {
+      repeat_delay = REPEAT_DELAY;
+    }
+  }
+  else
+  {
+    repeat_first = false;
+    repeat_delay = KEY_DELAY;
+  }
+
+  last_key_selected = key_selected;
+
+  if (key_selected != -1)
+  {
+    if (!shift_key)
+    {
+      //delay(repeat_delay);
+    }
+
+    Keyboard.write(key_selected);
+    key_selected = -1;
+  }
 }
