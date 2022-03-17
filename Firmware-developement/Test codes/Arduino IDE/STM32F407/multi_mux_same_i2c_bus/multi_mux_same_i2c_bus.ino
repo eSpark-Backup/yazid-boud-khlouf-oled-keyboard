@@ -42,7 +42,11 @@ void setup()
   for (int i = 24; i < 30; i++)
   {
     initDisplay(&i2c_mux1, &display , i);
-    initDisplay(&i2c_mux4, &display4 , i);
+  }
+
+  for (int i = 0; i < 8; i++)
+  {
+    initDisplay(&i2c_mux1, &display1 , i);
   }
 
   i2c_mux1.setChannelMask(0);

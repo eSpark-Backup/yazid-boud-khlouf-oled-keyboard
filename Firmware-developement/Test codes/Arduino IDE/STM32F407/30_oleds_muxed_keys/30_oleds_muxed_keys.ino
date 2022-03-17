@@ -76,16 +76,18 @@ void setup()
   for (int i = 0; i < 8; i++)
   {
     initDisplay(&i2c_mux1, &display , i);
-    initDisplay(&i2c_mux2, &display2 , i);
-    initDisplay(&i2c_mux3, &display3 , i);
+    //    initDisplay(&i2c_mux2, &display2 , i);
+    //    initDisplay(&i2c_mux3, &display3 , i);
   }
 
-  for (int i = 24; i < 30; i++)
-  {
-    initDisplay(&i2c_mux4, &display4 , i);
-  }
+  //  for (int i = 24; i < 30; i++)
+  //  {
+  //    initDisplay(&i2c_mux4, &display4 , i);
+  //  }
 
   Keyboard.begin();
+
+  //  capitalize();
 
 }
 
@@ -113,6 +115,12 @@ void loop() {
       uncapitalize();
     }
   }
+
+  //  capitalize();
+  //  delay(2000);
+  //
+  //  uncapitalize();
+  //  delay(2000);
 
   //  checkKeys();
   //  //
@@ -174,56 +182,57 @@ void displayScreen(TI_TCA9548A* i2c_mux, Adafruit_SSD1306* Display, int channel,
 
 void capitalize()
 {
-  i2c_mux1.setChannelMask(0);
+  //  i2c_mux1.setChannelMask(0);
+  //
+  //  for (int i = 24; i < 30; i++)
+  //  {
+  //    displayScreen(&i2c_mux4, &display4 , i, screens);
+  //  }
 
-  for (int i = 24; i < 30; i++)
-  {
-    displayScreen(&i2c_mux4, &display4 , i, screens);
-  }
-
-  i2c_mux4.setChannelMask(0);
+  //  i2c_mux4.setChannelMask(0);
 
   for (int i = 0; i < 8; i++)
   {
     displayScreen(&i2c_mux1, &display , i, screens);
   }
 
-  for (int i = 8; i < 16; i++)
-  {
-    displayScreen(&i2c_mux2, &display2 , i, screens);
-  }
-
-  for (int i = 16; i < 24; i++)
-  {
-    displayScreen(&i2c_mux3, &display3 , i, screens);
-  }
+  //  for (int i = 8; i < 16; i++)
+  //  {
+  //    displayScreen(&i2c_mux2, &display2 , i, screens);
+  //  }
+  //
+  //  for (int i = 16; i < 24; i++)
+  //  {
+  //    displayScreen(&i2c_mux3, &display3 , i, screens);
+  //  }
 }
 
 void uncapitalize()
 {
-  i2c_mux1.setChannelMask(0);
 
-  for (int i = 24; i < 30; i++)
-  {
-    displayScreen(&i2c_mux4, &display4 , i, screens2);
-  }
-
-  i2c_mux4.setChannelMask(0);
+  //  i2c_mux1.setChannelMask(0);
+  //
+  //  for (int i = 24; i < 30; i++)
+  //  {
+  //    displayScreen(&i2c_mux4, &display4 , i, screens2);
+  //  }
+  //
+  //  i2c_mux4.setChannelMask(0);
 
   for (int i = 0; i < 8; i++)
   {
     displayScreen(&i2c_mux1, &display , i, screens2);
   }
 
-  for (int i = 8; i < 16; i++)
-  {
-    displayScreen(&i2c_mux2, &display2 , i, screens2);
-  }
-
-  for (int i = 16; i < 24; i++)
-  {
-    displayScreen(&i2c_mux3, &display3 , i, screens2);
-  }
+  //  for (int i = 8; i < 16; i++)
+  //  {
+  //    displayScreen(&i2c_mux2, &display2 , i, screens2);
+  //  }
+  //
+  //  for (int i = 16; i < 24; i++)
+  //  {
+  //    displayScreen(&i2c_mux3, &display3 , i, screens2);
+  //  }
 }
 
 void checkKeys()

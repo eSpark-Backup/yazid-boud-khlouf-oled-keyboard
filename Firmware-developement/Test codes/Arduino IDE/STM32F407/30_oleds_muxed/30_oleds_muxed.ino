@@ -38,25 +38,25 @@ void setup() {
     displayScreen(&i2c_mux1, &display , i);
   }
 
-  for (int i = 8; i < 16; i++)
-  {
-    initDisplay(&i2c_mux2, &display2 , i);
-    displayScreen(&i2c_mux2, &display2 , i);
-  }
-
-  for (int i = 16; i < 24; i++)
-  {
-    initDisplay(&i2c_mux3, &display3 , i);
-    displayScreen(&i2c_mux3, &display3 , i);
-  }
-
-  i2c_mux1.setChannelMask(0);
-
-  for (int i = 24; i < 30; i++)
-  {
-    initDisplay(&i2c_mux4, &display4 , i);
-    displayScreen(&i2c_mux4, &display4 , i);
-  }
+//  for (int i = 8; i < 16; i++)
+//  {
+//    initDisplay(&i2c_mux2, &display2 , i);
+//    displayScreen(&i2c_mux2, &display2 , i);
+//  }
+//
+//  for (int i = 16; i < 24; i++)
+//  {
+//    initDisplay(&i2c_mux3, &display3 , i);
+//    displayScreen(&i2c_mux3, &display3 , i);
+//  }
+//
+//  i2c_mux1.setChannelMask(0);
+//
+//  for (int i = 24; i < 30; i++)
+//  {
+//    initDisplay(&i2c_mux4, &display4 , i);
+//    displayScreen(&i2c_mux4, &display4 , i);
+//  }
 
 }
 
