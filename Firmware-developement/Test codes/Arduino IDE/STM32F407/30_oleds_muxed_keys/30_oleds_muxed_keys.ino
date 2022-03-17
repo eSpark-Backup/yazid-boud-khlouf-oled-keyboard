@@ -96,40 +96,13 @@ void loop() {
 
   //  Keyboard.write('A');
 
-  if (digitalRead(PA0) == LOW)
-  {
-    if (!capitalized)
-    {
-      capitalized = true;
-      uncapitalized = false;
-
-      capitalize();
-    }
-  } else
-  {
-    if (!uncapitalized)
-    {
-      uncapitalized = true;
-      capitalized = false;
-
-      uncapitalize();
-    }
-  }
-
-  //  capitalize();
-  //  delay(2000);
-  //
-  //  uncapitalize();
-  //  delay(2000);
-
-  //  checkKeys();
-  //  //
   //  if (digitalRead(PA0) == LOW)
   //  {
   //    if (!capitalized)
   //    {
   //      capitalized = true;
   //      uncapitalized = false;
+  //
   //      capitalize();
   //    }
   //  } else
@@ -138,9 +111,36 @@ void loop() {
   //    {
   //      uncapitalized = true;
   //      capitalized = false;
+  //
   //      uncapitalize();
   //    }
   //  }
+
+  //  capitalize();
+  //  delay(2000);
+  //
+  //  uncapitalize();
+  //  delay(2000);
+
+  checkKeys();
+  //
+  if (shift_key)
+  {
+    if (!capitalized)
+    {
+      capitalized = true;
+      uncapitalized = false;
+      capitalize();
+    }
+  } else
+  {
+    if (!uncapitalized)
+    {
+      uncapitalized = true;
+      capitalized = false;
+      uncapitalize();
+    }
+  }
 
 }
 
