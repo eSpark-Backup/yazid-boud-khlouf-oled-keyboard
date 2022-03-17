@@ -47,6 +47,7 @@ char last_key_selected = NULL;
 uint16_t repeat_delay = 0;
 uint8_t repeat_first = false;
 uint8_t shift_key = false;
+uint8_t capslock_key = false;
 uint8_t capitalized = false;
 uint8_t uncapitalized = false;
 
@@ -124,7 +125,7 @@ void loop() {
 
   checkKeys();
   //
-  if (shift_key)
+  if (shift_key || capslock_key)
   {
     if (!capitalized)
     {
@@ -247,25 +248,19 @@ void checkKeys()
     if (output == 0)
     {
 
-      if (digitalRead(INPUT1) == 1)
-      {
-        shift_key = true;
-      }
-      else {
-        shift_key = false;
-      }
+      //      if (digitalRead(INPUT1) == HIGH)
+      //      {
+      //        shift_key = true;
+      //      }else
+      //      {
+      //        shift_key = false;
+      //      }
 
-      if (digitalRead(INPUT3) == 1)
-      {
-        while (!digitalRead(INPUT3));
-
-        //        Serial.print("Button pressed: ");
-        //        Serial.println(3 + (output * 4));
-
-        key_selected = '3';
-        //        Keyboard.write(key_selected);
-
-      }
+      //      if (digitalRead(INPUT2) == 1)
+      //      {
+      //        capslock_key = !capslock_key;
+      //        Keyboard.write(KEY_CAPS_LOCK);
+      //      }
 
       if (digitalRead(INPUT4) == 1)
       {
@@ -284,25 +279,31 @@ void checkKeys()
     if (output == 1)
     {
 
-      if (digitalRead(INPUT1) == 1)
+      if (digitalRead(INPUT1) == HIGH)
       {
-
-        //        Serial.print("Button pressed: ");
-        //        Serial.println(1 + (output * 4));
-
-        key_selected = 'A';
-        //        Keyboard.write(key_selected);
-
+        shift_key = true;
+        Keyboard.press(KEY_LEFT_SHIFT);
+      } else
+      {
+        shift_key = false;
+        Keyboard.release(KEY_LEFT_SHIFT);
       }
+
+      //      if (digitalRead(INPUT1) == 1)
+      //      {
+      //
+      //        //        Serial.print("Button pressed: ");
+      //        //        Serial.println(1 + (output * 4));
+      //
+      //        key_selected = 'a';
+      //        //        Keyboard.write(key_selected);
+      //
+      //      }
 
       if (digitalRead(INPUT2) == 1)
       {
-
-        //        Serial.print("Button pressed: ");
-        //        Serial.println(2 + (output * 4));
-
-        key_selected = 'B';
-        //        Keyboard.write(key_selected);
+        capslock_key = !capslock_key;
+        Keyboard.write(KEY_CAPS_LOCK);
 
       }
 
@@ -312,7 +313,7 @@ void checkKeys()
         //        Serial.print("Button pressed: ");
         //        Serial.println(3 + (output * 4));
 
-        key_selected = 'C';
+        key_selected = 'c';
         //        Keyboard.write(key_selected);
 
       }
@@ -323,7 +324,7 @@ void checkKeys()
         //        Serial.print("Button pressed: ");
         //        Serial.println(4 + (output * 4));
 
-        key_selected = 'D';
+        key_selected = 'd';
         //        Keyboard.write(key_selected);
 
       }
@@ -340,7 +341,7 @@ void checkKeys()
         //        Serial.print("Button pressed: ");
         //        Serial.println(1 + (output * 4));
 
-        key_selected = 'E';
+        key_selected = 'e';
         //        Keyboard.write(key_selected);
 
       }
@@ -351,7 +352,7 @@ void checkKeys()
         //        Serial.print("Button pressed: ");
         //        Serial.println(2 + (output * 4));
 
-        key_selected = 'F';
+        key_selected = 'f';
         //        Keyboard.write(key_selected);
 
       }
@@ -362,7 +363,7 @@ void checkKeys()
         //        Serial.print("Button pressed: ");
         //        Serial.println(3 + (output * 4));
 
-        key_selected = 'G';
+        key_selected = 'g';
         //        Keyboard.write(key_selected);
 
       }
@@ -372,7 +373,7 @@ void checkKeys()
         //        Serial.print("Button pressed: ");
         //        Serial.println(4 + (output * 4));
 
-        key_selected = 'H';
+        key_selected = 'h';
         //        Keyboard.write(key_selected);
 
       }
@@ -389,7 +390,7 @@ void checkKeys()
         //        Serial.print("Button pressed: ");
         //        Serial.println(1 + (output * 4));
 
-        key_selected = 'I';
+        key_selected = 'i';
         //        Keyboard.write(key_selected);
 
       }
@@ -400,7 +401,7 @@ void checkKeys()
         //        Serial.print("Button pressed: ");
         //        Serial.println(2 + (output * 4));
 
-        key_selected = 'J';
+        key_selected = 'j';
         //        Keyboard.write(key_selected);
       }
 
@@ -409,7 +410,7 @@ void checkKeys()
 
         //        Serial.print("Button pressed: ");
         //        Serial.println(3 + (output * 4));
-        key_selected = 'K';
+        key_selected = 'k';
         //        Keyboard.write(key_selected);
 
       }
@@ -420,7 +421,7 @@ void checkKeys()
         //        Serial.print("Button pressed: ");
         //        Serial.println(4 + (output * 4));
 
-        key_selected = 'L';
+        key_selected = 'l';
         //        Keyboard.write(key_selected);
 
       }
@@ -454,7 +455,7 @@ void checkKeys()
   {
     if (!shift_key)
     {
-      //delay(repeat_delay);
+      delay(repeat_delay);
     }
 
     Keyboard.write(key_selected);
