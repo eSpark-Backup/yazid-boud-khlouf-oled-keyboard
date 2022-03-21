@@ -70,6 +70,16 @@
 #define KEY_F10       0xCB
 #define KEY_F11       0xCC
 #define KEY_F12       0xCD
+#define NUM_1         0xE1
+#define NUM_2         0xE2
+#define NUM_3         0xE3
+#define NUM_4         0xE4
+#define NUM_5         0xE5
+#define NUM_6         0xE6
+#define NUM_7         0xE7
+#define NUM_8         0xE8
+#define NUM_9         0xE9
+#define NUM_0         0xEA
 
 //  Low level key report: up to 6 keys and shift, ctrl etc at once
 typedef struct {
@@ -78,16 +88,19 @@ typedef struct {
   uint8_t keys[6];
 } KeyReport;
 
+extern uint8_t OutDataBuffer[0x08];
+
 class Keyboard_ : public Print {
   private:
     KeyReport _keyReport;
     void sendReport(KeyReport *keys);
   public:
     Keyboard_(void);
+    void getReport(uint8_t * OutData, int len);
     void begin(void);
     void end(void);
+    uint8_t check_numlock();
     size_t write(uint8_t k);
-    size_t writeConsumer(uint8_t k);
     size_t press(uint8_t k);
     size_t release(uint8_t k);
     void releaseAll(void);

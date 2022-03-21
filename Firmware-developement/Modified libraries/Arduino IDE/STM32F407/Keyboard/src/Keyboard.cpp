@@ -44,7 +44,7 @@ void Keyboard_::end(void)
 
 void Keyboard_::sendReport(KeyReport *keys)
 {
-  uint8_t buf[9] = {1, keys->modifiers, keys->reserved, keys->keys[0], keys->keys[1],
+  uint8_t buf[9] = {1 ,keys->modifiers, keys->reserved, keys->keys[0], keys->keys[1],
                     keys->keys[2], keys->keys[3], keys->keys[4], keys->keys[5]
                    };
 
@@ -53,21 +53,6 @@ void Keyboard_::sendReport(KeyReport *keys)
   //delay required to prevent persistent key when call print
   delay(20);
 }
-
-size_t Keyboard_::writeConsumer(uint8_t c)
-{
-  uint8_t buf[3] = {2, 0xE9, 0x00};
-  HID_Composite_consumer_sendReport(buf, 3);
-
-  delay(100);
-
-  buf[1] = {0x00};
-
-  HID_Composite_consumer_sendReport(buf, 3);
-
-  return 1;
-}
-
 
 extern
 const uint8_t _asciimap[128] PROGMEM;
@@ -304,6 +289,16 @@ size_t Keyboard_::write(uint8_t c)
   uint8_t p = press(c);  // Keydown
   release(c);            // Keyup
   return p;              // just return the result of press() since release() almost always returns 1
+}
+
+uint8_t Keyboard_::check_numlock()
+{
+  if(OutDataBuffer[0] == 0x01)
+  {
+    return OutDataBuffer[1];
+  }
+
+  return 0;
 }
 
 Keyboard_ Keyboard;
