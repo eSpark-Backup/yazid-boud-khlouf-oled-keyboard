@@ -302,6 +302,7 @@ void checkKeys()
 
       if (digitalRead(INPUT2) == 1)
       {
+        while (digitalRead(INPUT2) == 1);
         capslock_key = !capslock_key;
         Keyboard.write(KEY_CAPS_LOCK);
 
