@@ -58,6 +58,7 @@
 #define KEY_HOME      0xD2
 #define KEY_END       0xD5
 #define KEY_CAPS_LOCK   0xC1
+#define KEY_NUM_LOCK   0xDB
 #define KEY_F1        0xC2
 #define KEY_F2        0xC3
 #define KEY_F3        0xC4
@@ -80,6 +81,21 @@
 #define NUM_8         0xE8
 #define NUM_9         0xE9
 #define NUM_0         0xEA
+
+#define HID_MEDIA_PAUSE  0xB1 // pause
+#define HID_MEDIA_RECORD  0xB3
+#define HID_MEDIA_SCAN_NEXT 0xB5
+#define HID_MEDIA_SCAN_PREV 0xB6
+#define HID_MEDIA_STOP  0xB7
+#define HID_MEDIA_EJECT 0xB8
+#define HID_MEDIA_VOL_UP 0xE9
+#define HID_MEDIA_VOL_DONW 0xEA
+#define HID_MEDIA_PLAY  0xCD // play/pause
+#define HID_MIC  0x04 // play/pause
+#define HID_CAMERA  0x78 // play/pause
+#define  HID_RADIO_WIRELESS 0xC6
+#define  HID_MEDIA_REPORT  2
+#define HID_WIRELESS_REPORT 3
 
 //  Low level key report: up to 6 keys and shift, ctrl etc at once
 typedef struct {
@@ -104,6 +120,8 @@ class Keyboard_ : public Print {
     size_t press(uint8_t k);
     size_t release(uint8_t k);
     void releaseAll(void);
+    void writeConsumer(uint8_t k);
+    void writeWireless(uint8_t k);
 };
 extern Keyboard_ Keyboard;
 

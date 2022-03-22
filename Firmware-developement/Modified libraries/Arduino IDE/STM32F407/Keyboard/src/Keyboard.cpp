@@ -291,6 +291,31 @@ size_t Keyboard_::write(uint8_t c)
   return p;              // just return the result of press() since release() almost always returns 1
 }
 
+void Keyboard_::writeConsumer(uint8_t k)
+{
+  uint8_t report[3];
+  report[0]= HID_MEDIA_REPORT;
+  report[1]= k;
+  report[2]= 0x00;
+  HID_Composite_keyboard_sendReport(report, 3);
+  HAL_Delay(30);
+
+  report[0]= HID_MEDIA_REPORT;
+  report[1]= 0x00;
+  report[2]= 0x00;
+  HID_Composite_keyboard_sendReport(report, 3);
+}
+
+void Keyboard_::writeWireless(uint8_t k)
+{
+  uint8_t report[3];
+  report[0]= HID_WIRELESS_REPORT;
+  report[1]= k;
+  report[2]= 0x00;
+  HID_Composite_keyboard_sendReport(report, 3);
+}
+
+
 uint8_t Keyboard_::check_numlock()
 {
   if(OutDataBuffer[0] == 0x01)

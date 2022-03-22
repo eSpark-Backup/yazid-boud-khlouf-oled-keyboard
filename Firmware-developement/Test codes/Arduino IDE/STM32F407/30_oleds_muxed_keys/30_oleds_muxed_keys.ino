@@ -88,7 +88,7 @@ void setup()
 
   Keyboard.begin();
 
-  //  capitalize();
+  capitalize();
 
 }
 
@@ -123,25 +123,25 @@ void loop() {
   //  uncapitalize();
   //  delay(2000);
 
-  checkKeys();
-  //
-  if (shift_key || capslock_key)
-  {
-    if (!capitalized)
-    {
-      capitalized = true;
-      uncapitalized = false;
-      capitalize();
-    }
-  } else
-  {
-    if (!uncapitalized)
-    {
-      uncapitalized = true;
-      capitalized = false;
-      uncapitalize();
-    }
-  }
+//  checkKeys();
+//
+//  if (shift_key || capslock_key)
+//  {
+//    if (!capitalized)
+//    {
+//      capitalized = true;
+//      uncapitalized = false;
+//      capitalize();
+//    }
+//  } else
+//  {
+//    if (!uncapitalized)
+//    {
+//      uncapitalized = true;
+//      capitalized = false;
+//      uncapitalize();
+//    }
+//  }
 
 }
 
@@ -190,7 +190,7 @@ void capitalize()
   //    displayScreen(&i2c_mux4, &display4 , i, screens);
   //  }
 
-  //  i2c_mux4.setChannelMask(0);
+  i2c_mux4.setChannelMask(0);
 
   for (int i = 0; i < 8; i++)
   {

@@ -55,6 +55,7 @@
 
  /**  define  VOLUME_REPORT  to tehr eport ID to use for volume or 0 if not support*/
 #define  HID_MEDIA_REPORT  2
+#define  HID_WIRELESS_REPORT  3
 #ifdef   HID_MEDIA_REPORT
 #   define HID_MEDIA_SIZE    25
 #else
@@ -97,7 +98,7 @@
 
 
 
-#define HID_REPORT_DESC_SIZE    (47+HID_MEDIA_SIZE+HID_LED_SIZE)
+#define HID_REPORT_DESC_SIZE    (47+HID_MEDIA_SIZE+HID_LED_SIZE+25)
 
 
 #define HID_DESCRIPTOR_TYPE           0x21

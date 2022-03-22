@@ -310,6 +310,20 @@ __ALIGN_BEGIN static uint8_t HID_ReportDesc[HID_REPORT_DESC_SIZE]  __ALIGN_END =
 
         // 25 bytes
 #endif
+
+        0x05, 0x01,  // USAGE_PAGE (Generic Desktop) 
+        0x09, 0x0C, // USAGE (Wireless Radio Controls)
+        0xA1, 0x01, // COLLECTION (Application)
+        0x85, HID_WIRELESS_REPORT,        //   Report ID (VOLUME_REPORT )
+        0x15, 0x00, // LOGICAL_MINIMUM (0)
+        0x25, 0x01, //  LOGICAL_MAXIMUM (1)
+        0x09, 0xC6, //  USAGE (Wireless Radio Button)
+        0x95, 0x01, //  REPORT_COUNT (1)
+        0x75, 0x01, //  REPORT_SIZE (1)
+        0x81, 0x06, //  INPUT (Data,Var,Rel)
+        0x75, 0x07, //  REPORT_SIZE (7)
+        0x81, 0x03, //  INPUT (Cnst,Var,Abs)
+        0xC0 // END_COLLECTION 
 }; 
 
 uint32_t  nOutData;

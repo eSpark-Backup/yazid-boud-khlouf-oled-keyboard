@@ -29,6 +29,6 @@ void loop() {
   // check for incoming serial data:
   //Keyboard.write('A');
 
-  Keyboard.writeConsumer(0x00);
-  delay(500);
+  Keyboard.writeConsumer(HID_MEDIA_VOL_UP);
+  delay(1000);
 }
