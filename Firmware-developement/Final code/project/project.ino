@@ -17,29 +17,29 @@
 #define TRANSFORM 0x04
 #define FN_KEY 0x05
 
-#define INPUT1 PD9
-#define INPUT2 PD10
-#define INPUT3 PD11
-#define INPUT4 PD12
-#define INPUT5 PD9
-#define INPUT6 PD10
-#define INPUT7 PD11
-#define INPUT8 PD12
-#define INPUT9 PD9
-#define INPUT10 PD10
-#define INPUT11 PD11
-#define INPUT12 PD12
-#define INPUT13 PD9
-#define INPUT14 PD10
-#define INPUT15 PD11
-#define INPUT16 PD12
-#define INPUT17 PD12
+#define INPUT1 PA0
+#define INPUT2 PA1
+#define INPUT3 PA2
+#define INPUT4 PA3
+#define INPUT5 PA5
+#define INPUT6 PB0
+#define INPUT7 PB1
+#define INPUT8 PE8
+#define INPUT9 PB3
+#define INPUT10 PB4
+#define INPUT11 PC5
+#define INPUT12 PC1
+#define INPUT13 PE7
+#define INPUT14 PC3
+#define INPUT15 PC4
+#define INPUT16 PD0
+#define INPUT17 PD1
 
-#define OUTPUT1 PB3
-#define OUTPUT2 PB4
-#define OUTPUT3 PB5
-#define OUTPUT4 PB6
-#define OUTPUT5 PB7
+#define OUTPUT1 PE0
+#define OUTPUT2 PE1
+#define OUTPUT3 PE2
+#define OUTPUT4 PE3
+#define OUTPUT5 PE4
 
 #define KEY_DELAY 100
 #define REPEAT_DELAY 30
@@ -90,25 +90,34 @@ void setup()
   WireDisplay2.begin();
   WireDisplay3.begin();
 
-  WireDisplay1.setClock(100000);
-  WireDisplay2.setClock(100000);
-  WireDisplay3.setClock(100000);
-
   pinMode(INPUT1, INPUT_PULLDOWN);
   pinMode(INPUT2, INPUT_PULLDOWN);
   pinMode(INPUT3, INPUT_PULLDOWN);
   pinMode(INPUT4, INPUT_PULLDOWN);
+  pinMode(INPUT5, INPUT_PULLDOWN);
+  pinMode(INPUT6, INPUT_PULLDOWN);
+  pinMode(INPUT7, INPUT_PULLDOWN);
+  pinMode(INPUT8, INPUT_PULLDOWN);
+  pinMode(INPUT9, INPUT_PULLDOWN);
+  pinMode(INPUT10, INPUT_PULLDOWN);
+  pinMode(INPUT11, INPUT_PULLDOWN);
+  pinMode(INPUT12, INPUT_PULLDOWN);
+  pinMode(INPUT13, INPUT_PULLDOWN);
+  pinMode(INPUT14, INPUT_PULLDOWN);
+  pinMode(INPUT15, INPUT_PULLDOWN);
+  pinMode(INPUT16, INPUT_PULLDOWN);
+  pinMode(INPUT17, INPUT_PULLDOWN);
 
   pinMode(OUTPUT1, OUTPUT);
   pinMode(OUTPUT2, OUTPUT);
   pinMode(OUTPUT3, OUTPUT);
   pinMode(OUTPUT4, OUTPUT);
+  pinMode(OUTPUT5, OUTPUT);
 
   for (int i = 0; i < 8; i++)
   {
     initDisplay(&i2c_mux1, &display , i);
-    //    initDisplay(&i2c_mux2, &display2 , i);
-    //    initDisplay(&i2c_mux3, &display3 , i);
+    initDisplay(&i2c_mux2, &display2 , i);
   }
 
   //  for (int i = 24; i < 30; i++)
@@ -225,12 +234,9 @@ void capitalize()
   for (int i = 0; i < 8; i++)
   {
     displayScreen(&i2c_mux1, &display , i, screens);
+    displayScreen(&i2c_mux2, &display2 , i, screens);
   }
 
-  //  for (int i = 8; i < 16; i++)
-  //  {
-  //    displayScreen(&i2c_mux2, &display2 , i, screens);
-  //  }
   //
   //  for (int i = 16; i < 24; i++)
   //  {
@@ -255,10 +261,10 @@ void uncapitalize()
     displayScreen(&i2c_mux1, &display , i, screens2);
   }
 
-  //  for (int i = 8; i < 16; i++)
-  //  {
-  //    displayScreen(&i2c_mux2, &display2 , i, screens2);
-  //  }
+  for (int i = 8; i < 16; i++)
+  {
+    displayScreen(&i2c_mux2, &display2 , i, screens2);
+  }
   //
   //  for (int i = 16; i < 24; i++)
   //  {
@@ -270,6 +276,9 @@ void checkKeys()
 {
   for (int output = 0; output < 5; output++)
   {
+    // Delay for scan voltage to settle
+    delay(5);
+
     digitalWrite(output_pins[0], output == 0);
     digitalWrite(output_pins[1], output == 1);
     digitalWrite(output_pins[2], output == 2);
@@ -302,6 +311,8 @@ void checkKeys()
         if ((inputs >> i) & 0b01)
         {
           key_selected = keys[i + output * i];
+          //          Serial.println("key pressed");
+          //          Serial.println(i + i * output);
         }
       }
 
@@ -334,6 +345,8 @@ void checkKeys()
         if ((inputs >> i) & 0b01)
         {
           key_selected = keys[i + output * i];
+          //          Serial.println("key pressed");
+          //          Serial.println(i + i * output);
         }
       }
 
@@ -366,6 +379,8 @@ void checkKeys()
         if ((inputs >> i) & 0b01)
         {
           key_selected = keys[i + output * i];
+          //          Serial.println("key pressed");
+          //          Serial.println(i + i * output);
         }
       }
 
@@ -398,6 +413,8 @@ void checkKeys()
         if ((inputs >> i) & 0b01)
         {
           key_selected = keys[i + output * i];
+          //          Serial.println("key pressed");
+          //          Serial.println(i + i * output);
         }
       }
 
@@ -408,31 +425,33 @@ void checkKeys()
     if (output == 4)
     {
 
-      //      inputs = (digitalRead(INPUT1) << 16) |
-      //               (digitalRead(INPUT2) << 15) |
-      //               (digitalRead(INPUT3) << 14) |
-      //               (digitalRead(INPUT4) << 13) |
-      //               (digitalRead(INPUT5) << 12) |
-      //               (digitalRead(INPUT6) << 11) |
-      //               (digitalRead(INPUT7) << 10) |
-      //               (digitalRead(INPUT8) <<  9) |
-      //               (digitalRead(INPUT9) <<  8) |
-      //               (digitalRead(INPUT10) << 7) |
-      //               (digitalRead(INPUT11) << 6) |
-      //               (digitalRead(INPUT12) << 5) |
-      //               (digitalRead(INPUT13) << 4) |
-      //               (digitalRead(INPUT14) << 3) |
-      //               (digitalRead(INPUT15) << 2) |
-      //               (digitalRead(INPUT16) << 1) |
-      //               (digitalRead(INPUT17) << 0);
-      //
-      //      for (int i = 0; i < 17; i++)
-      //      {
-      //        if ((inputs >> i) & 0b01)
-      //        {
-      //          key_selected = keys[i + output * i];
-      //        }
-      //      }
+      inputs = (digitalRead(INPUT1) << 16) |
+               (digitalRead(INPUT2) << 15) |
+               (digitalRead(INPUT3) << 14) |
+               (digitalRead(INPUT4) << 13) |
+               (digitalRead(INPUT5) << 12) |
+               (digitalRead(INPUT6) << 11) |
+               (digitalRead(INPUT7) << 10) |
+               (digitalRead(INPUT8) <<  9) |
+               (digitalRead(INPUT9) <<  8) |
+               (digitalRead(INPUT10) << 7) |
+               (digitalRead(INPUT11) << 6) |
+               (digitalRead(INPUT12) << 5) |
+               (digitalRead(INPUT13) << 4) |
+               (digitalRead(INPUT14) << 3) |
+               (digitalRead(INPUT15) << 2) |
+               (digitalRead(INPUT16) << 1) |
+               (digitalRead(INPUT17) << 0);
+
+      for (int i = 0; i < 17; i++)
+      {
+        if ((inputs >> i) & 0b01)
+        {
+          key_selected = keys[i + output * i];
+          //          Serial.println("key pressed");
+          //          Serial.println(i + i * output);
+        }
+      }
 
       continue;
 
