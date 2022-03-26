@@ -284,6 +284,9 @@ void checkKeys()
 {
   for (int output = 0; output < 5; output++)
   {
+    // Delay for scan voltage to settle
+    delay(5);
+    
     digitalWrite(output_pins[0], output == 0);
     digitalWrite(output_pins[1], output == 1);
     digitalWrite(output_pins[2], output == 2);
@@ -323,6 +326,7 @@ void checkKeys()
 
       continue;
     }
+
     if (output == 1)
     {
 
@@ -484,7 +488,7 @@ void checkKeys()
   //
   //  if (key_selected != -1)
   //  {
-  //    if (!shift_key)
+  //    if (!shift_key)/
   //    {
   //      delay(repeat_delay);
   //    }
