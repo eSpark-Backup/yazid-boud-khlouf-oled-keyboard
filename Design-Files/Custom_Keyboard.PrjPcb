@@ -309,6 +309,10 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=LGBLCBWT
 
+[GeneratedDocument1]
+DocumentPath=Project Outputs for Custom_Keyboard\Design Rule Check - Custom_Keyboard.html
+DItemRevisionGUID=
+
 [Configuration1]
 Name=Sources
 ParameterCount=0
