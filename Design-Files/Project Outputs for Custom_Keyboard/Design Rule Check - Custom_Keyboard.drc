@@ -1,7 +1,7 @@
 Protel Design System Design Rule Check
 PCB File : E:\Git\YazidBoukhlouf-OLEDKeyboard\Design-Files\Custom_Keyboard.PcbDoc
 Date     : 3/30/2022
-Time     : 6:19:01 PM
+Time     : 6:56:39 PM
 
 Processing Rule : Clearance Constraint (Gap=7mil) (All),(All)
 Rule Violations :0
@@ -45,4 +45,4 @@ Rule Violations :0
 
 Violations Detected : 0
 Waived Violations : 0
-Time Elapsed        : 00:00:03
+Time Elapsed        : 00:00:02
