@@ -10,36 +10,41 @@
 #define OLED_RESET     4 // Reset pin # (or -1 if sharing Arduino reset pin)
 #define SCREEN_ADDRESS 0x3C ///< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
 
-#define CONSUMER_KEY 0x00
+
 #define BLANK 0x00
 #define SQUARE_KEY 0x02
 #define CUBE_KEY 0x03
 #define TRANSFORM 0x04
 #define FN_KEY 0x05
 
-#define INPUT1 PA0
-#define INPUT2 PA1
-#define INPUT3 PA2
-#define INPUT4 PA3
-#define INPUT5 PA5
-#define INPUT6 PB0
-#define INPUT7 PB1
-#define INPUT8 PE8
-#define INPUT9 PB3
-#define INPUT10 PB4
-#define INPUT11 PC5
-#define INPUT12 PC1
-#define INPUT13 PE7
-#define INPUT14 PC3
-#define INPUT15 PC4
-#define INPUT16 PD0
-#define INPUT17 PD1
+#define KEY_RETURN 10
+#define KEY_SCREEN_RECORD 11
+#define KEY_SCREENSHOT 12
+#define KEY_PRINT 13
+#define KEY_SHARE 14
 
-#define OUTPUT1 PE0
-#define OUTPUT2 PE1
-#define OUTPUT3 PE2
-#define OUTPUT4 PE3
-#define OUTPUT5 PE4
+#define INPUT1 PD0
+#define INPUT2 PD1
+#define INPUT3 PD2
+#define INPUT4 PD3
+#define INPUT5 PD4
+#define INPUT6 PD5
+#define INPUT7 PD6
+#define INPUT8 PC0
+#define INPUT9 PC1
+#define INPUT10 PC2
+#define INPUT11 PC3
+#define INPUT12 PC4
+#define INPUT13 PC5
+#define INPUT14 PC6
+#define INPUT15 PC7
+#define INPUT16 PC8
+
+#define OUTPUT1 PB0
+#define OUTPUT2 PB1
+#define OUTPUT3 PB2
+#define OUTPUT4 PB3
+#define OUTPUT5 PB4
 
 #define KEY_DELAY 100
 #define REPEAT_DELAY 30
@@ -62,7 +67,7 @@ Adafruit_SSD1306 display4(SCREEN_WIDTH, SCREEN_HEIGHT, &WireDisplay1, OLED_RESET
 char screens[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4'};
 char screens2[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3', '4'};
 
-uint8_t keys[]  = {KEY_ESC, CONSUMER_KEY, CONSUMER_KEY, CONSUMER_KEY, CONSUMER_KEY, CONSUMER_KEY, CONSUMER_KEY, CONSUMER_KEY, CONSUMER_KEY, CONSUMER_KEY, CONSUMER_KEY, CONSUMER_KEY, CONSUMER_KEY, KEY_DELETE,
+uint8_t keys[]  = {KEY_ESC, KEY_RETURN, HID_DEC_BRIGHTNESS, HID_INC_BRIGHTNESS, HID_MEDIA_VOL_DOWN, HID_MEDIA_VOL_UP, HID_MIC, HID_CAMERA, KEY_SCREEN_RECORD, KEY_SCREENSHOT, KEY_PRINT, KEY_SHARE, HID_RADIO_WIRELESS, KEY_DELETE,
                    SQUARE_KEY, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', BLANK, BLANK, KEY_BACKSPACE,
                    KEY_TAB, 'a', 'z', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', BLANK, BLANK, KEY_RETURN,
                    TRANSFORM, 'q', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', BLANK, BLANK,
@@ -106,7 +111,6 @@ void setup()
   pinMode(INPUT14, INPUT_PULLDOWN);
   pinMode(INPUT15, INPUT_PULLDOWN);
   pinMode(INPUT16, INPUT_PULLDOWN);
-  pinMode(INPUT17, INPUT_PULLDOWN);
 
   pinMode(OUTPUT1, OUTPUT);
   pinMode(OUTPUT2, OUTPUT);
@@ -288,25 +292,24 @@ void checkKeys()
     if (output == 0)
     {
 
-      inputs = (digitalRead(INPUT1) << 16) |
-               (digitalRead(INPUT2) << 15) |
-               (digitalRead(INPUT3) << 14) |
-               (digitalRead(INPUT4) << 13) |
-               (digitalRead(INPUT5) << 12) |
-               (digitalRead(INPUT6) << 11) |
-               (digitalRead(INPUT7) << 10) |
-               (digitalRead(INPUT8) <<  9) |
-               (digitalRead(INPUT9) <<  8) |
-               (digitalRead(INPUT10) << 7) |
-               (digitalRead(INPUT11) << 6) |
-               (digitalRead(INPUT12) << 5) |
-               (digitalRead(INPUT13) << 4) |
-               (digitalRead(INPUT14) << 3) |
-               (digitalRead(INPUT15) << 2) |
-               (digitalRead(INPUT16) << 1) |
-               (digitalRead(INPUT17) << 0);
+      inputs = (digitalRead(INPUT1) << 15) |
+               (digitalRead(INPUT2) << 14) |
+               (digitalRead(INPUT3) << 13) |
+               (digitalRead(INPUT4) << 12) |
+               (digitalRead(INPUT5) << 11) |
+               (digitalRead(INPUT6) << 10) |
+               (digitalRead(INPUT7) << 9)  |
+               (digitalRead(INPUT8) <<  8) |
+               (digitalRead(INPUT9) <<  7) |
+               (digitalRead(INPUT10) << 6) |
+               (digitalRead(INPUT11) << 5) |
+               (digitalRead(INPUT12) << 4) |
+               (digitalRead(INPUT13) << 3) |
+               (digitalRead(INPUT14) << 2) |
+               (digitalRead(INPUT15) << 1) |
+               (digitalRead(INPUT16) << 0);
 
-      for (int i = 0; i < 17; i++)
+      for (int i = 0; i < 16; i++)
       {
         if ((inputs >> i) & 0b01)
         {
@@ -322,25 +325,24 @@ void checkKeys()
     if (output == 1)
     {
 
-      inputs = (digitalRead(INPUT1) << 16) |
-               (digitalRead(INPUT2) << 15) |
-               (digitalRead(INPUT3) << 14) |
-               (digitalRead(INPUT4) << 13) |
-               (digitalRead(INPUT5) << 12) |
-               (digitalRead(INPUT6) << 11) |
-               (digitalRead(INPUT7) << 10) |
-               (digitalRead(INPUT8) <<  9) |
-               (digitalRead(INPUT9) <<  8) |
-               (digitalRead(INPUT10) << 7) |
-               (digitalRead(INPUT11) << 6) |
-               (digitalRead(INPUT12) << 5) |
-               (digitalRead(INPUT13) << 4) |
-               (digitalRead(INPUT14) << 3) |
-               (digitalRead(INPUT15) << 2) |
-               (digitalRead(INPUT16) << 1) |
-               (digitalRead(INPUT17) << 0);
+      inputs = (digitalRead(INPUT1) << 15) |
+               (digitalRead(INPUT2) << 14) |
+               (digitalRead(INPUT3) << 13) |
+               (digitalRead(INPUT4) << 12) |
+               (digitalRead(INPUT5) << 11) |
+               (digitalRead(INPUT6) << 10) |
+               (digitalRead(INPUT7) << 9)  |
+               (digitalRead(INPUT8) <<  8) |
+               (digitalRead(INPUT9) <<  7) |
+               (digitalRead(INPUT10) << 6) |
+               (digitalRead(INPUT11) << 5) |
+               (digitalRead(INPUT12) << 4) |
+               (digitalRead(INPUT13) << 3) |
+               (digitalRead(INPUT14) << 2) |
+               (digitalRead(INPUT15) << 1) |
+               (digitalRead(INPUT16) << 0);
 
-      for (int i = 0; i < 17; i++)
+      for (int i = 0; i < 16; i++)
       {
         if ((inputs >> i) & 0b01)
         {
@@ -356,25 +358,24 @@ void checkKeys()
     if (output == 2)
     {
 
-      inputs = (digitalRead(INPUT1) << 16) |
-               (digitalRead(INPUT2) << 15) |
-               (digitalRead(INPUT3) << 14) |
-               (digitalRead(INPUT4) << 13) |
-               (digitalRead(INPUT5) << 12) |
-               (digitalRead(INPUT6) << 11) |
-               (digitalRead(INPUT7) << 10) |
-               (digitalRead(INPUT8) <<  9) |
-               (digitalRead(INPUT9) <<  8) |
-               (digitalRead(INPUT10) << 7) |
-               (digitalRead(INPUT11) << 6) |
-               (digitalRead(INPUT12) << 5) |
-               (digitalRead(INPUT13) << 4) |
-               (digitalRead(INPUT14) << 3) |
-               (digitalRead(INPUT15) << 2) |
-               (digitalRead(INPUT16) << 1) |
-               (digitalRead(INPUT17) << 0);
+      inputs = (digitalRead(INPUT1) << 15) |
+               (digitalRead(INPUT2) << 14) |
+               (digitalRead(INPUT3) << 13) |
+               (digitalRead(INPUT4) << 12) |
+               (digitalRead(INPUT5) << 11) |
+               (digitalRead(INPUT6) << 10) |
+               (digitalRead(INPUT7) << 9)  |
+               (digitalRead(INPUT8) <<  8) |
+               (digitalRead(INPUT9) <<  7) |
+               (digitalRead(INPUT10) << 6) |
+               (digitalRead(INPUT11) << 5) |
+               (digitalRead(INPUT12) << 4) |
+               (digitalRead(INPUT13) << 3) |
+               (digitalRead(INPUT14) << 2) |
+               (digitalRead(INPUT15) << 1) |
+               (digitalRead(INPUT16) << 0);
 
-      for (int i = 0; i < 17; i++)
+      for (int i = 0; i < 16; i++)
       {
         if ((inputs >> i) & 0b01)
         {
@@ -390,25 +391,24 @@ void checkKeys()
     if (output == 3)
     {
 
-      inputs = (digitalRead(INPUT1) << 16) |
-               (digitalRead(INPUT2) << 15) |
-               (digitalRead(INPUT3) << 14) |
-               (digitalRead(INPUT4) << 13) |
-               (digitalRead(INPUT5) << 12) |
-               (digitalRead(INPUT6) << 11) |
-               (digitalRead(INPUT7) << 10) |
-               (digitalRead(INPUT8) <<  9) |
-               (digitalRead(INPUT9) <<  8) |
-               (digitalRead(INPUT10) << 7) |
-               (digitalRead(INPUT11) << 6) |
-               (digitalRead(INPUT12) << 5) |
-               (digitalRead(INPUT13) << 4) |
-               (digitalRead(INPUT14) << 3) |
-               (digitalRead(INPUT15) << 2) |
-               (digitalRead(INPUT16) << 1) |
-               (digitalRead(INPUT17) << 0);
+      inputs = (digitalRead(INPUT1) << 15) |
+               (digitalRead(INPUT2) << 14) |
+               (digitalRead(INPUT3) << 13) |
+               (digitalRead(INPUT4) << 12) |
+               (digitalRead(INPUT5) << 11) |
+               (digitalRead(INPUT6) << 10) |
+               (digitalRead(INPUT7) << 9)  |
+               (digitalRead(INPUT8) <<  8) |
+               (digitalRead(INPUT9) <<  7) |
+               (digitalRead(INPUT10) << 6) |
+               (digitalRead(INPUT11) << 5) |
+               (digitalRead(INPUT12) << 4) |
+               (digitalRead(INPUT13) << 3) |
+               (digitalRead(INPUT14) << 2) |
+               (digitalRead(INPUT15) << 1) |
+               (digitalRead(INPUT16) << 0);
 
-      for (int i = 0; i < 17; i++)
+      for (int i = 0; i < 16; i++)
       {
         if ((inputs >> i) & 0b01)
         {
@@ -425,25 +425,24 @@ void checkKeys()
     if (output == 4)
     {
 
-      inputs = (digitalRead(INPUT1) << 16) |
-               (digitalRead(INPUT2) << 15) |
-               (digitalRead(INPUT3) << 14) |
-               (digitalRead(INPUT4) << 13) |
-               (digitalRead(INPUT5) << 12) |
-               (digitalRead(INPUT6) << 11) |
-               (digitalRead(INPUT7) << 10) |
-               (digitalRead(INPUT8) <<  9) |
-               (digitalRead(INPUT9) <<  8) |
-               (digitalRead(INPUT10) << 7) |
-               (digitalRead(INPUT11) << 6) |
-               (digitalRead(INPUT12) << 5) |
-               (digitalRead(INPUT13) << 4) |
-               (digitalRead(INPUT14) << 3) |
-               (digitalRead(INPUT15) << 2) |
-               (digitalRead(INPUT16) << 1) |
-               (digitalRead(INPUT17) << 0);
+      inputs = (digitalRead(INPUT1) << 15) |
+               (digitalRead(INPUT2) << 14) |
+               (digitalRead(INPUT3) << 13) |
+               (digitalRead(INPUT4) << 12) |
+               (digitalRead(INPUT5) << 11) |
+               (digitalRead(INPUT6) << 10) |
+               (digitalRead(INPUT7) << 9)  |
+               (digitalRead(INPUT8) <<  8) |
+               (digitalRead(INPUT9) <<  7) |
+               (digitalRead(INPUT10) << 6) |
+               (digitalRead(INPUT11) << 5) |
+               (digitalRead(INPUT12) << 4) |
+               (digitalRead(INPUT13) << 3) |
+               (digitalRead(INPUT14) << 2) |
+               (digitalRead(INPUT15) << 1) |
+               (digitalRead(INPUT16) << 0);
 
-      for (int i = 0; i < 17; i++)
+      for (int i = 0; i < 16; i++)
       {
         if ((inputs >> i) & 0b01)
         {
@@ -485,18 +484,113 @@ void checkKeys()
       delay(repeat_delay);
     }
 
-    if (key_selected == SQUARE_KEY)
-    {
+    print_key(key_selected);
+
+    key_selected = -1;
+  }
+}
+
+void print_key(uint32_t key)
+{
+  switch (key)
+  {
+
+    // Row 1
+    case KEY_ESC:
+      Keyboard.write(KEY_ESC);
+      break;
+
+    case KEY_RETURN:
+      Keyboard.press(KEY_LEFT_CTRL);
+      Keyboard.press('z');
+      Keyboard.releaseAll();
+      break;
+
+    case HID_DEC_BRIGHTNESS:
+      Keyboard.writeConsumer(HID_DEC_BRIGHTNESS);
+      break;
+
+    case HID_INC_BRIGHTNESS:
+      Keyboard.writeConsumer(HID_DEC_BRIGHTNESS);
+      break;
+
+    case HID_MEDIA_VOL_DOWN:
+      Keyboard.writeConsumer(HID_MEDIA_VOL_DOWN);
+      break;
+
+    case HID_MEDIA_VOL_UP:
+      Keyboard.writeConsumer(HID_MEDIA_VOL_UP);
+      break;
+
+    case HID_MIC:
+      // Mute mic not working
+      Keyboard.writeConsumer(HID_MIC);
+      break;
+
+    case HID_CAMERA:
+      Keyboard.writeConsumer(HID_CAMERA);
+      break;
+
+    case KEY_SCREEN_RECORD:
+      Keyboard.press(KEY_LEFT_GUI);
+      Keyboard.press(KEY_LEFT_ALT);
+      Keyboard.press('r');
+      Keyboard.releaseAll();
+      break;
+
+    case KEY_SCREENSHOT:
+      Keyboard.press(KEY_LEFT_GUI);
+      Keyboard.press(KEY_LEFT_SHIFT);
+      Keyboard.press('s');
+      Keyboard.releaseAll();
+      break;
+
+    case  KEY_PRINT:
+      Keyboard.press(KEY_LEFT_CTRL);
+      Keyboard.press('p');
+      Keyboard.releaseAll();
+      break;
+
+    case KEY_SHARE:
+      // To be decided
+      break;
+
+    case HID_RADIO_WIRELESS:
+      Keyboard.writeConsumer(HID_RADIO_WIRELESS);
+      break;
+
+    case KEY_DELETE:
+      Keyboard.write(KEY_DELETE);
+      break;
+
+    // Row 2
+    case SQUARE_KEY:
       Keyboard.press(KEY_LEFT_ALT);
       Keyboard.write(NUM_0);
       Keyboard.write(NUM_1);
       Keyboard.write(NUM_7);
       Keyboard.write(NUM_8);
       Keyboard.release(KEY_LEFT_ALT);
-    } else
-    {
-      Keyboard.write(key_selected);
-    }
-    key_selected = -1;
+      break;
+
+    // Row 3
+    // Printing Keys are printed in default block
+
+    // Row 4
+    // Printing Keys are printed in default block
+
+    // Row 5
+    // Skipping left shift key, implemented in matrix keypad code to implement release key
+    // Printing Keys are printed in default block
+
+    // Row 6
+    // Printing Keys are printed in default block
+
+    // Row 7
+    // Down Arrow key 
+
+    default:
+      Keyboard.write(key);
+
   }
 }
