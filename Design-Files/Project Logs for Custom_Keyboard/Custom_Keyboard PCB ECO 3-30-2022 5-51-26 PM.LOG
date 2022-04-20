@@ -1,0 +1,9 @@
+Added Component: Designator=X1(Q13FC1350000200)
+Add component (AddParameter): Name = "Crystal Type"; Value = "SMD Crystal Resonator"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Equivalent Series Resistance (ESR)"; Value = "70kO"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Frequency"; Value = "32.768kHz"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Load Capacitance"; Value = "7pF"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = "Seiko Epson"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=XL_IN Pin=X1-1
+Added Pin To Net: NetName=XL_OUT Pin=X1-2
+Added Member To Class: ClassName=U_Controller_Section_1 Member=Component X1 32.768KHz
