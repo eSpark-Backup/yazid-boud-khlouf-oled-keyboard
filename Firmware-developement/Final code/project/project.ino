@@ -297,9 +297,7 @@ void checkKeys()
                (digitalRead(INPUT3) << 13) |
                (digitalRead(INPUT4) << 12) |
                (digitalRead(INPUT5) << 11) |
-               (digitalRead(INPUT6) << 10) |
                (digitalRead(INPUT7) << 9)  |
-               (digitalRead(INPUT8) <<  8) |
                (digitalRead(INPUT9) <<  7) |
                (digitalRead(INPUT10) << 6) |
                (digitalRead(INPUT11) << 5) |
@@ -313,9 +311,9 @@ void checkKeys()
       {
         if ((inputs >> i) & 0b01)
         {
-          key_selected = keys[i + output * i];
+          key_selected = keys[i + 15 * output];
           //          Serial.println("key pressed");
-          //          Serial.println(i + i * output);
+          //          Serial.println(i + 16 * output);
         }
       }
 
@@ -330,9 +328,7 @@ void checkKeys()
                (digitalRead(INPUT3) << 13) |
                (digitalRead(INPUT4) << 12) |
                (digitalRead(INPUT5) << 11) |
-               (digitalRead(INPUT6) << 10) |
                (digitalRead(INPUT7) << 9)  |
-               (digitalRead(INPUT8) <<  8) |
                (digitalRead(INPUT9) <<  7) |
                (digitalRead(INPUT10) << 6) |
                (digitalRead(INPUT11) << 5) |
@@ -346,9 +342,9 @@ void checkKeys()
       {
         if ((inputs >> i) & 0b01)
         {
-          key_selected = keys[i + output * i];
+          key_selected = keys[i + 16 * output];
           //          Serial.println("key pressed");
-          //          Serial.println(i + i * output);
+          //          Serial.println(i + 16 * output);
         }
       }
 
@@ -363,9 +359,7 @@ void checkKeys()
                (digitalRead(INPUT3) << 13) |
                (digitalRead(INPUT4) << 12) |
                (digitalRead(INPUT5) << 11) |
-               (digitalRead(INPUT6) << 10) |
                (digitalRead(INPUT7) << 9)  |
-               (digitalRead(INPUT8) <<  8) |
                (digitalRead(INPUT9) <<  7) |
                (digitalRead(INPUT10) << 6) |
                (digitalRead(INPUT11) << 5) |
@@ -379,9 +373,9 @@ void checkKeys()
       {
         if ((inputs >> i) & 0b01)
         {
-          key_selected = keys[i + output * i];
+          key_selected = keys[i + 16 * output];
           //          Serial.println("key pressed");
-          //          Serial.println(i + i * output);
+          //          Serial.println(i + 16 * output);
         }
       }
 
@@ -396,9 +390,7 @@ void checkKeys()
                (digitalRead(INPUT3) << 13) |
                (digitalRead(INPUT4) << 12) |
                (digitalRead(INPUT5) << 11) |
-               (digitalRead(INPUT6) << 10) |
                (digitalRead(INPUT7) << 9)  |
-               (digitalRead(INPUT8) <<  8) |
                (digitalRead(INPUT9) <<  7) |
                (digitalRead(INPUT10) << 6) |
                (digitalRead(INPUT11) << 5) |
@@ -412,9 +404,9 @@ void checkKeys()
       {
         if ((inputs >> i) & 0b01)
         {
-          key_selected = keys[i + output * i];
+          key_selected = keys[i + 16 * output];
           //          Serial.println("key pressed");
-          //          Serial.println(i + i * output);
+          //          Serial.println(i + 16 * output);
         }
       }
 
@@ -430,9 +422,7 @@ void checkKeys()
                (digitalRead(INPUT3) << 13) |
                (digitalRead(INPUT4) << 12) |
                (digitalRead(INPUT5) << 11) |
-               (digitalRead(INPUT6) << 10) |
                (digitalRead(INPUT7) << 9)  |
-               (digitalRead(INPUT8) <<  8) |
                (digitalRead(INPUT9) <<  7) |
                (digitalRead(INPUT10) << 6) |
                (digitalRead(INPUT11) << 5) |
@@ -446,9 +436,9 @@ void checkKeys()
       {
         if ((inputs >> i) & 0b01)
         {
-          key_selected = keys[i + output * i];
+          key_selected = keys[i + 16 * output];
           //          Serial.println("key pressed");
-          //          Serial.println(i + i * output);
+          //          Serial.println(i + 16 * output);
         }
       }
 
@@ -477,21 +467,25 @@ void checkKeys()
 
   last_key_selected = key_selected;
 
-  if (key_selected != -1)
+  if (key_selected != NULL)
   {
     if (!shift_key)
     {
       delay(repeat_delay);
     }
 
+    //    Serial.println("hello");
+    //    Serial.println(key_selected);
     print_key(key_selected);
 
-    key_selected = -1;
+    key_selected = NULL;
   }
 }
 
 void print_key(uint32_t key)
 {
+  uint8_t last_num_lock_state = Keyboard.check_numlock();
+
   switch (key)
   {
 
@@ -511,7 +505,7 @@ void print_key(uint32_t key)
       break;
 
     case HID_INC_BRIGHTNESS:
-      Keyboard.writeConsumer(HID_DEC_BRIGHTNESS);
+      Keyboard.writeConsumer(HID_INC_BRIGHTNESS);
       break;
 
     case HID_MEDIA_VOL_DOWN:
@@ -556,7 +550,7 @@ void print_key(uint32_t key)
       break;
 
     case HID_RADIO_WIRELESS:
-      Keyboard.writeConsumer(HID_RADIO_WIRELESS);
+      Keyboard.writeWireless(HID_RADIO_WIRELESS);
       break;
 
     case KEY_DELETE:
@@ -565,12 +559,16 @@ void print_key(uint32_t key)
 
     // Row 2
     case SQUARE_KEY:
+      if (!last_num_lock_state)Keyboard.write(KEY_NUM_LOCK);
+
       Keyboard.press(KEY_LEFT_ALT);
       Keyboard.write(NUM_0);
       Keyboard.write(NUM_1);
       Keyboard.write(NUM_7);
       Keyboard.write(NUM_8);
       Keyboard.release(KEY_LEFT_ALT);
+
+      if (!last_num_lock_state)Keyboard.write(KEY_NUM_LOCK);
       break;
 
     // Row 3
@@ -587,7 +585,7 @@ void print_key(uint32_t key)
     // Printing Keys are printed in default block
 
     // Row 7
-    // Down Arrow key 
+    // Down Arrow key
 
     default:
       Keyboard.write(key);
