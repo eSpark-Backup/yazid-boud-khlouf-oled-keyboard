@@ -28,9 +28,9 @@
 #define INPUT3 PD2
 #define INPUT4 PD3
 #define INPUT5 PD4
-#define INPUT6 PD5
+#define INPUT6 PA2
 #define INPUT7 PD6
-#define INPUT8 PC0
+#define INPUT8 PA1
 #define INPUT9 PC1
 #define INPUT10 PC2
 #define INPUT11 PC3
@@ -68,7 +68,7 @@ char screens[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M
 char screens2[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3', '4'};
 
 uint8_t keys[]  = {KEY_ESC, KEY_RETURN, HID_DEC_BRIGHTNESS, HID_INC_BRIGHTNESS, HID_MEDIA_VOL_DOWN, HID_MEDIA_VOL_UP, HID_MIC, HID_CAMERA, KEY_SCREEN_RECORD, KEY_SCREENSHOT, KEY_PRINT, KEY_SHARE, HID_RADIO_WIRELESS, KEY_DELETE,
-                   SQUARE_KEY, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', BLANK, BLANK, KEY_BACKSPACE,
+                   SQUARE_KEY, KEY_SCREEN_RECORD, KEY_PRINT, '3', '4', '5', '6', '7', '8', '9', '0', BLANK, BLANK, KEY_BACKSPACE,
                    KEY_TAB, 'a', 'z', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', BLANK, BLANK, KEY_RETURN,
                    TRANSFORM, 'q', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', BLANK, BLANK,
                    KEY_LEFT_SHIFT, 'w', 'x', 'c', 'v', 'b', 'n', ',' , ';', ':', '.', KEY_RIGHT_SHIFT,
@@ -297,7 +297,9 @@ void checkKeys()
                (digitalRead(INPUT3) << 13) |
                (digitalRead(INPUT4) << 12) |
                (digitalRead(INPUT5) << 11) |
+               (digitalRead(INPUT6) << 10) |
                (digitalRead(INPUT7) << 9)  |
+               (digitalRead(INPUT8) << 8)  |
                (digitalRead(INPUT9) <<  7) |
                (digitalRead(INPUT10) << 6) |
                (digitalRead(INPUT11) << 5) |
