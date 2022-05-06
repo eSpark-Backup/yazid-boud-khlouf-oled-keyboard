@@ -1,0 +1,4 @@
+Removed Pin From Net: NetName=COl_8 Pin=U2-15
+Removed Pin From Net: NetName=COl_6 Pin=U2-86
+Added Pin To Net: NetName=COl_8 Pin=U2-24
+Added Pin To Net: NetName=COl_6 Pin=U2-25
