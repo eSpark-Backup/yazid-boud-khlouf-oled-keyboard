@@ -1,5 +1,5 @@
 ----------------------------------------------------------------------------------------------------------------------------------
-NCDrill File Report For: Custom_Keyboard.PcbDoc   4/4/2022  1:41:35 PM
+NCDrill File Report For: Custom_Keyboard.PcbDoc   5/6/2022  6:37:21 PM
 ----------------------------------------------------------------------------------------------------------------------------------
 
 Layer Pair : Top Layer to Bottom Layer
@@ -8,11 +8,11 @@ ASCII SlotHoles File : Custom_Keyboard-SlotHoles.TXT
 
 Tool       Hole Size               Hole Tolerance               Hole Type       Hole Count   Plated         Tool Travel
 ----------------------------------------------------------------------------------------------------------------------------------
-T1      8mil (0.2mm)                                              Round             174       PTH        0.00inch (0.00mm)
-T2      12mil (0.3mm)                                             Round             126       PTH        0.00inch (0.00mm)
-T3      24mil (0.6mm)                                             Slot              4         PTH        0.00inch (0.00mm)
-T4      118mil (3mm)                                              Round             4         PTH        0.00inch (0.00mm)
+T1      8mil (0.2mm)                                              Round             170       PTH        19.04inch (483.53mm)
+T2      12mil (0.3mm)                                             Round             127       PTH        25.40inch (645.06mm)
+T3      24mil (0.6mm)                                             Slot              4         PTH        2.76inch (70.10mm)
+T4      118mil (3mm)                                              Round             4         PTH        8.07inch (205.05mm)
 ----------------------------------------------------------------------------------------------------------------------------------
-Totals                                                                              308
+Totals                                                                              305
 
-Total Processing Time (hh:mm:ss) : 00:00:01
+Total Processing Time (hh:mm:ss) : 00:00:00

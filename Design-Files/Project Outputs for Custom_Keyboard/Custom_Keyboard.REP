@@ -2,30 +2,292 @@
 FileName = Custom_Keyboard.GBR
 AutoAperture = True
 *************************************************************
-Generating : Drill Drawing
-      File : Custom_Keyboard.GD1
+Generating : Mechanical 2
+      File : Custom_Keyboard.GM2
 
-    Adding Drill Pair : Top Layer-Bottom Layer
-
-    Adding Layer      : Drill Drawing
+    Adding Layer      : Mechanical 2
 
 
 Used DCodes :
-    D217
-    D218
+    D11
 *************************************************************
 
 *************************************************************
-Generating : Drill Guide
-      File : Custom_Keyboard.GG1
+Generating : Bottom Overlay
+      File : Custom_Keyboard.GBO
 
-    Adding Drill Pair : Top Layer-Bottom Layer
-
-    Adding Layer      : Drill Guide
+    Adding Layer      : Bottom Overlay
 
 
 Used DCodes :
-    D217
+    D10
+    D11
+    D13
+    D216
+*************************************************************
+
+*************************************************************
+Generating : Bottom Paste
+      File : Custom_Keyboard.GBP
+
+    Adding Layer      : Bottom Paste
+
+    Adding Layer      : Bottom Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D17
+    D25
+    D27
+    D171
+    D172
+    D173
+    D174
+*************************************************************
+
+*************************************************************
+Generating : Bottom Solder
+      File : Custom_Keyboard.GBS
+
+    Adding Layer      : Bottom Solder
+
+    Adding Layer      : Bottom Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D40
+    D48
+    D50
+    D51
+    D64
+    D65
+    D66
+    D212
+    D213
+    D214
+    D215
+*************************************************************
+
+*************************************************************
+Generating : Top Solder
+      File : Custom_Keyboard.GTS
+
+    Adding Layer      : Top Solder
+
+    Adding Layer      : Top Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D39
+    D40
+    D41
+    D42
+    D43
+    D44
+    D45
+    D46
+    D47
+    D48
+    D49
+    D50
+    D51
+    D52
+    D53
+    D54
+    D55
+    D56
+    D57
+    D58
+    D59
+    D60
+    D61
+    D62
+    D63
+    D64
+    D65
+    D66
+*************************************************************
+
+*************************************************************
+Generating : Top Paste
+      File : Custom_Keyboard.GTP
+
+    Adding Layer      : Top Paste
+
+    Adding Layer      : Top Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D16
+    D17
+    D18
+    D19
+    D20
+    D21
+    D22
+    D23
+    D24
+    D25
+    D26
+    D27
+    D28
+    D29
+    D30
+    D31
+    D32
+    D33
+    D34
+    D35
+    D36
+    D37
+    D38
+*************************************************************
+
+*************************************************************
+Generating : Top Overlay
+      File : Custom_Keyboard.GTO
+
+    Adding Layer      : Top Overlay
+
+
+Used DCodes :
+    D10
+    D11
+    D12
+    D13
+    D14
+    D15
+*************************************************************
+
+*************************************************************
+Generating : Top Pad Master
+      File : Custom_Keyboard.GPT
+
+    Adding Layer      : Top Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D16
+    D17
+    D18
+    D19
+    D20
+    D21
+    D22
+    D23
+    D24
+    D25
+    D26
+    D27
+    D28
+    D29
+    D30
+    D31
+    D32
+    D33
+    D34
+    D35
+    D36
+    D37
+    D38
+    D167
+    D168
+*************************************************************
+
+*************************************************************
+Generating : Bottom Pad Master
+      File : Custom_Keyboard.GPB
+
+    Adding Layer      : Bottom Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D17
+    D25
+    D27
+    D167
+    D168
+    D171
+    D172
+    D173
+    D174
+*************************************************************
+
+*************************************************************
+Generating : Bottom Layer
+      File : Custom_Keyboard.GBL
+
+    Adding Layer      : Bottom Layer
+
+    Adding Layer      : Multi-Layer
+
+
+Used DCodes :
+    D11
+    D17
+    D25
+    D27
+    D67
+    D68
+    D70
+    D71
+    D167
+    D168
+    D169
+    D170
+    D171
+    D172
+    D173
+    D174
+    D175
+    D176
+    D177
+    D178
+    D179
+    D180
+    D181
+    D182
+    D183
+    D184
+    D185
+    D186
+    D187
+    D188
+    D189
+    D190
+    D191
+    D192
+    D193
+    D194
+    D195
+    D196
+    D197
+    D198
+    D199
+    D200
+    D201
+    D202
+    D203
+    D204
+    D205
+    D206
+    D207
+    D208
+    D209
+    D210
+    D211
 *************************************************************
 
 *************************************************************
@@ -170,291 +432,29 @@ Used DCodes :
 *************************************************************
 
 *************************************************************
-Generating : Top Pad Master
-      File : Custom_Keyboard.GPT
+Generating : Drill Drawing
+      File : Custom_Keyboard.GD1
 
-    Adding Layer      : Top Layer
+    Adding Drill Pair : Top Layer-Bottom Layer
 
-    Adding Layer      : Multi-Layer
-
-
-Used DCodes :
-    D16
-    D17
-    D18
-    D19
-    D20
-    D21
-    D22
-    D23
-    D24
-    D25
-    D26
-    D27
-    D28
-    D29
-    D30
-    D31
-    D32
-    D33
-    D34
-    D35
-    D36
-    D37
-    D38
-    D167
-    D168
-*************************************************************
-
-*************************************************************
-Generating : Bottom Paste
-      File : Custom_Keyboard.GBP
-
-    Adding Layer      : Bottom Paste
-
-    Adding Layer      : Bottom Layer
-
-    Adding Layer      : Multi-Layer
+    Adding Layer      : Drill Drawing
 
 
 Used DCodes :
-    D17
-    D25
-    D27
-    D171
-    D172
-    D173
-    D174
+    D217
+    D218
 *************************************************************
 
 *************************************************************
-Generating : Bottom Pad Master
-      File : Custom_Keyboard.GPB
+Generating : Drill Guide
+      File : Custom_Keyboard.GG1
 
-    Adding Layer      : Bottom Layer
+    Adding Drill Pair : Top Layer-Bottom Layer
 
-    Adding Layer      : Multi-Layer
+    Adding Layer      : Drill Guide
 
 
 Used DCodes :
-    D17
-    D25
-    D27
-    D167
-    D168
-    D171
-    D172
-    D173
-    D174
-*************************************************************
-
-*************************************************************
-Generating : Top Solder
-      File : Custom_Keyboard.GTS
-
-    Adding Layer      : Top Solder
-
-    Adding Layer      : Top Layer
-
-    Adding Layer      : Multi-Layer
-
-
-Used DCodes :
-    D39
-    D40
-    D41
-    D42
-    D43
-    D44
-    D45
-    D46
-    D47
-    D48
-    D49
-    D50
-    D51
-    D52
-    D53
-    D54
-    D55
-    D56
-    D57
-    D58
-    D59
-    D60
-    D61
-    D62
-    D63
-    D64
-    D65
-    D66
-*************************************************************
-
-*************************************************************
-Generating : Top Paste
-      File : Custom_Keyboard.GTP
-
-    Adding Layer      : Top Paste
-
-    Adding Layer      : Top Layer
-
-    Adding Layer      : Multi-Layer
-
-
-Used DCodes :
-    D16
-    D17
-    D18
-    D19
-    D20
-    D21
-    D22
-    D23
-    D24
-    D25
-    D26
-    D27
-    D28
-    D29
-    D30
-    D31
-    D32
-    D33
-    D34
-    D35
-    D36
-    D37
-    D38
-*************************************************************
-
-*************************************************************
-Generating : Top Overlay
-      File : Custom_Keyboard.GTO
-
-    Adding Layer      : Top Overlay
-
-
-Used DCodes :
-    D10
-    D11
-    D12
-    D13
-    D14
-    D15
-*************************************************************
-
-*************************************************************
-Generating : Mechanical 2
-      File : Custom_Keyboard.GM2
-
-    Adding Layer      : Mechanical 2
-
-
-Used DCodes :
-    D11
-*************************************************************
-
-*************************************************************
-Generating : Bottom Layer
-      File : Custom_Keyboard.GBL
-
-    Adding Layer      : Bottom Layer
-
-    Adding Layer      : Multi-Layer
-
-
-Used DCodes :
-    D11
-    D17
-    D25
-    D27
-    D67
-    D68
-    D70
-    D71
-    D167
-    D168
-    D169
-    D170
-    D171
-    D172
-    D173
-    D174
-    D175
-    D176
-    D177
-    D178
-    D179
-    D180
-    D181
-    D182
-    D183
-    D184
-    D185
-    D186
-    D187
-    D188
-    D189
-    D190
-    D191
-    D192
-    D193
-    D194
-    D195
-    D196
-    D197
-    D198
-    D199
-    D200
-    D201
-    D202
-    D203
-    D204
-    D205
-    D206
-    D207
-    D208
-    D209
-    D210
-    D211
-*************************************************************
-
-*************************************************************
-Generating : Bottom Overlay
-      File : Custom_Keyboard.GBO
-
-    Adding Layer      : Bottom Overlay
-
-
-Used DCodes :
-    D10
-    D11
-    D13
-    D216
-*************************************************************
-
-*************************************************************
-Generating : Bottom Solder
-      File : Custom_Keyboard.GBS
-
-    Adding Layer      : Bottom Solder
-
-    Adding Layer      : Bottom Layer
-
-    Adding Layer      : Multi-Layer
-
-
-Used DCodes :
-    D40
-    D48
-    D50
-    D51
-    D64
-    D65
-    D66
-    D212
-    D213
-    D214
-    D215
+    D217
 *************************************************************
 
