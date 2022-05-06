@@ -50,6 +50,14 @@
 #define REPEAT_DELAY 30
 #define REPEAT_DELAY_INITIAL 500
 
+#define HID_DEC_BRIGHTNESS_MEDIA 20
+#define HID_INC_BRIGHTNESS_MEDIA 21
+#define HID_MEDIA_VOL_DOWN_MEDIA 22
+#define HID_MEDIA_VOL_UP_MEDIA 23
+#define HID_MIC_MEDIA 24
+#define HID_CAMERA_MEDIA 25
+#define HID_RADIO_WIRELESS_MEDIA 26
+
 TwoWire WireDisplay1(PB9, PB8);
 TwoWire WireDisplay2(PB11, PB10);
 TwoWire WireDisplay3(PC9, PA8);
@@ -67,12 +75,12 @@ Adafruit_SSD1306 display4(SCREEN_WIDTH, SCREEN_HEIGHT, &WireDisplay1, OLED_RESET
 char screens[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4'};
 char screens2[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3', '4'};
 
-uint8_t keys[]  = {KEY_ESC, KEY_RETURN, HID_DEC_BRIGHTNESS, HID_INC_BRIGHTNESS, HID_MEDIA_VOL_DOWN, HID_MEDIA_VOL_UP, HID_MIC, HID_CAMERA, KEY_SCREEN_RECORD, KEY_SCREENSHOT, KEY_PRINT, KEY_SHARE, HID_RADIO_WIRELESS, KEY_DELETE,
-                   SQUARE_KEY, KEY_SCREEN_RECORD, KEY_PRINT, '3', '4', '5', '6', '7', '8', '9', '0', BLANK, BLANK, KEY_BACKSPACE,
+uint8_t keys[]  = {KEY_ESC, KEY_RETURN, HID_DEC_BRIGHTNESS_MEDIA, HID_INC_BRIGHTNESS_MEDIA, HID_MEDIA_VOL_DOWN_MEDIA, HID_MEDIA_VOL_UP_MEDIA, HID_MIC_MEDIA, HID_CAMERA_MEDIA, KEY_SCREEN_RECORD, KEY_SCREENSHOT, KEY_PRINT, KEY_SHARE, HID_RADIO_WIRELESS_MEDIA, KEY_DELETE,
+                   SQUARE_KEY, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', BLANK, BLANK, KEY_BACKSPACE,
                    KEY_TAB, 'a', 'z', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', BLANK, BLANK, KEY_RETURN,
-                   TRANSFORM, 'q', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', BLANK, BLANK,
-                   KEY_LEFT_SHIFT, 'w', 'x', 'c', 'v', 'b', 'n', ',' , ';', ':', '.', KEY_RIGHT_SHIFT,
-                   KEY_LEFT_CTRL, FN_KEY, KEY_LEFT_GUI, KEY_LEFT_ALT, ' ', KEY_RIGHT_ALT, KEY_RIGHT_CTRL, KEY_LEFT_ARROW, KEY_UP_ARROW, KEY_RIGHT_ARROW,
+                   TRANSFORM, 'q', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', BLANK, BLANK, BLANK,
+                   KEY_LEFT_SHIFT, BLANK, 'w', 'x', 'c', 'v', 'b', 'n', ',' , ';', ':', '.', BLANK, 'a',
+                   KEY_LEFT_CTRL, FN_KEY, KEY_LEFT_GUI, KEY_LEFT_ALT, BLANK, BLANK, ' ', BLANK, BLANK, KEY_RIGHT_ALT, KEY_RIGHT_CTRL, KEY_LEFT_ARROW, KEY_UP_ARROW, KEY_RIGHT_ARROW,
                    KEY_DOWN_ARROW
                   };
 
@@ -81,7 +89,8 @@ char key_selected = NULL;
 char last_key_selected = NULL;
 uint16_t repeat_delay = 0;
 uint8_t repeat_first = false;
-uint8_t shift_key = false;
+uint8_t shift_key_right = false;
+uint8_t shift_key_left = false;
 uint8_t capslock_key = false;
 uint8_t capitalized = false;
 uint8_t uncapitalized = false;
@@ -168,7 +177,7 @@ void loop() {
 
   checkKeys();
   //
-  if (shift_key || capslock_key)
+  if (shift_key_left || capslock_key)
   {
     if (!capitalized)
     {
@@ -278,6 +287,20 @@ void uncapitalize()
 
 void checkKeys()
 {
+  // Modifier keys
+  if (digitalRead(INPUT11) == HIGH)
+  {
+    shift_key_right = true;
+    Keyboard.press(KEY_RIGHT_SHIFT);
+  }
+  else
+  {
+    shift_key_right = false;
+    Keyboard.release(KEY_RIGHT_SHIFT);
+  }
+
+
+  // Other than modifier keys
   for (int output = 0; output < 5; output++)
   {
     // Delay for scan voltage to settle
@@ -313,7 +336,7 @@ void checkKeys()
       {
         if ((inputs >> i) & 0b01)
         {
-          key_selected = keys[i + 15 * output];
+          key_selected = keys[i + 16 * output];
           //          Serial.println("key pressed");
           //          Serial.println(i + 16 * output);
         }
@@ -330,7 +353,9 @@ void checkKeys()
                (digitalRead(INPUT3) << 13) |
                (digitalRead(INPUT4) << 12) |
                (digitalRead(INPUT5) << 11) |
+               (digitalRead(INPUT6) << 10) |
                (digitalRead(INPUT7) << 9)  |
+               (digitalRead(INPUT8) << 8)  |
                (digitalRead(INPUT9) <<  7) |
                (digitalRead(INPUT10) << 6) |
                (digitalRead(INPUT11) << 5) |
@@ -361,7 +386,9 @@ void checkKeys()
                (digitalRead(INPUT3) << 13) |
                (digitalRead(INPUT4) << 12) |
                (digitalRead(INPUT5) << 11) |
+               (digitalRead(INPUT6) << 10) |
                (digitalRead(INPUT7) << 9)  |
+               (digitalRead(INPUT8) << 8)  |
                (digitalRead(INPUT9) <<  7) |
                (digitalRead(INPUT10) << 6) |
                (digitalRead(INPUT11) << 5) |
@@ -392,7 +419,9 @@ void checkKeys()
                (digitalRead(INPUT3) << 13) |
                (digitalRead(INPUT4) << 12) |
                (digitalRead(INPUT5) << 11) |
+               (digitalRead(INPUT6) << 10) |
                (digitalRead(INPUT7) << 9)  |
+               (digitalRead(INPUT8) << 8)  |
                (digitalRead(INPUT9) <<  7) |
                (digitalRead(INPUT10) << 6) |
                (digitalRead(INPUT11) << 5) |
@@ -424,10 +453,11 @@ void checkKeys()
                (digitalRead(INPUT3) << 13) |
                (digitalRead(INPUT4) << 12) |
                (digitalRead(INPUT5) << 11) |
+               (digitalRead(INPUT6) << 10) |
                (digitalRead(INPUT7) << 9)  |
+               (digitalRead(INPUT8) << 8)  |
                (digitalRead(INPUT9) <<  7) |
                (digitalRead(INPUT10) << 6) |
-               (digitalRead(INPUT11) << 5) |
                (digitalRead(INPUT12) << 4) |
                (digitalRead(INPUT13) << 3) |
                (digitalRead(INPUT14) << 2) |
@@ -469,12 +499,15 @@ void checkKeys()
 
   last_key_selected = key_selected;
 
+
   if (key_selected != NULL)
   {
-    if (!shift_key)
+
+    if (!shift_key_right)
     {
       delay(repeat_delay);
     }
+
 
     //    Serial.println("hello");
     //    Serial.println(key_selected);
@@ -502,28 +535,28 @@ void print_key(uint32_t key)
       Keyboard.releaseAll();
       break;
 
-    case HID_DEC_BRIGHTNESS:
+    case HID_DEC_BRIGHTNESS_MEDIA:
       Keyboard.writeConsumer(HID_DEC_BRIGHTNESS);
       break;
 
-    case HID_INC_BRIGHTNESS:
+    case HID_INC_BRIGHTNESS_MEDIA:
       Keyboard.writeConsumer(HID_INC_BRIGHTNESS);
       break;
 
-    case HID_MEDIA_VOL_DOWN:
+    case HID_MEDIA_VOL_DOWN_MEDIA:
       Keyboard.writeConsumer(HID_MEDIA_VOL_DOWN);
       break;
 
-    case HID_MEDIA_VOL_UP:
+    case HID_MEDIA_VOL_UP_MEDIA:
       Keyboard.writeConsumer(HID_MEDIA_VOL_UP);
       break;
 
-    case HID_MIC:
+    case HID_MIC_MEDIA:
       // Mute mic not working
       Keyboard.writeConsumer(HID_MIC);
       break;
 
-    case HID_CAMERA:
+    case HID_CAMERA_MEDIA:
       Keyboard.writeConsumer(HID_CAMERA);
       break;
 
@@ -541,7 +574,7 @@ void print_key(uint32_t key)
       Keyboard.releaseAll();
       break;
 
-    case  KEY_PRINT:
+    case KEY_PRINT:
       Keyboard.press(KEY_LEFT_CTRL);
       Keyboard.press('p');
       Keyboard.releaseAll();
@@ -551,7 +584,7 @@ void print_key(uint32_t key)
       // To be decided
       break;
 
-    case HID_RADIO_WIRELESS:
+    case HID_RADIO_WIRELESS_MEDIA:
       Keyboard.writeWireless(HID_RADIO_WIRELESS);
       break;
 
@@ -590,7 +623,9 @@ void print_key(uint32_t key)
     // Down Arrow key
 
     default:
-      Keyboard.write(key);
+      Keyboard.write(key_selected);
+      break;
 
   }
+
 }
