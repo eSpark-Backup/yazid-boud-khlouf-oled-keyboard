@@ -1,3 +1,11 @@
+/*
+   Modifier keys mapping
+
+   Left shift key => row3, input8
+   Right shift key => row4, input11
+*/
+
+
 #include "TI_TCA9548A.h"
 #include "Wire.h"
 #include "Adafruit_GFX.h"
@@ -78,9 +86,9 @@ char screens2[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', '
 uint8_t keys[]  = {KEY_ESC, KEY_RETURN, HID_DEC_BRIGHTNESS_MEDIA, HID_INC_BRIGHTNESS_MEDIA, HID_MEDIA_VOL_DOWN_MEDIA, HID_MEDIA_VOL_UP_MEDIA, HID_MIC_MEDIA, HID_CAMERA_MEDIA, KEY_SCREEN_RECORD, KEY_SCREENSHOT, KEY_PRINT, KEY_SHARE, HID_RADIO_WIRELESS_MEDIA, KEY_DELETE,
                    SQUARE_KEY, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', BLANK, BLANK, KEY_BACKSPACE,
                    KEY_TAB, 'a', 'z', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', BLANK, BLANK, KEY_RETURN,
-                   TRANSFORM, 'q', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', BLANK, BLANK, BLANK,
-                   KEY_LEFT_SHIFT, BLANK, 'w', 'x', 'c', 'v', 'b', 'n', ',' , ';', ':', '.', BLANK, 'a',
-                   KEY_LEFT_CTRL, FN_KEY, KEY_LEFT_GUI, KEY_LEFT_ALT, BLANK, BLANK, ' ', BLANK, BLANK, KEY_RIGHT_ALT, KEY_RIGHT_CTRL, KEY_LEFT_ARROW, KEY_UP_ARROW, KEY_RIGHT_ARROW,
+                   TRANSFORM, 'q', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', BLANK, BLANK,
+                   KEY_LEFT_SHIFT, 'w', 'x', 'c', 'v', 'b', 'n', ',' , ';', ':', '.', KEY_RIGHT_SHIFT,
+                   KEY_LEFT_CTRL, FN_KEY, KEY_LEFT_GUI, KEY_LEFT_ALT, ' ', KEY_RIGHT_ALT, KEY_RIGHT_CTRL, KEY_LEFT_ARROW, KEY_UP_ARROW, KEY_RIGHT_ARROW,
                    KEY_DOWN_ARROW
                   };
 
@@ -91,6 +99,11 @@ uint16_t repeat_delay = 0;
 uint8_t repeat_first = false;
 uint8_t shift_key_right = false;
 uint8_t shift_key_left = false;
+uint8_t ctrl_key_right = false;
+uint8_t ctrl_key_left = false;
+uint8_t alt_key_right = false;
+uint8_t alt_key_left = false;
+uint8_t fn_key = false;
 uint8_t capslock_key = false;
 uint8_t capitalized = false;
 uint8_t uncapitalized = false;
@@ -287,17 +300,18 @@ void uncapitalize()
 
 void checkKeys()
 {
-  // Modifier keys
-  if (digitalRead(INPUT11) == HIGH)
-  {
-    shift_key_right = true;
-    Keyboard.press(KEY_RIGHT_SHIFT);
-  }
-  else
-  {
-    shift_key_right = false;
-    Keyboard.release(KEY_RIGHT_SHIFT);
-  }
+
+  // right shift key
+  //  if (digitalRead(INPUT13) == HIGH)
+  //  {
+  //    shift_key_right = true;
+  //    Keyboard.press(KEY_RIGHT_SHIFT);
+  //  }
+  //  else if ((digitalRead(INPUT13) == LOW))
+  //  {
+  //    shift_key_right = false;
+  //    Keyboard.release(KEY_RIGHT_SHIFT);
+  //  }
 
 
   // Other than modifier keys
@@ -342,7 +356,6 @@ void checkKeys()
         }
       }
 
-      continue;
     }
 
     if (output == 1)
@@ -375,7 +388,6 @@ void checkKeys()
         }
       }
 
-      continue;
     }
 
     if (output == 2)
@@ -408,7 +420,6 @@ void checkKeys()
         }
       }
 
-      continue;
     }
 
     if (output == 3)
@@ -422,7 +433,6 @@ void checkKeys()
                (digitalRead(INPUT6) << 10) |
                (digitalRead(INPUT7) << 9)  |
                (digitalRead(INPUT8) << 8)  |
-               (digitalRead(INPUT9) <<  7) |
                (digitalRead(INPUT10) << 6) |
                (digitalRead(INPUT11) << 5) |
                (digitalRead(INPUT12) << 4) |
@@ -441,7 +451,16 @@ void checkKeys()
         }
       }
 
-      continue;
+      if (digitalRead(INPUT9) == HIGH)
+      {
+        shift_key_right = true;
+        Keyboard.press(KEY_LEFT_SHIFT);
+      }
+      else if ((digitalRead(INPUT9) == LOW))
+      {
+        shift_key_right = false;
+        Keyboard.release(KEY_LEFT_SHIFT);
+      }
 
     }
 
@@ -454,13 +473,8 @@ void checkKeys()
                (digitalRead(INPUT4) << 12) |
                (digitalRead(INPUT5) << 11) |
                (digitalRead(INPUT6) << 10) |
-               (digitalRead(INPUT7) << 9)  |
-               (digitalRead(INPUT8) << 8)  |
                (digitalRead(INPUT9) <<  7) |
-               (digitalRead(INPUT10) << 6) |
-               (digitalRead(INPUT12) << 4) |
-               (digitalRead(INPUT13) << 3) |
-               (digitalRead(INPUT14) << 2) |
+               (digitalRead(INPUT11) << 5) |
                (digitalRead(INPUT15) << 1) |
                (digitalRead(INPUT16) << 0);
 
@@ -474,7 +488,77 @@ void checkKeys()
         }
       }
 
-      continue;
+      // Press and release responses
+
+      // Right Shift key
+      if (digitalRead(INPUT14) == HIGH)
+      {
+        shift_key_right = true;
+        Keyboard.press(KEY_RIGHT_SHIFT);
+      }
+      else if ((digitalRead(INPUT14) == LOW))
+      {
+        shift_key_right = false;
+        Keyboard.release(KEY_RIGHT_SHIFT);
+      }
+
+      // Left Ctrl
+      if (digitalRead(INPUT13) == HIGH)
+      {
+        ctrl_key_left = true;
+        Keyboard.press(KEY_LEFT_CTRL);
+      }
+      else if ((digitalRead(INPUT13) == LOW))
+      {
+        ctrl_key_left = false;
+        Keyboard.release(KEY_LEFT_CTRL);
+      }
+
+      // fn key
+      if (digitalRead(INPUT12) == HIGH)
+      {
+        fn_key = true;
+      }
+      else if ((digitalRead(INPUT12) == LOW))
+      {
+        fn_key = false;
+      }
+
+      // Left Alt
+      if (digitalRead(INPUT10) == HIGH)
+      {
+        alt_key_left = true;
+        Keyboard.press(KEY_LEFT_ALT);
+      }
+      else if ((digitalRead(INPUT10) == LOW))
+      {
+        alt_key_left = false;
+        Keyboard.release(KEY_LEFT_ALT);
+      }
+
+      // Right Alt
+      if (digitalRead(INPUT8) == HIGH)
+      {
+        alt_key_right = true;
+        Keyboard.press(KEY_RIGHT_ALT);
+      }
+      else if ((digitalRead(INPUT8) == LOW))
+      {
+        alt_key_right = false;
+        Keyboard.release(KEY_RIGHT_ALT);
+      }
+
+      // Right Ctrl
+      if (digitalRead(INPUT7) == HIGH)
+      {
+        ctrl_key_right = true;
+        Keyboard.press(KEY_RIGHT_CTRL);
+      }
+      else if ((digitalRead(INPUT7) == LOW))
+      {
+        ctrl_key_right = false;
+        Keyboard.release(KEY_RIGHT_CTRL);
+      }
 
     }
 
@@ -503,7 +587,9 @@ void checkKeys()
   if (key_selected != NULL)
   {
 
-    if (!shift_key_right)
+    // Key delay except for modifier keys
+    if ((!shift_key_right) && (!shift_key_left) && (!ctrl_key_left) && (!ctrl_key_right)  /
+        (!alt_key_left) && (!alt_key_right))
     {
       delay(repeat_delay);
     }
