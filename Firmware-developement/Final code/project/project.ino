@@ -20,16 +20,28 @@
 
 
 #define BLANK 0x00
-#define SQUARE_KEY 0x02
-#define CUBE_KEY 0x03
-#define TRANSFORM 0x04
-#define FN_KEY 0x05
+#define SQUARE_KEY 0x01
+#define CUBE_KEY 0x02
+#define TRANSFORM 0x03
+#define FN_KEY 0x04
+#define DEGREE_KEY 0x05
+#define EURO_KEY 0x06
+#define POUND_KEY 0x07
+#define YEN_KEY 0x08
+#define DIAERESIS_KEY 0x09
 
-#define KEY_RETURN 10
-#define KEY_SCREEN_RECORD 11
-#define KEY_SCREENSHOT 12
-#define KEY_PRINT 13
-#define KEY_SHARE 14
+#define HID_DEC_BRIGHTNESS_MEDIA 0x0A
+#define HID_INC_BRIGHTNESS_MEDIA 0x0B
+#define HID_MEDIA_VOL_DOWN_MEDIA 0x0C
+#define HID_MEDIA_VOL_UP_MEDIA 0x0D
+#define HID_MIC_MEDIA 0x0E
+#define HID_CAMERA_MEDIA 0x0F
+#define HID_RADIO_WIRELESS_MEDIA 0x10
+#define KEY_CANCEL 0x11
+#define KEY_SCREEN_RECORD 0x12
+#define KEY_SCREENSHOT 0x13
+#define KEY_PRINT 0x14
+#define KEY_SHARE 0x15
 
 #define INPUT1 PD0
 #define INPUT2 PD1
@@ -58,14 +70,6 @@
 #define REPEAT_DELAY 30
 #define REPEAT_DELAY_INITIAL 500
 
-#define HID_DEC_BRIGHTNESS_MEDIA 20
-#define HID_INC_BRIGHTNESS_MEDIA 21
-#define HID_MEDIA_VOL_DOWN_MEDIA 22
-#define HID_MEDIA_VOL_UP_MEDIA 23
-#define HID_MIC_MEDIA 24
-#define HID_CAMERA_MEDIA 25
-#define HID_RADIO_WIRELESS_MEDIA 26
-
 TwoWire WireDisplay1(PB9, PB8);
 TwoWire WireDisplay2(PB11, PB10);
 TwoWire WireDisplay3(PC9, PA8);
@@ -83,7 +87,7 @@ Adafruit_SSD1306 display4(SCREEN_WIDTH, SCREEN_HEIGHT, &WireDisplay1, OLED_RESET
 char screens[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4'};
 char screens2[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3', '4'};
 
-uint8_t keys[]  = {KEY_ESC, KEY_RETURN, HID_DEC_BRIGHTNESS_MEDIA, HID_INC_BRIGHTNESS_MEDIA, HID_MEDIA_VOL_DOWN_MEDIA, HID_MEDIA_VOL_UP_MEDIA, HID_MIC_MEDIA, HID_CAMERA_MEDIA, KEY_SCREEN_RECORD, KEY_SCREENSHOT, KEY_PRINT, KEY_SHARE, HID_RADIO_WIRELESS_MEDIA, KEY_DELETE,
+uint8_t keys[]  = {KEY_ESC, KEY_CANCEL, HID_DEC_BRIGHTNESS_MEDIA, HID_INC_BRIGHTNESS_MEDIA, HID_MEDIA_VOL_DOWN_MEDIA, HID_MEDIA_VOL_UP_MEDIA, HID_MIC_MEDIA, HID_CAMERA_MEDIA, KEY_SCREEN_RECORD, KEY_SCREENSHOT, KEY_PRINT, KEY_SHARE, HID_RADIO_WIRELESS_MEDIA, KEY_DELETE,
                    SQUARE_KEY, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', BLANK, BLANK, KEY_BACKSPACE,
                    KEY_TAB, 'a', 'z', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', BLANK, BLANK, KEY_RETURN,
                    TRANSFORM, 'q', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', BLANK, BLANK,
@@ -92,7 +96,16 @@ uint8_t keys[]  = {KEY_ESC, KEY_RETURN, HID_DEC_BRIGHTNESS_MEDIA, HID_INC_BRIGHT
                    KEY_DOWN_ARROW
                   };
 
-uint8_t special_keys[] = {KEY_F1, KEY_F2, KEY_F3, KEY_F4, KEY_F5, KEY_F6, KEY_F7, KEY_F8, KEY_F9, KEY_F10, KEY_F11, KEY_F12};
+uint8_t function_keys[] = {KEY_F1, KEY_F2, KEY_F3, KEY_F4, KEY_F5, KEY_F6, KEY_F7, KEY_F8, KEY_F9, KEY_F10, KEY_F11, KEY_F12};
+
+uint8_t special_keys[]  = {KEY_ESC, KEY_CANCEL, HID_DEC_BRIGHTNESS_MEDIA, HID_INC_BRIGHTNESS_MEDIA, HID_MEDIA_VOL_DOWN_MEDIA, HID_MEDIA_VOL_UP_MEDIA, HID_MIC_MEDIA, HID_CAMERA_MEDIA, KEY_SCREEN_RECORD, KEY_SCREENSHOT, KEY_PRINT, KEY_SHARE, HID_RADIO_WIRELESS_MEDIA, KEY_DELETE,
+                           DEGREE_KEY, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '%', '=', KEY_BACKSPACE,
+                           KEY_TAB, '\'', '\"', '(', ')', '{', '}', '[', ']', '<', '>', '+', '-', KEY_RETURN,
+                           TRANSFORM, '&', '#', '@', EURO_KEY, '$', POUND_KEY, YEN_KEY, '~', DIAERESIS_KEY, '^', '*', '/',
+                           KEY_LEFT_SHIFT, '\\', '|', '-', '_', ';', ':', ',', '.', '?', '!', KEY_RIGHT_SHIFT,
+                           KEY_LEFT_CTRL, FN_KEY, KEY_LEFT_GUI, KEY_LEFT_ALT, ' ', KEY_RIGHT_ALT, KEY_RIGHT_CTRL, KEY_LEFT_ARROW, KEY_UP_ARROW, KEY_RIGHT_ARROW,
+                           KEY_DOWN_ARROW
+                          };
 
 uint32_t output_pins[] = {OUTPUT1, OUTPUT2, OUTPUT3, OUTPUT4, OUTPUT5};
 char key_selected = NULL;
@@ -105,6 +118,7 @@ uint8_t ctrl_key_right = false;
 uint8_t ctrl_key_left = false;
 uint8_t alt_key_right = false;
 uint8_t alt_key_left = false;
+uint8_t transform_key = false;
 uint8_t fn_key = false;
 uint8_t capslock_key = false;
 uint8_t capitalized = false;
@@ -354,8 +368,13 @@ void checkKeys()
         {
           if ((fn_key) && (i < 12))
           {
-            key_selected = special_keys[i];
-          } else
+            key_selected = function_keys[i];
+          }
+          else if (transform_key)
+          {
+            key_selected = special_keys[i + 16 * output];
+          }
+          else
           {
             key_selected = keys[i + 16 * output];
             //          Serial.println("key pressed");
@@ -390,9 +409,16 @@ void checkKeys()
       {
         if ((inputs >> i) & 0b01)
         {
-          key_selected = keys[i + 16 * output];
-          //          Serial.println("key pressed");
-          //          Serial.println(i + 16 * output);
+          if (transform_key)
+          {
+            key_selected = special_keys[i + 16 * output];
+          }
+          else
+          {
+            key_selected = keys[i + 16 * output];
+            //          Serial.println("key pressed");
+            //          Serial.println(i + 16 * output);
+          }
         }
       }
 
@@ -406,7 +432,6 @@ void checkKeys()
                (digitalRead(INPUT3) << 13) |
                (digitalRead(INPUT4) << 12) |
                (digitalRead(INPUT5) << 11) |
-               (digitalRead(INPUT6) << 10) |
                (digitalRead(INPUT7) << 9)  |
                (digitalRead(INPUT8) << 8)  |
                (digitalRead(INPUT9) <<  7) |
@@ -422,10 +447,26 @@ void checkKeys()
       {
         if ((inputs >> i) & 0b01)
         {
-          key_selected = keys[i + 16 * output];
-          //          Serial.println("key pressed");
-          //          Serial.println(i + 16 * output);
+          if (transform_key)
+          {
+            key_selected = special_keys[i + 16 * output];
+          }
+          else
+          {
+            key_selected = keys[i + 16 * output];
+            //          Serial.println("key pressed");
+            //          Serial.println(i + 16 * output);
+          }
         }
+      }
+
+      if (digitalRead(INPUT6) == HIGH)
+      {
+        transform_key = true;
+      }
+      else if ((digitalRead(INPUT6) == LOW))
+      {
+        transform_key = false;
       }
 
     }
@@ -453,9 +494,16 @@ void checkKeys()
       {
         if ((inputs >> i) & 0b01)
         {
-          key_selected = keys[i + 16 * output];
-          //          Serial.println("key pressed");
-          //          Serial.println(i + 16 * output);
+          if (transform_key)
+          {
+            key_selected = special_keys[i + 16 * output];
+          }
+          else
+          {
+            key_selected = keys[i + 16 * output];
+            //          Serial.println("key pressed");
+            //          Serial.println(i + 16 * output);
+          }
         }
       }
 
@@ -490,9 +538,16 @@ void checkKeys()
       {
         if ((inputs >> i) & 0b01)
         {
-          key_selected = keys[i + 16 * output];
-          //          Serial.println("key pressed");
-          //          Serial.println(i + 16 * output);
+          if (transform_key)
+          {
+            key_selected = special_keys[i + 16 * output];
+          }
+          else
+          {
+            key_selected = keys[i + 16 * output];
+            //          Serial.println("key pressed");
+            //          Serial.println(i + 16 * output);
+          }
         }
       }
 
@@ -624,7 +679,7 @@ void print_key(uint32_t key)
       Keyboard.write(KEY_ESC);
       break;
 
-    case KEY_RETURN:
+    case KEY_CANCEL:
       Keyboard.press(KEY_LEFT_CTRL);
       Keyboard.press('z');
       Keyboard.releaseAll();
@@ -695,6 +750,71 @@ void print_key(uint32_t key)
       Keyboard.write(NUM_0);
       Keyboard.write(NUM_1);
       Keyboard.write(NUM_7);
+      Keyboard.write(NUM_8);
+      Keyboard.release(KEY_LEFT_ALT);
+
+      if (!last_num_lock_state)Keyboard.write(KEY_NUM_LOCK);
+      break;
+
+    case DEGREE_KEY:
+      if (!last_num_lock_state)Keyboard.write(KEY_NUM_LOCK);
+
+      Keyboard.press(KEY_LEFT_ALT);
+      Keyboard.write(NUM_0);
+      Keyboard.write(NUM_1);
+      Keyboard.write(NUM_7);
+      Keyboard.write(NUM_6);
+      Keyboard.release(KEY_LEFT_ALT);
+
+      if (!last_num_lock_state)Keyboard.write(KEY_NUM_LOCK);
+      break;
+
+    case EURO_KEY:
+      if (!last_num_lock_state)Keyboard.write(KEY_NUM_LOCK);
+
+      Keyboard.press(KEY_LEFT_ALT);
+      Keyboard.write(NUM_0);
+      Keyboard.write(NUM_1);
+      Keyboard.write(NUM_2);
+      Keyboard.write(NUM_8);
+      Keyboard.release(KEY_LEFT_ALT);
+
+      if (!last_num_lock_state)Keyboard.write(KEY_NUM_LOCK);
+      break;
+
+    case POUND_KEY:
+      if (!last_num_lock_state)Keyboard.write(KEY_NUM_LOCK);
+
+      Keyboard.press(KEY_LEFT_ALT);
+      Keyboard.write(NUM_0);
+      Keyboard.write(NUM_1);
+      Keyboard.write(NUM_6);
+      Keyboard.write(NUM_3);
+      Keyboard.release(KEY_LEFT_ALT);
+
+      if (!last_num_lock_state)Keyboard.write(KEY_NUM_LOCK);
+      break;
+
+    case YEN_KEY:
+      if (!last_num_lock_state)Keyboard.write(KEY_NUM_LOCK);
+
+      Keyboard.press(KEY_LEFT_ALT);
+      Keyboard.write(NUM_0);
+      Keyboard.write(NUM_1);
+      Keyboard.write(NUM_6);
+      Keyboard.write(NUM_5);
+      Keyboard.release(KEY_LEFT_ALT);
+
+      if (!last_num_lock_state)Keyboard.write(KEY_NUM_LOCK);
+      break;
+
+    case DIAERESIS_KEY:
+      if (!last_num_lock_state)Keyboard.write(KEY_NUM_LOCK);
+
+      Keyboard.press(KEY_LEFT_ALT);
+      Keyboard.write(NUM_0);
+      Keyboard.write(NUM_1);
+      Keyboard.write(NUM_6);
       Keyboard.write(NUM_8);
       Keyboard.release(KEY_LEFT_ALT);
 
