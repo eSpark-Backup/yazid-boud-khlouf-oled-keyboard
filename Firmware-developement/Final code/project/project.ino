@@ -92,6 +92,8 @@ uint8_t keys[]  = {KEY_ESC, KEY_RETURN, HID_DEC_BRIGHTNESS_MEDIA, HID_INC_BRIGHT
                    KEY_DOWN_ARROW
                   };
 
+uint8_t special_keys[] = {KEY_F1, KEY_F2, KEY_F3, KEY_F4, KEY_F5, KEY_F6, KEY_F7, KEY_F8, KEY_F9, KEY_F10, KEY_F11, KEY_F12};
+
 uint32_t output_pins[] = {OUTPUT1, OUTPUT2, OUTPUT3, OUTPUT4, OUTPUT5};
 char key_selected = NULL;
 char last_key_selected = NULL;
@@ -350,9 +352,15 @@ void checkKeys()
       {
         if ((inputs >> i) & 0b01)
         {
-          key_selected = keys[i + 16 * output];
-          //          Serial.println("key pressed");
-          //          Serial.println(i + 16 * output);
+          if ((fn_key) && (i < 12))
+          {
+            key_selected = special_keys[i];
+          } else
+          {
+            key_selected = keys[i + 16 * output];
+            //          Serial.println("key pressed");
+            //          Serial.println(i + 16 * output);
+          }
         }
       }
 
@@ -597,6 +605,7 @@ void checkKeys()
 
     //    Serial.println("hello");
     //    Serial.println(key_selected);
+
     print_key(key_selected);
 
     key_selected = NULL;
