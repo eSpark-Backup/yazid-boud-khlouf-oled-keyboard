@@ -43,6 +43,15 @@
 #define KEY_PRINT 0x14
 #define KEY_SHARE 0x15
 
+#define A_GRAVE 0xA0
+#define A_ACUTE 0xA1
+#define A_CIRC 0xA2
+#define A_TILDE 0xA3
+#define A_UML 0xA4
+#define A_RING 0xA5
+#define A_MACRON 0xA6
+#define A_ELIG 0xA7
+
 #define INPUT1 PD0
 #define INPUT2 PD1
 #define INPUT3 PD2
@@ -107,10 +116,20 @@ uint8_t special_keys[]  = {KEY_ESC, KEY_CANCEL, HID_DEC_BRIGHTNESS_MEDIA, HID_IN
                            KEY_DOWN_ARROW
                           };
 
+uint8_t a_variants[]  = {BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                         BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                         BLANK, 'a', A_GRAVE, A_ACUTE, A_CIRC, A_TILDE, A_UML, A_RING, A_MACRON, A_ELIG, BLANK, BLANK, BLANK, BLANK,
+                         BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                         BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK , BLANK, BLANK, BLANK, BLANK,
+                         BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                         BLANK
+                        };
+
 uint32_t output_pins[] = {OUTPUT1, OUTPUT2, OUTPUT3, OUTPUT4, OUTPUT5};
 
 uint32_t track_shift_time = 0;
 uint32_t track_transform_time = 0;
+uint32_t track_a_key_pressed_time = 0;
 
 char key_selected = NULL;
 char last_key_selected = NULL;
@@ -125,6 +144,9 @@ uint8_t alt_key_left = false;
 uint8_t transform_key = false;
 uint8_t toggle_capslock = false;
 uint8_t toggle_transform = false;
+uint8_t a_key_pressed = false;
+uint8_t initial_a_key = false;
+uint8_t special_a = false;
 uint8_t fn_key = false;
 uint8_t capslock_key = false;
 uint8_t capitalized = false;
@@ -376,6 +398,10 @@ void checkKeys()
           {
             key_selected = function_keys[i];
           }
+          else if (a_key_pressed)
+          {
+            key_selected = a_variants[i + 16 * output];
+          }
           else if ((transform_key) || (toggle_transform))
           {
             key_selected = special_keys[i + 16 * output];
@@ -396,7 +422,6 @@ void checkKeys()
 
       inputs = (digitalRead(INPUT1) << 15) |
                (digitalRead(INPUT2) << 14) |
-               (digitalRead(INPUT3) << 13) |
                (digitalRead(INPUT4) << 12) |
                (digitalRead(INPUT5) << 11) |
                (digitalRead(INPUT6) << 10) |
@@ -419,12 +444,42 @@ void checkKeys()
           {
             key_selected = special_keys[i + 16 * output];
           }
+          else if (a_key_pressed)
+          {
+            key_selected = a_variants[i + 16 * output];
+          }
           else
           {
             key_selected = keys[i + 16 * output];
             //          Serial.println("key pressed");
             //          Serial.println(i + 16 * output);
           }
+        }
+      }
+
+      // 'a' key
+      if ((digitalRead(INPUT3) == HIGH))
+      {
+        if (initial_a_key == false)
+        {
+          track_a_key_pressed_time = millis();
+          initial_a_key = true;
+          special_a = false;
+        }
+
+        if ((millis() - track_a_key_pressed_time) > 1000)
+        {
+          a_key_pressed = true;
+        }
+      }
+      else if ((digitalRead(INPUT3) == LOW) && (initial_a_key == true))
+      {
+        a_key_pressed = false;
+        initial_a_key =  false;
+
+        if (!special_a)
+        {
+          key_selected = 'a';
         }
       }
 
@@ -456,6 +511,10 @@ void checkKeys()
           if ((transform_key) || (toggle_transform))
           {
             key_selected = special_keys[i + 16 * output];
+          }
+          else if (a_key_pressed)
+          {
+            key_selected = a_variants[i + 16 * output];
           }
           else
           {
@@ -839,6 +898,119 @@ void print_key(uint32_t key)
       Keyboard.write(NUM_1);
       Keyboard.write(NUM_6);
       Keyboard.write(NUM_8);
+      Keyboard.release(KEY_LEFT_ALT);
+
+      if (!last_num_lock_state)Keyboard.write(KEY_NUM_LOCK);
+      break;
+
+    case A_GRAVE:
+      special_a = true;
+      if (!last_num_lock_state)Keyboard.write(KEY_NUM_LOCK);
+
+      Keyboard.press(KEY_LEFT_ALT);
+      Keyboard.write(NUM_0);
+      Keyboard.write(NUM_2);
+      Keyboard.write(NUM_2);
+      Keyboard.write(NUM_4);
+      Keyboard.release(KEY_LEFT_ALT);
+
+      if (!last_num_lock_state)Keyboard.write(KEY_NUM_LOCK);
+      break;
+
+    case A_ACUTE:
+      special_a =  true;
+      if (!last_num_lock_state)Keyboard.write(KEY_NUM_LOCK);
+
+      Keyboard.press(KEY_LEFT_ALT);
+      Keyboard.write(NUM_0);
+      Keyboard.write(NUM_2);
+      Keyboard.write(NUM_2);
+      Keyboard.write(NUM_5);
+      Keyboard.release(KEY_LEFT_ALT);
+
+      if (!last_num_lock_state)Keyboard.write(KEY_NUM_LOCK);
+      break;
+
+    case A_CIRC:
+      special_a =  true;
+      if (!last_num_lock_state)Keyboard.write(KEY_NUM_LOCK);
+
+      Keyboard.press(KEY_LEFT_ALT);
+      Keyboard.write(NUM_0);
+      Keyboard.write(NUM_2);
+      Keyboard.write(NUM_2);
+      Keyboard.write(NUM_6);
+      Keyboard.release(KEY_LEFT_ALT);
+
+      if (!last_num_lock_state)Keyboard.write(KEY_NUM_LOCK);
+      break;
+
+    case A_TILDE:
+      special_a =  true;
+      if (!last_num_lock_state)Keyboard.write(KEY_NUM_LOCK);
+
+      Keyboard.press(KEY_LEFT_ALT);
+      Keyboard.write(NUM_0);
+      Keyboard.write(NUM_2);
+      Keyboard.write(NUM_2);
+      Keyboard.write(NUM_7);
+      Keyboard.release(KEY_LEFT_ALT);
+
+      if (!last_num_lock_state)Keyboard.write(KEY_NUM_LOCK);
+      break;
+
+    case A_UML:
+      special_a =  true;
+      if (!last_num_lock_state)Keyboard.write(KEY_NUM_LOCK);
+
+      Keyboard.press(KEY_LEFT_ALT);
+      Keyboard.write(NUM_0);
+      Keyboard.write(NUM_2);
+      Keyboard.write(NUM_2);
+      Keyboard.write(NUM_8);
+      Keyboard.release(KEY_LEFT_ALT);
+
+      if (!last_num_lock_state)Keyboard.write(KEY_NUM_LOCK);
+      break;
+
+    case A_RING:
+      special_a =  true;
+      if (!last_num_lock_state)Keyboard.write(KEY_NUM_LOCK);
+
+      Keyboard.press(KEY_LEFT_ALT);
+      Keyboard.write(NUM_0);
+      Keyboard.write(NUM_2);
+      Keyboard.write(NUM_2);
+      Keyboard.write(NUM_9);
+      Keyboard.release(KEY_LEFT_ALT);
+
+      if (!last_num_lock_state)Keyboard.write(KEY_NUM_LOCK);
+      break;
+
+    case A_MACRON:
+      special_a =  true;
+      if (!last_num_lock_state)Keyboard.write(KEY_NUM_LOCK);
+
+      Keyboard.press(KEY_LEFT_ALT);
+      Keyboard.write(NUM_0);
+      Keyboard.write(NUM_2);
+      Keyboard.write(NUM_5);
+      Keyboard.write(NUM_7);
+      Keyboard.release(KEY_LEFT_ALT);
+
+      if (!last_num_lock_state)Keyboard.write(KEY_NUM_LOCK);
+      break;
+
+    case A_ELIG:
+      special_a =  true;
+
+      if (!last_num_lock_state)Keyboard.write(KEY_NUM_LOCK);
+
+      Keyboard.press(KEY_LEFT_ALT);
+      Keyboard.write(NUM_0);
+      Keyboard.write(NUM_2);
+      Keyboard.write(NUM_3);
+      Keyboard.write(NUM_0);
       Keyboard.release(KEY_LEFT_ALT);
 
       if (!last_num_lock_state)Keyboard.write(KEY_NUM_LOCK);
