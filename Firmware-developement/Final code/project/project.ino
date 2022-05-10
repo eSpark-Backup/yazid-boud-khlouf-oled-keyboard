@@ -108,7 +108,10 @@ uint8_t special_keys[]  = {KEY_ESC, KEY_CANCEL, HID_DEC_BRIGHTNESS_MEDIA, HID_IN
                           };
 
 uint32_t output_pins[] = {OUTPUT1, OUTPUT2, OUTPUT3, OUTPUT4, OUTPUT5};
+
 uint32_t track_shift_time = 0;
+uint32_t track_transform_time = 0;
+
 char key_selected = NULL;
 char last_key_selected = NULL;
 uint16_t repeat_delay = 0;
@@ -121,6 +124,7 @@ uint8_t alt_key_right = false;
 uint8_t alt_key_left = false;
 uint8_t transform_key = false;
 uint8_t toggle_capslock = false;
+uint8_t toggle_transform = false;
 uint8_t fn_key = false;
 uint8_t capslock_key = false;
 uint8_t capitalized = false;
@@ -372,7 +376,7 @@ void checkKeys()
           {
             key_selected = function_keys[i];
           }
-          else if (transform_key)
+          else if ((transform_key) || (toggle_transform))
           {
             key_selected = special_keys[i + 16 * output];
           }
@@ -411,7 +415,7 @@ void checkKeys()
       {
         if ((inputs >> i) & 0b01)
         {
-          if (transform_key)
+          if ((transform_key) || (toggle_transform))
           {
             key_selected = special_keys[i + 16 * output];
           }
@@ -449,7 +453,7 @@ void checkKeys()
       {
         if ((inputs >> i) & 0b01)
         {
-          if (transform_key)
+          if ((transform_key) || (toggle_transform))
           {
             key_selected = special_keys[i + 16 * output];
           }
@@ -462,13 +466,20 @@ void checkKeys()
         }
       }
 
-      if (digitalRead(INPUT6) == HIGH)
+      if ((digitalRead(INPUT6) == HIGH) && (transform_key == false))
       {
         transform_key = true;
+        track_transform_time = millis();
       }
-      else if ((digitalRead(INPUT6) == LOW))
+      else if ((digitalRead(INPUT6) == LOW) && (transform_key == true))
       {
         transform_key = false;
+
+        if ((millis() - track_transform_time) < 1000)
+        {
+          track_transform_time = millis();
+          toggle_transform = !toggle_transform;
+        }
       }
 
     }
@@ -496,7 +507,7 @@ void checkKeys()
       {
         if ((inputs >> i) & 0b01)
         {
-          if (transform_key)
+          if ((transform_key) || (toggle_transform))
           {
             key_selected = special_keys[i + 16 * output];
           }
@@ -523,7 +534,7 @@ void checkKeys()
         Keyboard.release(KEY_LEFT_SHIFT);
 
         if ((millis() - track_shift_time) < (1000))
-        { 
+        {
           track_shift_time = millis();
           toggle_capslock = !toggle_capslock;
           Keyboard.write(KEY_CAPS_LOCK);
@@ -550,7 +561,7 @@ void checkKeys()
       {
         if ((inputs >> i) & 0b01)
         {
-          if (transform_key)
+          if ((transform_key) || (toggle_transform))
           {
             key_selected = special_keys[i + 16 * output];
           }
