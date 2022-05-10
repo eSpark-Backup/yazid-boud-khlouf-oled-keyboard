@@ -43,14 +43,14 @@
 #define KEY_PRINT 0x14
 #define KEY_SHARE 0x15
 
-#define A_GRAVE 0xA0
-#define A_ACUTE 0xA1
-#define A_CIRC 0xA2
-#define A_TILDE 0xA3
-#define A_UML 0xA4
-#define A_RING 0xA5
-#define A_MACRON 0xA6
-#define A_ELIG 0xA7
+const uint16_t A_GRAVE = 0xA000;
+const uint16_t A_ACUTE = 0xA100;
+const uint16_t A_CIRC = 0xA200;
+const uint16_t A_TILDE = 0xA300;
+const uint16_t A_UML = 0xA400;
+const uint16_t A_RING = 0xA500;
+const uint16_t A_MACRON = 0xA600;
+const uint16_t A_ELIG = 0xA700;
 
 #define INPUT1 PD0
 #define INPUT2 PD1
@@ -116,23 +116,34 @@ uint8_t special_keys[]  = {KEY_ESC, KEY_CANCEL, HID_DEC_BRIGHTNESS_MEDIA, HID_IN
                            KEY_DOWN_ARROW
                           };
 
-uint8_t a_variants[]  = {BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+uint16_t a_variants[]  = {KEY_ESC, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                          BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                          BLANK, 'a', A_GRAVE, A_ACUTE, A_CIRC, A_TILDE, A_UML, A_RING, A_MACRON, A_ELIG, BLANK, BLANK, BLANK, BLANK,
+                          BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                          BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK , BLANK, BLANK, BLANK, BLANK,
+                          BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                          BLANK
+                         };
+
+uint8_t e_variants[]  = {KEY_ESC, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
                          BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
-                         BLANK, 'a', A_GRAVE, A_ACUTE, A_CIRC, A_TILDE, A_UML, A_RING, A_MACRON, A_ELIG, BLANK, BLANK, BLANK, BLANK,
+                         BLANK, 'a', 'z', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', BLANK, BLANK, KEY_RETURN,
                          BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
                          BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK , BLANK, BLANK, BLANK, BLANK,
                          BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
                          BLANK
                         };
 
+
 uint32_t output_pins[] = {OUTPUT1, OUTPUT2, OUTPUT3, OUTPUT4, OUTPUT5};
 
 uint32_t track_shift_time = 0;
 uint32_t track_transform_time = 0;
 uint32_t track_a_key_pressed_time = 0;
+uint32_t track_e_key_pressed_time = 0;
 
-char key_selected = NULL;
-char last_key_selected = NULL;
+uint16_t key_selected = NULL;
+uint16_t last_key_selected = NULL;
 uint16_t repeat_delay = 0;
 uint8_t repeat_first = false;
 uint8_t shift_key_right = false;
@@ -144,9 +155,14 @@ uint8_t alt_key_left = false;
 uint8_t transform_key = false;
 uint8_t toggle_capslock = false;
 uint8_t toggle_transform = false;
+
 uint8_t a_key_pressed = false;
 uint8_t initial_a_key = false;
 uint8_t special_a = false;
+uint8_t e_key_pressed = false;
+uint8_t initial_e_key = false;
+uint8_t special_e = false;
+
 uint8_t fn_key = false;
 uint8_t capslock_key = false;
 uint8_t capitalized = false;
@@ -420,8 +436,7 @@ void checkKeys()
     if (output == 1)
     {
 
-      inputs = (digitalRead(INPUT1) << 15) |
-               (digitalRead(INPUT2) << 14) |
+      inputs = (digitalRead(INPUT2) << 14) |
                (digitalRead(INPUT4) << 12) |
                (digitalRead(INPUT5) << 11) |
                (digitalRead(INPUT6) << 10) |
@@ -435,6 +450,11 @@ void checkKeys()
                (digitalRead(INPUT14) << 2) |
                (digitalRead(INPUT15) << 1) |
                (digitalRead(INPUT16) << 0);
+
+      if (a_key_pressed)
+      {
+        inputs |= digitalRead(INPUT1) << 15;
+      }
 
       for (int i = 0; i < 16; i++)
       {
@@ -480,6 +500,35 @@ void checkKeys()
         if (!special_a)
         {
           key_selected = 'a';
+        }
+      }
+
+      if (!a_key_pressed)
+      {
+        // 'e' key
+        if ((digitalRead(INPUT1) == HIGH))
+        {
+          if (initial_e_key == false)
+          {
+            track_e_key_pressed_time = millis();
+            initial_e_key = true;
+            special_e = false;
+          }
+
+          if ((millis() - track_e_key_pressed_time) > 1000)
+          {
+            e_key_pressed = true;
+          }
+        }
+        else if ((digitalRead(INPUT1) == LOW) && (initial_e_key == true))
+        {
+          e_key_pressed = false;
+          initial_e_key =  false;
+
+          if (!special_e)
+          {
+            key_selected = 'e';
+          }
         }
       }
 
