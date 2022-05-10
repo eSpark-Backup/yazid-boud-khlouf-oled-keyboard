@@ -108,6 +108,7 @@ uint8_t special_keys[]  = {KEY_ESC, KEY_CANCEL, HID_DEC_BRIGHTNESS_MEDIA, HID_IN
                           };
 
 uint32_t output_pins[] = {OUTPUT1, OUTPUT2, OUTPUT3, OUTPUT4, OUTPUT5};
+uint32_t track_shift_time = 0;
 char key_selected = NULL;
 char last_key_selected = NULL;
 uint16_t repeat_delay = 0;
@@ -119,6 +120,7 @@ uint8_t ctrl_key_left = false;
 uint8_t alt_key_right = false;
 uint8_t alt_key_left = false;
 uint8_t transform_key = false;
+uint8_t toggle_capslock = false;
 uint8_t fn_key = false;
 uint8_t capslock_key = false;
 uint8_t capitalized = false;
@@ -206,7 +208,7 @@ void loop() {
 
   checkKeys();
   //
-  if (shift_key_left || capslock_key)
+  if (capslock_key)
   {
     if (!capitalized)
     {
@@ -507,15 +509,25 @@ void checkKeys()
         }
       }
 
-      if (digitalRead(INPUT9) == HIGH)
+      // Left shift key
+      if ((digitalRead(INPUT9) == HIGH) && (shift_key_left == false))
       {
-        shift_key_right = true;
+        shift_key_left = true;
         Keyboard.press(KEY_LEFT_SHIFT);
+
+        track_shift_time = millis();
       }
-      else if ((digitalRead(INPUT9) == LOW))
+      else if ((digitalRead(INPUT9) == LOW) && (shift_key_left == true))
       {
-        shift_key_right = false;
+        shift_key_left = false;
         Keyboard.release(KEY_LEFT_SHIFT);
+
+        if ((millis() - track_shift_time) < (1000))
+        { 
+          track_shift_time = millis();
+          toggle_capslock = !toggle_capslock;
+          Keyboard.write(KEY_CAPS_LOCK);
+        }
       }
 
     }
