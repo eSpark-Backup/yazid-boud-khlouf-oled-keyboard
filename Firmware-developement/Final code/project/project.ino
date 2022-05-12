@@ -159,6 +159,9 @@ const uint16_t N_RING = 0x1C00;
 #define OUTPUT4 PB3
 #define OUTPUT5 PB4
 
+#define TEST_LED PD13
+#define TEST_LED2 PD14
+
 #define KEY_DELAY 100
 #define REPEAT_DELAY 30
 #define REPEAT_DELAY_INITIAL 500
@@ -209,32 +212,32 @@ uint16_t a_variants[]  = {KEY_ESC, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLA
                           BLANK
                          };
 
-uint8_t e_variants[]  = {KEY_ESC, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
-                         BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
-                         BLANK,  E_GRAVE, E_ACUTE, 'e', E_CIRC, E_UML, E_MACRON, E_DOT, E_OGON, E_BREVE, BLANK, BLANK, BLANK, KEY_RETURN,
-                         BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
-                         BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK , BLANK, BLANK, BLANK, BLANK,
-                         BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
-                         BLANK
-                        };
+uint16_t e_variants[]  = {KEY_ESC, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                          BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                          BLANK,  E_GRAVE, E_ACUTE, 'e', E_CIRC, E_UML, E_MACRON, E_DOT, E_OGON, E_BREVE, BLANK, BLANK, BLANK, KEY_RETURN,
+                          BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                          BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK , BLANK, BLANK, BLANK, BLANK,
+                          BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                          BLANK
+                         };
 
-uint8_t y_variants[]  = {KEY_ESC, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
-                         BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
-                         BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, 'y', Y_UML, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
-                         BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
-                         BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK , BLANK, BLANK, BLANK, BLANK,
-                         BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
-                         BLANK
-                        };
+uint16_t y_variants[]  = {KEY_ESC, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                          BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                          BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, 'y', Y_UML, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                          BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                          BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK , BLANK, BLANK, BLANK, BLANK,
+                          BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                          BLANK
+                         };
 
-uint8_t u_variants[]  = {KEY_ESC, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
-                         BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
-                         BLANK, U_GRAVE, U_ACUTE, U_CIRC, U_UML, U_TILDE, U_MACRON, 'u', U_CARON, U_DBLAC, U_OGON, U_RING, BLANK, BLANK,
-                         BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
-                         BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK , BLANK, BLANK, BLANK, BLANK,
-                         BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
-                         BLANK
-                        };
+uint16_t u_variants[]  = {KEY_ESC, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                          BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                          BLANK, U_GRAVE, U_ACUTE, U_CIRC, U_UML, U_TILDE, U_MACRON, 'u', U_BREVE, U_DBLAC, U_OGON, U_RING, BLANK, BLANK,
+                          BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                          BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK , BLANK, BLANK, BLANK, BLANK,
+                          BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                          BLANK
+                         };
 
 
 uint32_t output_pins[] = {OUTPUT1, OUTPUT2, OUTPUT3, OUTPUT4, OUTPUT5};
@@ -328,6 +331,9 @@ void setup()
   pinMode(OUTPUT4, OUTPUT);
   pinMode(OUTPUT5, OUTPUT);
 
+  pinMode(TEST_LED, OUTPUT);
+  pinMode(TEST_LED2, OUTPUT);
+
   //  for (int i = 0; i < 8; i++)
   //  {
   //    initDisplay(&i2c_mux1, &display , i);
@@ -377,6 +383,9 @@ void loop() {
   //  delay(2000);
 
   checkKeys();
+
+  digitalWrite(TEST_LED, u_key_pressed);
+  digitalWrite(TEST_LED2, a_key_pressed);
   //
 
   //  if (capslock_key)
@@ -588,6 +597,16 @@ void checkKeys()
                (digitalRead(INPUT15) << 1) |
                (digitalRead(INPUT16) << 0);
 
+      if ((u_key_pressed) || (y_key_pressed) || (a_key_pressed) || (i_key_pressed) || (c_key_pressed) || (o_key_pressed) || (n_key_pressed))
+      {
+        inputs |= digitalRead(INPUT1) << 15;
+      }
+
+      if ((u_key_pressed) || (y_key_pressed) || (e_key_pressed) || (i_key_pressed) || (c_key_pressed) || (o_key_pressed) || (n_key_pressed))
+      {
+        inputs |= digitalRead(INPUT3) << 13;
+      }
+
       for (int i = 0; i < 16; i++)
       {
         if ((inputs >> i) & 0b01)
@@ -612,23 +631,12 @@ void checkKeys()
           {
             key_selected = keys[i + 16 * output];
             //          Serial.println("key pressed");
-            //          Serial.println(i + 16 * output);
+            //          Serial.println(i uu+ 16 * output);
           }
         }
       }
 
-      if (a_key_pressed)
-      {
-        inputs |= digitalRead(INPUT1) << 15;
-      }
-
-      if (e_key_pressed)
-      {
-        inputs |= digitalRead(INPUT3) << 11;
-      }
-
-
-      if (!e_key_pressed)
+      if ((!u_key_pressed) && (!y_key_pressed) && (!e_key_pressed) && (!i_key_pressed) && (!c_key_pressed) && (!o_key_pressed) && (!n_key_pressed))
       {
         // 'a' key pressed?
         if ((digitalRead(INPUT3) == HIGH))
@@ -657,7 +665,7 @@ void checkKeys()
         }
       }
 
-      if (!a_key_pressed)
+      if ((!u_key_pressed) || (!a_key_pressed) || (!y_key_pressed) || (!i_key_pressed) || (!c_key_pressed) || (!o_key_pressed) || (!n_key_pressed))
       {
         // 'e' key pressed?
         if ((digitalRead(INPUT1) == HIGH))
@@ -706,6 +714,16 @@ void checkKeys()
                (digitalRead(INPUT15) << 1) |
                (digitalRead(INPUT16) << 0);
 
+      if (y_key_pressed || a_key_pressed || e_key_pressed || i_key_pressed || c_key_pressed || o_key_pressed || n_key_pressed)
+      {
+        inputs |= digitalRead(INPUT13) << 3;
+      }
+
+      if (u_key_pressed || a_key_pressed || e_key_pressed || i_key_pressed || c_key_pressed || o_key_pressed || n_key_pressed)
+      {
+        inputs |= digitalRead(INPUT14) << 2;
+      }
+
       for (int i = 0; i < 16; i++)
       {
         if ((inputs >> i) & 0b01)
@@ -735,17 +753,7 @@ void checkKeys()
         }
       }
 
-      if (y_key_pressed || a_key_pressed || e_key_pressed || i_key_pressed || c_key_pressed || o_key_pressed || n_key_pressed)
-      {
-        inputs |= digitalRead(INPUT13) << 3;
-      }
-
-      if (u_key_pressed || a_key_pressed || e_key_pressed || i_key_pressed || c_key_pressed || o_key_pressed || n_key_pressed)
-      {
-        inputs |= digitalRead(INPUT14) << 2;
-      }
-
-      if ((!u_key_pressed) || (!a_key_pressed) || (!e_key_pressed) || (!i_key_pressed) || (!c_key_pressed) || (!o_key_pressed) || (!n_key_pressed))
+      if ((!u_key_pressed) && (!a_key_pressed) && (!e_key_pressed) && (!i_key_pressed) && (!c_key_pressed) && (!o_key_pressed) && (!n_key_pressed))
       {
         // 'y' key pressed?
         if ((digitalRead(INPUT14) == HIGH))
@@ -774,7 +782,7 @@ void checkKeys()
         }
       }
 
-      if ((!y_key_pressed) || (!a_key_pressed) || (!e_key_pressed) || (!i_key_pressed) || (!c_key_pressed) || (!o_key_pressed) || (!n_key_pressed))
+      if ((!y_key_pressed) && (!a_key_pressed) && (!e_key_pressed) && (!i_key_pressed) && (!c_key_pressed) && (!o_key_pressed) && (!n_key_pressed))
       {
         // 'u' key pressed?
         if ((digitalRead(INPUT13) == HIGH))
@@ -1605,6 +1613,20 @@ void print_key(uint32_t key)
       Keyboard.write(NUM_3);
       Keyboard.write(NUM_6);
       Keyboard.write(NUM_7);
+      Keyboard.release(KEY_LEFT_ALT);
+
+      if (!last_num_lock_state)Keyboard.write(KEY_NUM_LOCK);
+      break;
+
+    case U_UML:
+      special_u =  true;
+      if (!last_num_lock_state)Keyboard.write(KEY_NUM_LOCK);
+
+      Keyboard.press(KEY_LEFT_ALT);
+      Keyboard.write(NUM_0);
+      Keyboard.write(NUM_2);
+      Keyboard.write(NUM_5);
+      Keyboard.write(NUM_2);
       Keyboard.release(KEY_LEFT_ALT);
 
       if (!last_num_lock_state)Keyboard.write(KEY_NUM_LOCK);
