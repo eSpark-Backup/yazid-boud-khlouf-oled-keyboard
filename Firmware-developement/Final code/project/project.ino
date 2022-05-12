@@ -239,6 +239,15 @@ uint16_t u_variants[]  = {KEY_ESC, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLA
                           BLANK
                          };
 
+uint16_t i_variants[]  = {KEY_ESC, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                          BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                          BLANK, BLANK, I_GRAVE, I_ACUTE, I_CIRC, I_UML, I_TILDE, I_MACRON, 'i', I_BREVE, I_OGON, BLANK, BLANK, BLANK,
+                          BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                          BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK , BLANK, BLANK, BLANK, BLANK,
+                          BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                          BLANK
+                         };
+
 
 uint32_t output_pins[] = {OUTPUT1, OUTPUT2, OUTPUT3, OUTPUT4, OUTPUT5};
 
@@ -560,9 +569,17 @@ void checkKeys()
           {
             key_selected = e_variants[i + 16 * output];
           }
+          else if (y_key_pressed)
+          {
+            key_selected = y_variants[i + 16 * output];
+          }
           else if (u_key_pressed)
           {
             key_selected = u_variants[i + 16 * output];
+          }
+          else if (i_key_pressed)
+          {
+            key_selected = i_variants[i + 16 * output];
           }
           else if ((transform_key) || (toggle_transform))
           {
@@ -623,9 +640,17 @@ void checkKeys()
           {
             key_selected = e_variants[i + 16 * output];
           }
+          else if (y_key_pressed)
+          {
+            key_selected = y_variants[i + 16 * output];
+          }
           else if (u_key_pressed)
           {
             key_selected = u_variants[i + 16 * output];
+          }
+          else if (i_key_pressed)
+          {
+            key_selected = i_variants[i + 16 * output];
           }
           else
           {
@@ -665,7 +690,7 @@ void checkKeys()
         }
       }
 
-      if ((!u_key_pressed) || (!a_key_pressed) || (!y_key_pressed) || (!i_key_pressed) || (!c_key_pressed) || (!o_key_pressed) || (!n_key_pressed))
+      if ((!u_key_pressed) && (!a_key_pressed) && (!y_key_pressed) && (!i_key_pressed) && (!c_key_pressed) && (!o_key_pressed) && (!n_key_pressed))
       {
         // 'e' key pressed?
         if ((digitalRead(INPUT1) == HIGH))
@@ -710,7 +735,6 @@ void checkKeys()
                (digitalRead(INPUT9) <<  7) |
                (digitalRead(INPUT10) << 6) |
                (digitalRead(INPUT11) << 5) |
-               (digitalRead(INPUT12) << 4) |
                (digitalRead(INPUT15) << 1) |
                (digitalRead(INPUT16) << 0);
 
@@ -722,6 +746,11 @@ void checkKeys()
       if (u_key_pressed || a_key_pressed || e_key_pressed || i_key_pressed || c_key_pressed || o_key_pressed || n_key_pressed)
       {
         inputs |= digitalRead(INPUT14) << 2;
+      }
+
+      if (u_key_pressed || a_key_pressed || e_key_pressed || y_key_pressed || c_key_pressed || o_key_pressed || n_key_pressed)
+      {
+        inputs |= digitalRead(INPUT12) << 4;
       }
 
       for (int i = 0; i < 16; i++)
@@ -740,9 +769,17 @@ void checkKeys()
           {
             key_selected = e_variants[i + 16 * output];
           }
+          else if (y_key_pressed)
+          {
+            key_selected = y_variants[i + 16 * output];
+          }
           else if (u_key_pressed)
           {
             key_selected = u_variants[i + 16 * output];
+          }
+          else if (i_key_pressed)
+          {
+            key_selected = i_variants[i + 16 * output];
           }
           else
           {
@@ -811,6 +848,35 @@ void checkKeys()
         }
       }
 
+      if ((!y_key_pressed) && (!a_key_pressed) && (!e_key_pressed) && (!u_key_pressed) && (!c_key_pressed) && (!o_key_pressed) && (!n_key_pressed))
+      {
+        // 'i' key pressed?
+        if ((digitalRead(INPUT12) == HIGH))
+        {
+          if (initial_i_key == false)
+          {
+            track_i_key_pressed_time = millis();
+            initial_i_key = true;
+            special_i = false;
+          }
+
+          if ((millis() - track_i_key_pressed_time) > 1000)
+          {
+            i_key_pressed = true;
+          }
+        }
+        else if ((digitalRead(INPUT12) == LOW) && (initial_i_key == true))
+        {
+          i_key_pressed = false;
+          initial_i_key =  false;
+
+          if (!special_i)
+          {
+            key_selected = 'i';
+          }
+        }
+      }
+
       if ((digitalRead(INPUT6) == HIGH) && (transform_key == false))
       {
         transform_key = true;
@@ -864,9 +930,17 @@ void checkKeys()
           {
             key_selected = e_variants[i + 16 * output];
           }
+          else if (y_key_pressed)
+          {
+            key_selected = y_variants[i + 16 * output];
+          }
           else if (u_key_pressed)
           {
             key_selected = u_variants[i + 16 * output];
+          }
+          else if (i_key_pressed)
+          {
+            key_selected = i_variants[i + 16 * output];
           }
           else
           {
@@ -930,9 +1004,17 @@ void checkKeys()
           {
             key_selected = e_variants[i + 16 * output];
           }
+          else if (y_key_pressed)
+          {
+            key_selected = y_variants[i + 16 * output];
+          }
           else if (u_key_pressed)
           {
             key_selected = u_variants[i + 16 * output];
+          }
+          else if (i_key_pressed)
+          {
+            key_selected = i_variants[i + 16 * output];
           }
           else
           {
