@@ -1,0 +1,102 @@
+Added Component: Designator=J1(U231-091N-4BLRA00-S)
+Add component (AddParameter): Name = "Manufacturer"; Value = "XKB Connectivity"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mounting Style"; Value = "Surface Mount"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Number of Ports"; Value = "1"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Standard"; Value = "USB 3.0"; VariantName = "[No Variations]"
+Added Component: Designator=J2(046288080000846+)
+Add component (AddParameter): Name = "ComponentLink1Description"; Value = "LCSC"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ComponentLink1URL"; Value = "https://lcsc.com/product-detail/FFC-span-style-background-color-ff0-FPC-span-Connectors_Kyocera-046288080000846_C513346.html"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = "Kyocera AVX"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer Part No"; Value = "046288080000846+"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "Custom"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=VCC_5V Pin=J1-1
+Added Pin To Net: NetName=DM Pin=J1-2
+Added Pin To Net: NetName=DP Pin=J1-3
+Added Pin To Net: NetName=GND Pin=J1-4
+Added Pin To Net: NetName=GND Pin=J1-6
+Added Pin To Net: NetName=GND Pin=J1-MH1
+Added Pin To Net: NetName=GND Pin=J1-MH2
+Added Pin To Net: NetName=MUX_1.SDA_1 Pin=J2-1
+Added Pin To Net: NetName=MUX_1.SDA_2 Pin=J2-2
+Added Pin To Net: NetName=MUX_1.SDA_3 Pin=J2-3
+Added Pin To Net: NetName=MUX_1.SDA_4 Pin=J2-4
+Added Pin To Net: NetName=MUX_1.SDA_5 Pin=J2-5
+Added Pin To Net: NetName=MUX_1.SDA_6 Pin=J2-6
+Added Pin To Net: NetName=MUX_1.SDA_7 Pin=J2-7
+Added Pin To Net: NetName=MUX_1.SDA_8 Pin=J2-8
+Added Pin To Net: NetName=MUX_1.SCL_1 Pin=J2-9
+Added Pin To Net: NetName=MUX_1.SCL_2 Pin=J2-10
+Added Pin To Net: NetName=MUX_1.SCL_3 Pin=J2-11
+Added Pin To Net: NetName=MUX_1.SCL_4 Pin=J2-12
+Added Pin To Net: NetName=MUX_1.SCL_5 Pin=J2-13
+Added Pin To Net: NetName=MUX_1.SCL_6 Pin=J2-14
+Added Pin To Net: NetName=MUX_1.SCL_7 Pin=J2-15
+Added Pin To Net: NetName=MUX_1.SCL_8 Pin=J2-16
+Added Pin To Net: NetName=MUX_2.SDA_9 Pin=J2-17
+Added Pin To Net: NetName=MUX_2.SDA_10 Pin=J2-18
+Added Pin To Net: NetName=MUX_2.SDA_11 Pin=J2-19
+Added Pin To Net: NetName=MUX_2.SDA_12 Pin=J2-20
+Added Pin To Net: NetName=MUX_2.SDA_13 Pin=J2-21
+Added Pin To Net: NetName=MUX_2.SDA_14 Pin=J2-22
+Added Pin To Net: NetName=MUX_2.SDA_15 Pin=J2-23
+Added Pin To Net: NetName=MUX_2.SDA_16 Pin=J2-24
+Added Pin To Net: NetName=MUX_2.SCL_9 Pin=J2-25
+Added Pin To Net: NetName=MUX_2.SCL_10 Pin=J2-26
+Added Pin To Net: NetName=MUX_2.SCL_11 Pin=J2-27
+Added Pin To Net: NetName=MUX_2.SCL_12 Pin=J2-28
+Added Pin To Net: NetName=MUX_2.SCL_13 Pin=J2-29
+Added Pin To Net: NetName=MUX_2.SCL_14 Pin=J2-30
+Added Pin To Net: NetName=MUX_2.SCL_15 Pin=J2-31
+Added Pin To Net: NetName=MUX_2.SCL_16 Pin=J2-32
+Added Pin To Net: NetName=MUX_3.SDA_17 Pin=J2-33
+Added Pin To Net: NetName=MUX_3.SDA_18 Pin=J2-34
+Added Pin To Net: NetName=MUX_3.SDA_19 Pin=J2-35
+Added Pin To Net: NetName=MUX_3.SDA_20 Pin=J2-36
+Added Pin To Net: NetName=MUX_3.SDA_21 Pin=J2-37
+Added Pin To Net: NetName=MUX_3.SDA_22 Pin=J2-38
+Added Pin To Net: NetName=MUX_3.SDA_23 Pin=J2-39
+Added Pin To Net: NetName=MUX_3.SDA_24 Pin=J2-40
+Added Pin To Net: NetName=MUX_3.SCL_17 Pin=J2-41
+Added Pin To Net: NetName=MUX_3.SCL_18 Pin=J2-42
+Added Pin To Net: NetName=MUX_3.SCL_19 Pin=J2-43
+Added Pin To Net: NetName=MUX_3.SCL_20 Pin=J2-44
+Added Pin To Net: NetName=MUX_3.SCL_21 Pin=J2-45
+Added Pin To Net: NetName=MUX_3.SCL_22 Pin=J2-46
+Added Pin To Net: NetName=MUX_3.SCL_23 Pin=J2-47
+Added Pin To Net: NetName=MUX_3.SCL_24 Pin=J2-48
+Added Pin To Net: NetName=MUX_4.SDA_25 Pin=J2-49
+Added Pin To Net: NetName=MUX_4.SDA_26 Pin=J2-50
+Added Pin To Net: NetName=MUX_4.SDA_27 Pin=J2-51
+Added Pin To Net: NetName=MUX_4.SDA_28 Pin=J2-52
+Added Pin To Net: NetName=MUX_4.SDA_29 Pin=J2-53
+Added Pin To Net: NetName=MUX_4.SDA_30 Pin=J2-54
+Added Pin To Net: NetName=MUX_4.SDA_31 Pin=J2-55
+Added Pin To Net: NetName=MUX_4.SDA_32 Pin=J2-56
+Added Pin To Net: NetName=MUX_4.SCL_25 Pin=J2-57
+Added Pin To Net: NetName=MUX_4.SCL_26 Pin=J2-58
+Added Pin To Net: NetName=MUX_4.SCL_27 Pin=J2-59
+Added Pin To Net: NetName=MUX_4.SCL_28 Pin=J2-60
+Added Pin To Net: NetName=MUX_4.SCL_29 Pin=J2-61
+Added Pin To Net: NetName=MUX_4.SCL_30 Pin=J2-62
+Added Pin To Net: NetName=MUX_4.SCL_31 Pin=J2-63
+Added Pin To Net: NetName=MUX_4.SCL_32 Pin=J2-64
+Added Pin To Net: NetName=MUX_5.SDA_33 Pin=J2-65
+Added Pin To Net: NetName=MUX_5.SDA_34 Pin=J2-66
+Added Pin To Net: NetName=MUX_5.SDA_35 Pin=J2-67
+Added Pin To Net: NetName=MUX_5.SDA_36 Pin=J2-68
+Added Pin To Net: NetName=MUX_5.SDA_37 Pin=J2-69
+Added Pin To Net: NetName=MUX_5.SDA_38 Pin=J2-70
+Added Pin To Net: NetName=MUX_5.SDA_39 Pin=J2-71
+Added Pin To Net: NetName=MUX_5.SDA_40 Pin=J2-72
+Added Pin To Net: NetName=MUX_5.SCL_33 Pin=J2-73
+Added Pin To Net: NetName=MUX_5.SCL_34 Pin=J2-74
+Added Pin To Net: NetName=MUX_5.SCL_35 Pin=J2-75
+Added Pin To Net: NetName=MUX_5.SCL_36 Pin=J2-76
+Added Pin To Net: NetName=MUX_5.SCL_37 Pin=J2-77
+Added Pin To Net: NetName=MUX_5.SCL_38 Pin=J2-78
+Added Pin To Net: NetName=MUX_5.SCL_39 Pin=J2-79
+Added Pin To Net: NetName=MUX_5.SCL_40 Pin=J2-80
+Added Pin To Net: NetName=GND Pin=J2-MP1
+Added Pin To Net: NetName=GND Pin=J2-MP2
+Added Member To Class: ClassName=U_Connector_Sheet Member=Component J1 U231-091N-4BLRA00-S
+Added Member To Class: ClassName=U_Connector_Sheet Member=Component J2 046288080000846+
