@@ -257,6 +257,15 @@ uint16_t c_variants[]  = {KEY_ESC, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLA
                           BLANK
                          };
 
+uint16_t o_variants[]  = {KEY_ESC, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                          BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                          BLANK, O_GRAVE, O_ACUTE, O_CIRC, O_UML, O_TILDE, O_MACRON, O_BREVE, O_DBLAC, 'o', O_ELIG, BLANK, BLANK, BLANK,
+                          BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                          BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK , BLANK, BLANK, BLANK, BLANK,
+                          BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                          BLANK
+                         };
+
 
 uint32_t output_pins[] = {OUTPUT1, OUTPUT2, OUTPUT3, OUTPUT4, OUTPUT5};
 
@@ -377,7 +386,7 @@ void loop() {
   //  if (digitalRead(PA0) == LOW)
   //  {
   //    if (!capitalized)
-  //    {
+  //    {oooo
   //      capitalized = true;
   //      uncapitalized = false;
   //
@@ -402,8 +411,8 @@ void loop() {
 
   checkKeys();
 
-  digitalWrite(TEST_LED, u_key_pressed);
-  digitalWrite(TEST_LED2, a_key_pressed);
+  //digitalWrite(TEST_LED, digitalRead(INPUT11));
+  digitalWrite(TEST_LED2, initial_o_key);
   //
 
   //  if (capslock_key)
@@ -594,6 +603,10 @@ void checkKeys()
           {
             key_selected = c_variants[i + 16 * output];
           }
+          else if (o_key_pressed)
+          {
+            key_selected = o_variants[i + 16 * output];
+          }
           else if ((transform_key) || (toggle_transform))
           {
             key_selected = special_keys[i + 16 * output];
@@ -668,6 +681,10 @@ void checkKeys()
           else if (c_key_pressed)
           {
             key_selected = c_variants[i + 16 * output];
+          }
+          else if (o_key_pressed)
+          {
+            key_selected = o_variants[i + 16 * output];
           }
           else
           {
@@ -751,23 +768,31 @@ void checkKeys()
                (digitalRead(INPUT8) << 8)  |
                (digitalRead(INPUT9) <<  7) |
                (digitalRead(INPUT10) << 6) |
-               (digitalRead(INPUT11) << 5) |
                (digitalRead(INPUT15) << 1) |
                (digitalRead(INPUT16) << 0);
 
+      // u key
       if (y_key_pressed || a_key_pressed || e_key_pressed || i_key_pressed || c_key_pressed || o_key_pressed || n_key_pressed)
       {
         inputs |= digitalRead(INPUT13) << 3;
       }
 
+      // y key
       if (u_key_pressed || a_key_pressed || e_key_pressed || i_key_pressed || c_key_pressed || o_key_pressed || n_key_pressed)
       {
         inputs |= digitalRead(INPUT14) << 2;
       }
 
+      // i key
       if (u_key_pressed || a_key_pressed || e_key_pressed || y_key_pressed || c_key_pressed || o_key_pressed || n_key_pressed)
       {
         inputs |= digitalRead(INPUT12) << 4;
+      }
+
+      // o key
+      if (u_key_pressed || a_key_pressed || e_key_pressed || y_key_pressed || c_key_pressed || i_key_pressed || n_key_pressed)
+      {
+        inputs |= (digitalRead(INPUT11) << 5);
       }
 
       for (int i = 0; i < 16; i++)
@@ -801,6 +826,10 @@ void checkKeys()
           else if (c_key_pressed)
           {
             key_selected = c_variants[i + 16 * output];
+          }
+          else if (o_key_pressed)
+          {
+            key_selected = o_variants[i + 16 * output];
           }
           else
           {
@@ -895,311 +924,367 @@ void checkKeys()
           {
             key_selected = 'i';
           }
+
         }
-      }
 
-      if ((digitalRead(INPUT6) == HIGH) && (transform_key == false))
-      {
-        transform_key = true;
-        track_transform_time = millis();
-      }
-      else if ((digitalRead(INPUT6) == LOW) && (transform_key == true))
-      {
-        transform_key = false;
-
-        if ((millis() - track_transform_time) < 1000)
+        if ((digitalRead(INPUT6) == HIGH) && (transform_key == false))
         {
+          transform_key = true;
           track_transform_time = millis();
-          toggle_transform = !toggle_transform;
         }
-      }
-
-    }
-
-    if (output == 3)
-    {
-
-      inputs = (digitalRead(INPUT1) << 15) |
-               (digitalRead(INPUT2) << 14) |
-               (digitalRead(INPUT3) << 13) |
-               (digitalRead(INPUT4) << 12) |
-               (digitalRead(INPUT5) << 11) |
-               (digitalRead(INPUT7) << 9)  |
-               (digitalRead(INPUT8) << 8)  |
-               (digitalRead(INPUT10) << 6) |
-               (digitalRead(INPUT11) << 5) |
-               (digitalRead(INPUT12) << 4) |
-               (digitalRead(INPUT13) << 3) |
-               (digitalRead(INPUT14) << 2) |
-               (digitalRead(INPUT15) << 1) |
-               (digitalRead(INPUT16) << 0);
-
-      if (u_key_pressed || a_key_pressed || e_key_pressed || y_key_pressed || i_key_pressed || o_key_pressed || n_key_pressed)
-      {
-        inputs |= digitalRead(INPUT6) << 10;
-      }
-
-      for (int i = 0; i < 16; i++)
-      {
-        if ((inputs >> i) & 0b01)
+        else if ((digitalRead(INPUT6) == LOW) && (transform_key == true))
         {
-          if ((transform_key) || (toggle_transform))
+          transform_key = false;
+
+          if ((millis() - track_transform_time) < 1000)
           {
-            key_selected = special_keys[i + 16 * output];
-          }
-          else if (a_key_pressed)
-          {
-            key_selected = a_variants[i + 16 * output];
-          }
-          else if (e_key_pressed)
-          {
-            key_selected = e_variants[i + 16 * output];
-          }
-          else if (y_key_pressed)
-          {
-            key_selected = y_variants[i + 16 * output];
-          }
-          else if (u_key_pressed)
-          {
-            key_selected = u_variants[i + 16 * output];
-          }
-          else if (i_key_pressed)
-          {
-            key_selected = i_variants[i + 16 * output];
-          }
-          else if (c_key_pressed)
-          {
-            key_selected = c_variants[i + 16 * output];
-          }
-          else
-          {
-            key_selected = keys[i + 16 * output];
-            //          Serial.println("key pressed");
-            //          Serial.println(i + 16 * output);
+            track_transform_time = millis();
+            toggle_transform = !toggle_transform;
           }
         }
+
       }
 
-      if ((!u_key_pressed) && (!a_key_pressed) && (!e_key_pressed) && (!i_key_pressed) && (!y_key_pressed) && (!o_key_pressed) && (!n_key_pressed))
+      if ((!y_key_pressed) && (!a_key_pressed) && (!e_key_pressed) && (!u_key_pressed) && (!c_key_pressed) && (!i_key_pressed) && (!n_key_pressed))
       {
-        // 'c' key pressed?
-        if ((digitalRead(INPUT6) == HIGH))
+        // 'o' key pressed?
+        if ((digitalRead(INPUT11) == HIGH))
         {
-          if (initial_c_key == false)
+          if (initial_o_key == false)
           {
-            track_c_key_pressed_time = millis();
-            initial_c_key = true;
-            special_c = false;
+            track_o_key_pressed_time = millis();
+            initial_o_key = true;
+            special_o = false;
           }
 
-          if ((millis() - track_c_key_pressed_time) > 1000)
+          if ((millis() - track_o_key_pressed_time) > 1000)
           {
-            c_key_pressed = true;
-          }
-        }
-        else if ((digitalRead(INPUT14) == LOW) && (initial_c_key == true))
-        {
-          c_key_pressed = false;
-          initial_c_key =  false;
-
-          if (!special_c)
-          {
-            key_selected = 'c';
+            o_key_pressed = true;
           }
         }
-      }
-
-      // Left shift key
-      if ((digitalRead(INPUT9) == HIGH) && (shift_key_left == false))
-      {
-        shift_key_left = true;
-        Keyboard.press(KEY_LEFT_SHIFT);
-
-        track_shift_time = millis();
-      }
-      else if ((digitalRead(INPUT9) == LOW) && (shift_key_left == true))
-      {
-        shift_key_left = false;
-        Keyboard.release(KEY_LEFT_SHIFT);
-
-        if ((millis() - track_shift_time) < (1000))
+        else if ((digitalRead(INPUT11) == LOW) && (initial_o_key == true))
         {
+          o_key_pressed = false;
+          initial_o_key =  false;
+
+          if (!special_o)
+          {
+            key_selected = 'o';
+          }
+
+        }
+
+        if ((digitalRead(INPUT6) == HIGH) && (transform_key == false))
+        {
+          transform_key = true;
+          track_transform_time = millis();
+        }
+        else if ((digitalRead(INPUT6) == LOW) && (transform_key == true))
+        {
+          transform_key = false;
+
+          if ((millis() - track_transform_time) < 1000)
+          {
+            track_transform_time = millis();
+            toggle_transform = !toggle_transform;
+          }
+        }
+
+      }
+
+      if (output == 3)
+      {
+
+        inputs = (digitalRead(INPUT1) << 15) |
+                 (digitalRead(INPUT2) << 14) |
+                 (digitalRead(INPUT3) << 13) |
+                 (digitalRead(INPUT4) << 12) |
+                 (digitalRead(INPUT5) << 11) |
+                 (digitalRead(INPUT7) << 9)  |
+                 (digitalRead(INPUT8) << 8)  |
+                 (digitalRead(INPUT10) << 6) |
+                 (digitalRead(INPUT11) << 5) |
+                 (digitalRead(INPUT12) << 4) |
+                 (digitalRead(INPUT13) << 3) |
+                 (digitalRead(INPUT14) << 2) |
+                 (digitalRead(INPUT15) << 1) |
+                 (digitalRead(INPUT16) << 0);
+
+        if (u_key_pressed || a_key_pressed || e_key_pressed || y_key_pressed || i_key_pressed || o_key_pressed || n_key_pressed)
+        {
+          inputs |= digitalRead(INPUT6) << 10;
+        }
+
+        for (int i = 0; i < 16; i++)
+        {
+          if ((inputs >> i) & 0b01)
+          {
+            if ((transform_key) || (toggle_transform))
+            {
+              key_selected = special_keys[i + 16 * output];
+            }
+            else if (a_key_pressed)
+            {
+              key_selected = a_variants[i + 16 * output];
+            }
+            else if (e_key_pressed)
+            {
+              key_selected = e_variants[i + 16 * output];
+            }
+            else if (y_key_pressed)
+            {
+              key_selected = y_variants[i + 16 * output];
+            }
+            else if (u_key_pressed)
+            {
+              key_selected = u_variants[i + 16 * output];
+            }
+            else if (i_key_pressed)
+            {
+              key_selected = i_variants[i + 16 * output];
+            }
+            else if (c_key_pressed)
+            {
+              key_selected = c_variants[i + 16 * output];
+            }
+            else if (o_key_pressed)
+            {
+              key_selected = o_variants[i + 16 * output];
+            }
+            else
+            {
+              key_selected = keys[i + 16 * output];
+              //          Serial.println("key pressed");
+              //          Serial.println(i + 16 * output);
+            }
+          }
+        }
+
+        if ((!u_key_pressed) && (!a_key_pressed) && (!e_key_pressed) && (!i_key_pressed) && (!y_key_pressed) && (!o_key_pressed) && (!n_key_pressed))
+        {
+          // 'c' key pressed?
+          if ((digitalRead(INPUT6) == HIGH))
+          {
+            if (initial_c_key == false)
+            {
+              track_c_key_pressed_time = millis();
+              initial_c_key = true;
+              special_c = false;
+            }
+
+            if ((millis() - track_c_key_pressed_time) > 1000)
+            {
+              c_key_pressed = true;
+            }
+          }
+          else if ((digitalRead(INPUT14) == LOW) && (initial_c_key == true))
+          {
+            c_key_pressed = false;
+            initial_c_key =  false;
+
+            if (!special_c)
+            {
+              key_selected = 'c';
+            }
+          }
+        }
+
+        // Left shift key
+        if ((digitalRead(INPUT9) == HIGH) && (shift_key_left == false))
+        {
+          shift_key_left = true;
+          Keyboard.press(KEY_LEFT_SHIFT);
+
           track_shift_time = millis();
-          toggle_capslock = !toggle_capslock;
-          Keyboard.write(KEY_CAPS_LOCK);
         }
-      }
-
-    }
-
-    if (output == 4)
-    {
-
-      inputs = (digitalRead(INPUT1) << 15) |
-               (digitalRead(INPUT2) << 14) |
-               (digitalRead(INPUT3) << 13) |
-               (digitalRead(INPUT4) << 12) |
-               (digitalRead(INPUT5) << 11) |
-               (digitalRead(INPUT6) << 10) |
-               (digitalRead(INPUT9) <<  7) |
-               (digitalRead(INPUT11) << 5) |
-               (digitalRead(INPUT15) << 1) |
-               (digitalRead(INPUT16) << 0);
-
-      for (int i = 0; i < 16; i++)
-      {
-        if ((inputs >> i) & 0b01)
+        else if ((digitalRead(INPUT9) == LOW) && (shift_key_left == true))
         {
-          if ((transform_key) || (toggle_transform))
+          shift_key_left = false;
+          Keyboard.release(KEY_LEFT_SHIFT);
+
+          if ((millis() - track_shift_time) < (1000))
           {
-            key_selected = special_keys[i + 16 * output];
-          }
-          else if (a_key_pressed)
-          {
-            key_selected = a_variants[i + 16 * output];
-          }
-          else if (e_key_pressed)
-          {
-            key_selected = e_variants[i + 16 * output];
-          }
-          else if (y_key_pressed)
-          {
-            key_selected = y_variants[i + 16 * output];
-          }
-          else if (u_key_pressed)
-          {
-            key_selected = u_variants[i + 16 * output];
-          }
-          else if (i_key_pressed)
-          {
-            key_selected = i_variants[i + 16 * output];
-          }
-          else if (c_key_pressed)
-          {
-            key_selected = c_variants[i + 16 * output];
-          }
-          else
-          {
-            key_selected = keys[i + 16 * output];
-            //          Serial.println("key pressed");
-            //          Serial.println(i + 16 * output);
+            track_shift_time = millis();
+            toggle_capslock = !toggle_capslock;
+            Keyboard.write(KEY_CAPS_LOCK);
           }
         }
+
       }
 
-      // Press and release responses
+      if (output == 4)
+      {
 
-      // Right Shift key
-      if (digitalRead(INPUT14) == HIGH)
-      {
-        shift_key_right = true;
-        Keyboard.press(KEY_RIGHT_SHIFT);
-      }
-      else if ((digitalRead(INPUT14) == LOW))
-      {
-        shift_key_right = false;
-        Keyboard.release(KEY_RIGHT_SHIFT);
-      }
+        inputs = (digitalRead(INPUT1) << 15) |
+                 (digitalRead(INPUT2) << 14) |
+                 (digitalRead(INPUT3) << 13) |
+                 (digitalRead(INPUT4) << 12) |
+                 (digitalRead(INPUT5) << 11) |
+                 (digitalRead(INPUT6) << 10) |
+                 (digitalRead(INPUT9) <<  7) |
+                 (digitalRead(INPUT11) << 5) |
+                 (digitalRead(INPUT15) << 1) |
+                 (digitalRead(INPUT16) << 0);
 
-      // Left Ctrl
-      if (digitalRead(INPUT13) == HIGH)
-      {
-        ctrl_key_left = true;
-        Keyboard.press(KEY_LEFT_CTRL);
-      }
-      else if ((digitalRead(INPUT13) == LOW))
-      {
-        ctrl_key_left = false;
-        Keyboard.release(KEY_LEFT_CTRL);
-      }
+        for (int i = 0; i < 16; i++)
+        {
+          if ((inputs >> i) & 0b01)
+          {
+            if ((transform_key) || (toggle_transform))
+            {
+              key_selected = special_keys[i + 16 * output];
+            }
+            else if (a_key_pressed)
+            {
+              key_selected = a_variants[i + 16 * output];
+            }
+            else if (e_key_pressed)
+            {
+              key_selected = e_variants[i + 16 * output];
+            }
+            else if (y_key_pressed)
+            {
+              key_selected = y_variants[i + 16 * output];
+            }
+            else if (u_key_pressed)
+            {
+              key_selected = u_variants[i + 16 * output];
+            }
+            else if (i_key_pressed)
+            {
+              key_selected = i_variants[i + 16 * output];
+            }
+            else if (c_key_pressed)
+            {
+              key_selected = c_variants[i + 16 * output];
+            }
+            else if (o_key_pressed)
+            {
+              key_selected = o_variants[i + 16 * output];
+            }
+            else
+            {
+              key_selected = keys[i + 16 * output];
+              //          Serial.println("key pressed");
+              //          Serial.println(i + 16 * output);
+            }
+          }
+        }
 
-      // fn key
-      if (digitalRead(INPUT12) == HIGH)
-      {
-        fn_key = true;
-      }
-      else if ((digitalRead(INPUT12) == LOW))
-      {
-        fn_key = false;
-      }
+        // Press and release responses
 
-      // Left Alt
-      if (digitalRead(INPUT10) == HIGH)
-      {
-        alt_key_left = true;
-        Keyboard.press(KEY_LEFT_ALT);
-      }
-      else if ((digitalRead(INPUT10) == LOW))
-      {
-        alt_key_left = false;
-        Keyboard.release(KEY_LEFT_ALT);
-      }
+        // Right Shift key
+        if (digitalRead(INPUT14) == HIGH)
+        {
+          shift_key_right = true;
+          Keyboard.press(KEY_RIGHT_SHIFT);
+        }
+        else if ((digitalRead(INPUT14) == LOW))
+        {
+          shift_key_right = false;
+          Keyboard.release(KEY_RIGHT_SHIFT);
+        }
 
-      // Right Alt
-      if (digitalRead(INPUT8) == HIGH)
-      {
-        alt_key_right = true;
-        Keyboard.press(KEY_RIGHT_ALT);
-      }
-      else if ((digitalRead(INPUT8) == LOW))
-      {
-        alt_key_right = false;
-        Keyboard.release(KEY_RIGHT_ALT);
-      }
+        // Left Ctrl
+        if (digitalRead(INPUT13) == HIGH)
+        {
+          ctrl_key_left = true;
+          Keyboard.press(KEY_LEFT_CTRL);
+        }
+        else if ((digitalRead(INPUT13) == LOW))
+        {
+          ctrl_key_left = false;
+          Keyboard.release(KEY_LEFT_CTRL);
+        }
 
-      // Right Ctrl
-      if (digitalRead(INPUT7) == HIGH)
-      {
-        ctrl_key_right = true;
-        Keyboard.press(KEY_RIGHT_CTRL);
-      }
-      else if ((digitalRead(INPUT7) == LOW))
-      {
-        ctrl_key_right = false;
-        Keyboard.release(KEY_RIGHT_CTRL);
+        // fn key
+        if (digitalRead(INPUT12) == HIGH)
+        {
+          fn_key = true;
+        }
+        else if ((digitalRead(INPUT12) == LOW))
+        {
+          fn_key = false;
+        }
+
+        // Left Alt
+        if (digitalRead(INPUT10) == HIGH)
+        {
+          alt_key_left = true;
+          Keyboard.press(KEY_LEFT_ALT);
+        }
+        else if ((digitalRead(INPUT10) == LOW))
+        {
+          alt_key_left = false;
+          Keyboard.release(KEY_LEFT_ALT);
+        }
+
+        // Right Alt
+        if (digitalRead(INPUT8) == HIGH)
+        {
+          alt_key_right = true;
+          Keyboard.press(KEY_RIGHT_ALT);
+        }
+        else if ((digitalRead(INPUT8) == LOW))
+        {
+          alt_key_right = false;
+          Keyboard.release(KEY_RIGHT_ALT);
+        }
+
+        // Right Ctrl
+        if (digitalRead(INPUT7) == HIGH)
+        {
+          ctrl_key_right = true;
+          Keyboard.press(KEY_RIGHT_CTRL);
+        }
+        else if ((digitalRead(INPUT7) == LOW))
+        {
+          ctrl_key_right = false;
+          Keyboard.release(KEY_RIGHT_CTRL);
+        }
+
       }
 
     }
 
-  }
-
-  if (last_key_selected == key_selected)
-  {
-    if (!repeat_first)
+    if (last_key_selected == key_selected)
     {
-      repeat_delay = REPEAT_DELAY_INITIAL;
-      repeat_first = true;
-    } else
-    {
-      repeat_delay = REPEAT_DELAY;
+      if (!repeat_first)
+      {
+        repeat_delay = REPEAT_DELAY_INITIAL;
+        repeat_first = true;
+      } else
+      {
+        repeat_delay = REPEAT_DELAY;
+      }
     }
-  }
-  else
-  {
-    repeat_first = false;
-    repeat_delay = KEY_DELAY;
-  }
-
-  last_key_selected = key_selected;
-
-
-  if (key_selected != NULL)
-  {
-
-    // Key delay except for modifier keys
-    if ((!shift_key_right) && (!shift_key_left) && (!ctrl_key_left) && (!ctrl_key_right)  /
-        (!alt_key_left) && (!alt_key_right))
+    else
     {
-      delay(repeat_delay);
+      repeat_first = false;
+      repeat_delay = KEY_DELAY;
     }
 
+    last_key_selected = key_selected;
 
-    //    Serial.println("hello");
-    //    Serial.println(key_selected);
 
-    print_key(key_selected);
+    if (key_selected != NULL)
+    {
 
-    key_selected = NULL;
+      // Key delay except for modifier keys
+      if ((!shift_key_right) && (!shift_key_left) && (!ctrl_key_left) && (!ctrl_key_right)  /
+          (!alt_key_left) && (!alt_key_right))
+      {
+        delay(repeat_delay);
+      }
+
+
+      //    Serial.println("hello");
+      //    Serial.println(key_selected);
+
+      print_key(key_selected);
+
+      key_selected = NULL;
+    }
   }
 }
 
@@ -2055,7 +2140,7 @@ void print_key(uint32_t key)
       Keyboard.write(NUM_0);
       Keyboard.write(NUM_3);
       Keyboard.write(NUM_3);
-      Keyboard.write(NUM_6);
+      Keyboard.write(NUM_7);
       Keyboard.release(KEY_LEFT_ALT);
 
       if (!last_num_lock_state)Keyboard.write(KEY_NUM_LOCK);
