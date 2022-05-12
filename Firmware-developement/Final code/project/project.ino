@@ -248,6 +248,15 @@ uint16_t i_variants[]  = {KEY_ESC, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLA
                           BLANK
                          };
 
+uint16_t c_variants[]  = {KEY_ESC, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                          BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                          BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                          BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                          BLANK, C_DOT, C_CARON, 'c', C_OGON, C_ACUTE, C_CIRC, BLANK , BLANK, BLANK, BLANK, BLANK,
+                          BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                          BLANK
+                         };
+
 
 uint32_t output_pins[] = {OUTPUT1, OUTPUT2, OUTPUT3, OUTPUT4, OUTPUT5};
 
@@ -581,6 +590,10 @@ void checkKeys()
           {
             key_selected = i_variants[i + 16 * output];
           }
+          else if (c_key_pressed)
+          {
+            key_selected = c_variants[i + 16 * output];
+          }
           else if ((transform_key) || (toggle_transform))
           {
             key_selected = special_keys[i + 16 * output];
@@ -651,6 +664,10 @@ void checkKeys()
           else if (i_key_pressed)
           {
             key_selected = i_variants[i + 16 * output];
+          }
+          else if (c_key_pressed)
+          {
+            key_selected = c_variants[i + 16 * output];
           }
           else
           {
@@ -781,6 +798,10 @@ void checkKeys()
           {
             key_selected = i_variants[i + 16 * output];
           }
+          else if (c_key_pressed)
+          {
+            key_selected = c_variants[i + 16 * output];
+          }
           else
           {
             key_selected = keys[i + 16 * output];
@@ -903,7 +924,6 @@ void checkKeys()
                (digitalRead(INPUT3) << 13) |
                (digitalRead(INPUT4) << 12) |
                (digitalRead(INPUT5) << 11) |
-               (digitalRead(INPUT6) << 10) |
                (digitalRead(INPUT7) << 9)  |
                (digitalRead(INPUT8) << 8)  |
                (digitalRead(INPUT10) << 6) |
@@ -913,6 +933,11 @@ void checkKeys()
                (digitalRead(INPUT14) << 2) |
                (digitalRead(INPUT15) << 1) |
                (digitalRead(INPUT16) << 0);
+
+      if (u_key_pressed || a_key_pressed || e_key_pressed || y_key_pressed || i_key_pressed || o_key_pressed || n_key_pressed)
+      {
+        inputs |= digitalRead(INPUT6) << 10;
+      }
 
       for (int i = 0; i < 16; i++)
       {
@@ -942,11 +967,44 @@ void checkKeys()
           {
             key_selected = i_variants[i + 16 * output];
           }
+          else if (c_key_pressed)
+          {
+            key_selected = c_variants[i + 16 * output];
+          }
           else
           {
             key_selected = keys[i + 16 * output];
             //          Serial.println("key pressed");
             //          Serial.println(i + 16 * output);
+          }
+        }
+      }
+
+      if ((!u_key_pressed) && (!a_key_pressed) && (!e_key_pressed) && (!i_key_pressed) && (!y_key_pressed) && (!o_key_pressed) && (!n_key_pressed))
+      {
+        // 'c' key pressed?
+        if ((digitalRead(INPUT6) == HIGH))
+        {
+          if (initial_c_key == false)
+          {
+            track_c_key_pressed_time = millis();
+            initial_c_key = true;
+            special_c = false;
+          }
+
+          if ((millis() - track_c_key_pressed_time) > 1000)
+          {
+            c_key_pressed = true;
+          }
+        }
+        else if ((digitalRead(INPUT14) == LOW) && (initial_c_key == true))
+        {
+          c_key_pressed = false;
+          initial_c_key =  false;
+
+          if (!special_c)
+          {
+            key_selected = 'c';
           }
         }
       }
@@ -1015,6 +1073,10 @@ void checkKeys()
           else if (i_key_pressed)
           {
             key_selected = i_variants[i + 16 * output];
+          }
+          else if (c_key_pressed)
+          {
+            key_selected = c_variants[i + 16 * output];
           }
           else
           {
