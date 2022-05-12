@@ -266,6 +266,15 @@ uint16_t o_variants[]  = {KEY_ESC, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLA
                           BLANK
                          };
 
+uint16_t n_variants[]  = {KEY_ESC, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                          BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                          BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                          BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                          BLANK, BLANK, BLANK, N_ACUTE, N_TILDE, N_BREVE, 'n', N_OGON , BLANK, BLANK, BLANK, BLANK,
+                          BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK,
+                          BLANK
+                         };
+
 
 uint32_t output_pins[] = {OUTPUT1, OUTPUT2, OUTPUT3, OUTPUT4, OUTPUT5};
 
@@ -997,7 +1006,6 @@ void checkKeys()
 
         inputs = (digitalRead(INPUT1) << 15) |
                  (digitalRead(INPUT2) << 14) |
-                 (digitalRead(INPUT3) << 13) |
                  (digitalRead(INPUT4) << 12) |
                  (digitalRead(INPUT5) << 11) |
                  (digitalRead(INPUT7) << 9)  |
@@ -1014,6 +1022,13 @@ void checkKeys()
         {
           inputs |= digitalRead(INPUT6) << 10;
         }
+
+        if (u_key_pressed || a_key_pressed || e_key_pressed || y_key_pressed || i_key_pressed || o_key_pressed || c_key_pressed)
+        {
+          inputs |= (digitalRead(INPUT3) << 13) ;
+        }
+
+
 
         for (int i = 0; i < 16; i++)
         {
@@ -1051,6 +1066,10 @@ void checkKeys()
             {
               key_selected = o_variants[i + 16 * output];
             }
+            else if (n_key_pressed)
+            {
+              key_selected = n_variants[i + 16 * output];
+            }
             else
             {
               key_selected = keys[i + 16 * output];
@@ -1085,6 +1104,35 @@ void checkKeys()
             if (!special_c)
             {
               key_selected = 'c';
+            }
+          }
+        }
+
+        if ((!u_key_pressed) && (!a_key_pressed) && (!e_key_pressed) && (!i_key_pressed) && (!y_key_pressed) && (!o_key_pressed) && (!c_key_pressed))
+        {
+          // 'n' key pressed?
+          if ((digitalRead(INPUT3) == HIGH))
+          {
+            if (initial_n_key == false)
+            {
+              track_n_key_pressed_time = millis();
+              initial_n_key = true;
+              special_n = false;
+            }
+
+            if ((millis() - track_n_key_pressed_time) > 1000)
+            {
+              n_key_pressed = true;
+            }
+          }
+          else if ((digitalRead(INPUT3) == LOW) && (initial_n_key == true))
+          {
+            n_key_pressed = false;
+            initial_n_key =  false;
+
+            if (!special_n)
+            {
+              key_selected = 'n';
             }
           }
         }
