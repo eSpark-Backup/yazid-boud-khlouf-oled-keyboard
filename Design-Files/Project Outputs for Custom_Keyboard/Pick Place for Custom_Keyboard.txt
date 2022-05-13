@@ -4,18 +4,18 @@ E:\YazidBoukhlouf-OLEDKeyboard\Design-Files\Project Outputs for Custom_Keyboard\
 ========================================================================================================================
 File Design Information:
 
-Date:       06/05/22
-Time:       18:39
-Revision:   bf858d09f686c32cb97df923cc1fd80ee8c47994
+Date:       13/05/22
+Time:       19:37
+Revision:   9d8aedaf62c7add7967e9812e5e5db21030b6357
 Variant:    No variations
 Units used: mil
 
 Designator Layer       Center-X(mil) Center-Y(mil) Rotation Ref-X(mil)  Ref-Y(mil)  Pad-X(mil)  Pad-Y(mil)  
+J1         TopLayer    2696,638mil   1264,110mil   90       2802,937mil 1264,110mil 2674,000mil 1146,000mil 
+J2         TopLayer    1786,843mil   84,787mil     0        1786,842mil 84,787mil   1009,284mil 196,008mil  
 C28        TopLayer    1807,000mil   1517,000mil   180      1807,000mil 1517,000mil 1837,000mil 1517,000mil 
 X1         TopLayer    751,000mil    1560,000mil   180      751,000mil  1560,000mil 800,213mil  1560,000mil 
 J3         TopLayer    444,008mil    -5,213mil     0        444,008mil  -5,213mil   690,071mil  44,000mil   
-J2         TopLayer    1786,843mil   84,787mil     0        1786,842mil 84,787mil   1009,284mil 196,008mil  
-J1         TopLayer    2803,063mil   1260,000mil   90       2803,063mil 1260,000mil 2674,126mil 1141,890mil 
 R120       TopLayer    2577,000mil   623,000mil    90       2577,000mil 623,000mil  2577,000mil 604,500mil  
 C15        TopLayer    1699,000mil   1607,000mil   90       1699,000mil 1607,000mil 1699,000mil 1577,000mil 
 C14        TopLayer    1570,000mil   996,000mil    0        1570,000mil 996,000mil  1540,000mil 996,000mil  
