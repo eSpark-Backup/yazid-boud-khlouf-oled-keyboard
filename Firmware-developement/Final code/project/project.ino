@@ -182,6 +182,7 @@ Adafruit_SSD1306 display4(SCREEN_WIDTH, SCREEN_HEIGHT, &WireDisplay1, OLED_RESET
 
 char screens[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4'};
 char screens2[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3', '4'};
+char special_screens[] = {'\'', '\"', '(', ')', '{', '}', '[', ']', '<', '>', '+', '-', '&', '#', '@', '€', '$', '£', '¥', '¨', '^', '*', '/',  '~', '\\', '|', '-', '_', ';', ':', ',', '.', '?', '!'};
 
 uint8_t keys[]  = {KEY_ESC, KEY_CANCEL, HID_DEC_BRIGHTNESS_MEDIA, HID_INC_BRIGHTNESS_MEDIA, HID_MEDIA_VOL_DOWN_MEDIA, HID_MEDIA_VOL_UP_MEDIA, HID_MIC_MEDIA, HID_CAMERA_MEDIA, KEY_SCREEN_RECORD, KEY_SCREENSHOT, KEY_PRINT, KEY_SHARE, HID_RADIO_WIRELESS_MEDIA, KEY_DELETE,
                    SQUARE_KEY, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', BLANK, BLANK, KEY_BACKSPACE,
@@ -334,6 +335,7 @@ uint8_t fn_key = false;
 uint8_t capslock_key = false;
 uint8_t capitalized = false;
 uint8_t uncapitalized = false;
+uint8_t transformed =  false;
 
 uint32_t inputs = 0;
 
@@ -424,8 +426,7 @@ void loop() {
 
   checkKeys();
 
-  //digitalWrite(TEST_LED, digitalRead(INPUT11));
-  digitalWrite(TEST_LED2, initial_o_key);
+  digitalWrite(TEST_LED2, transform_key);
   //
 
   if ((shift_key_right) || (shift_key_left) || (toggle_capslock))
@@ -436,14 +437,32 @@ void loop() {
       uncapitalized = false;
       capitalize();
     }
-  } else
+  }
+  else
   {
     if (!uncapitalized)
     {
       uncapitalized = true;
+      transformed = false;
       capitalized = false;
       uncapitalize();
     }
+  }
+
+  if (toggle_transform || transform_key)
+  {
+    if (!transformed)
+    {
+      digitalWrite(TEST_LED, HIGH);
+      transformed = true;
+      transform();
+    }
+  }
+  else
+  {
+    digitalWrite(TEST_LED, LOW);
+    transformed = false;
+    uncapitalize();
   }
 
 }
@@ -546,6 +565,26 @@ void uncapitalize()
   //  {
   //    displayScreen(&i2c_mux3, &display3 , i, screens2);
   //  }
+}
+
+void transform()
+{
+
+
+  i2c_mux4.setChannelMask(0);
+
+  for (int i = 0; i < 8; i++)
+  {
+    displayScreen(&i2c_mux1, &display , i, special_screens);
+  }
+
+  i2c_mux1.setChannelMask(0);
+
+  for (int i = 8; i < 16; i++)
+  {
+    displayScreen(&i2c_mux4, &display4 , i, special_screens);
+  }
+
 }
 
 void checkKeys()
