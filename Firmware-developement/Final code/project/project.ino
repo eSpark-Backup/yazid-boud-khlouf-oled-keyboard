@@ -167,17 +167,17 @@ const uint16_t N_RING = 0x1C00;
 #define REPEAT_DELAY_INITIAL 500
 
 TwoWire WireDisplay1(PB9, PB8);
-TwoWire WireDisplay2(PB11, PB10);
-TwoWire WireDisplay3(PC9, PA8);
+//TwoWire WireDisplay2(PB11, PB10);
+//TwoWire WireDisplay3(PC9, PA8);
 
 TI_TCA9548A i2c_mux1(&WireDisplay1);
-TI_TCA9548A i2c_mux2(&WireDisplay2);
-TI_TCA9548A i2c_mux3(&WireDisplay3);
+//TI_TCA9548A i2c_mux2(&WireDisplay2);
+//TI_TCA9548A i2c_mux3(&WireDisplay3);
 TI_TCA9548A i2c_mux4(&WireDisplay1, 1);
 
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &WireDisplay1, OLED_RESET);
-Adafruit_SSD1306 display2(SCREEN_WIDTH, SCREEN_HEIGHT, &WireDisplay2, OLED_RESET);
-Adafruit_SSD1306 display3(SCREEN_WIDTH, SCREEN_HEIGHT, &WireDisplay3, OLED_RESET);
+//Adafruit_SSD1306 display2(SCREEN_WIDTH, SCREEN_HEIGHT, &WireDisplay2, OLED_RESET);
+//Adafruit_SSD1306 display3(SCREEN_WIDTH, SCREEN_HEIGHT, &WireDisplay3, OLED_RESET);
 Adafruit_SSD1306 display4(SCREEN_WIDTH, SCREEN_HEIGHT, &WireDisplay1, OLED_RESET);
 
 char screens[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4'};
@@ -341,8 +341,8 @@ void setup()
 // put your setup code here, to run once:
 {
   WireDisplay1.begin();
-  WireDisplay2.begin();
-  WireDisplay3.begin();
+  //  WireDisplay2.begin();
+  //  WireDisplay3.begin();
 
   pinMode(INPUT1, INPUT_PULLDOWN);
   pinMode(INPUT2, INPUT_PULLDOWN);
@@ -370,16 +370,19 @@ void setup()
   pinMode(TEST_LED, OUTPUT);
   pinMode(TEST_LED2, OUTPUT);
 
-  //  for (int i = 0; i < 8; i++)
-  //  {
-  //    initDisplay(&i2c_mux1, &display , i);
-  //    initDisplay(&i2c_mux2, &display2 , i);
-  //  }
+  i2c_mux4.setChannelMask(0);
 
-  //  for (int i = 24; i < 30; i++)
-  //  {
-  //    initDisplay(&i2c_mux4, &display4 , i);
-  //  }
+  for (int i = 0; i < 8; i++)
+  {
+    initDisplay(&i2c_mux1, &display , i);
+  }
+
+  i2c_mux1.setChannelMask(0);
+
+  for (int i = 24; i < 32; i++)
+  {
+    initDisplay(&i2c_mux4, &display4 , i);
+  }
 
   Keyboard.begin();
 
@@ -415,7 +418,8 @@ void loop() {
   //  capitalize();
   //  delay(2000);
   //
-  //  uncapitalize();
+
+  //uncapitalize();
   //  delay(2000);
 
   checkKeys();
@@ -424,23 +428,23 @@ void loop() {
   digitalWrite(TEST_LED2, initial_o_key);
   //
 
-  //  if (capslock_key)
-  //  {
-  //    if (!capitalized)
-  //    {
-  //      capitalized = true;
-  //      uncapitalized = false;
-  //      capitalize();
-  //    }
-  //  } else
-  //  {
-  //    if (!uncapitalized)
-  //    {
-  //      uncapitalized = true;
-  //      capitalized = false;
-  //      uncapitalize();
-  //    }
-  //  }
+  if ((shift_key_right) || (shift_key_left) || (toggle_capslock))
+  {
+    if (!capitalized)
+    {
+      capitalized = true;
+      uncapitalized = false;
+      capitalize();
+    }
+  } else
+  {
+    if (!uncapitalized)
+    {
+      uncapitalized = true;
+      capitalized = false;
+      uncapitalize();
+    }
+  }
 
 }
 
@@ -449,7 +453,7 @@ void initDisplay(TI_TCA9548A* i2c_mux, Adafruit_SSD1306* Display, int channel)
 
   if ((channel >= 8) && (channel < 16)) channel -= 8;
   if ((channel >= 16) && (channel < 24))channel -= 16;
-  if ((channel >= 24) && (channel < 30))channel -= 24;
+  if ((channel >= 24) && (channel < 32))channel -= 24;
   i2c_mux->selectChannel(channel);
 
   // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
@@ -466,7 +470,7 @@ void displayScreen(TI_TCA9548A* i2c_mux, Adafruit_SSD1306* Display, int channel,
   int screen_number = channel;
   if ((channel >= 8) && (channel < 16)) channel -= 8;
   if ((channel >= 16) && (channel < 24))channel -= 16;
-  if ((channel >= 24) && (channel < 30))channel -= 24;
+  if ((channel >= 24) && (channel < 32))channel -= 24;
   i2c_mux->selectChannel(channel);
 
   // Clear the buffer
@@ -491,10 +495,18 @@ void capitalize()
 
   //  i2c_mux4.setChannelMask(0);
 
+  i2c_mux4.setChannelMask(0);
+
   for (int i = 0; i < 8; i++)
   {
     displayScreen(&i2c_mux1, &display , i, screens);
-    displayScreen(&i2c_mux2, &display2 , i, screens);
+  }
+
+  i2c_mux1.setChannelMask(0);
+
+  for (int i = 8; i < 16; i++)
+  {
+    displayScreen(&i2c_mux4, &display4 , i, screens);
   }
 
   //
@@ -514,17 +526,21 @@ void uncapitalize()
   //    displayScreen(&i2c_mux4, &display4 , i, screens2);
   //  }
   //
-  //  i2c_mux4.setChannelMask(0);
+
+  i2c_mux4.setChannelMask(0);
 
   for (int i = 0; i < 8; i++)
   {
     displayScreen(&i2c_mux1, &display , i, screens2);
   }
 
+  i2c_mux1.setChannelMask(0);
+
   for (int i = 8; i < 16; i++)
   {
-    displayScreen(&i2c_mux2, &display2 , i, screens2);
+    displayScreen(&i2c_mux4, &display4 , i, screens2);
   }
+
   //
   //  for (int i = 16; i < 24; i++)
   //  {
