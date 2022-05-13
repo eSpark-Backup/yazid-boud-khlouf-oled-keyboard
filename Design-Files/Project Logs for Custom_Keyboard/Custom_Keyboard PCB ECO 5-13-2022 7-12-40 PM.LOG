@@ -1,0 +1,13 @@
+Added Component: Designator=J1(U231-091N-4BLRA00-S)
+Add component (AddParameter): Name = "Manufacturer"; Value = "XKB Connectivity"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Mounting Style"; Value = "Surface Mount"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Number of Ports"; Value = "1"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Standard"; Value = "USB 3.0"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=VCC_5V Pin=J1-1
+Added Pin To Net: NetName=DM Pin=J1-2
+Added Pin To Net: NetName=DP Pin=J1-3
+Added Pin To Net: NetName=GND Pin=J1-4
+Added Pin To Net: NetName=GND Pin=J1-6
+Added Pin To Net: NetName=GND Pin=J1-MH1
+Added Pin To Net: NetName=GND Pin=J1-MH2
+Added Member To Class: ClassName=U_Connector_Sheet Member=Component J1 U231-091N-4BLRA00-S
