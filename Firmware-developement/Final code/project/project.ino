@@ -386,6 +386,9 @@ void setup()
     initDisplay(&i2c_mux4, &display4 , i);
   }
 
+  // display.setFont(&FreeSans9pt7b);
+  // display4.setFont(&FreeSans9pt7b);
+
   Keyboard.begin();
 
   //  capitalize();
@@ -426,7 +429,7 @@ void loop() {
 
   checkKeys();
 
-  digitalWrite(TEST_LED2, transform_key);
+  digitalWrite(TEST_LED2, toggle_capslock);
   //
 
   if ((shift_key_right) || (shift_key_left) || (toggle_capslock))
@@ -449,20 +452,26 @@ void loop() {
     }
   }
 
-  if (toggle_transform || transform_key)
+  if ((!shift_key_right) && (!shift_key_left) && (!toggle_capslock))
   {
-    if (!transformed)
+    if (toggle_transform || transform_key)
     {
-      digitalWrite(TEST_LED, HIGH);
-      transformed = true;
-      transform();
+      if (!transformed)
+      {
+        digitalWrite(TEST_LED, HIGH);
+        transformed = true;
+        transform();
+      }
     }
-  }
-  else
-  {
-    digitalWrite(TEST_LED, LOW);
-    transformed = false;
-    uncapitalize();
+    else
+    {
+      if (transformed)
+      {
+        digitalWrite(TEST_LED, LOW);
+        transformed = false;
+        uncapitalize();
+      }
+    }
   }
 
 }
@@ -477,7 +486,7 @@ void initDisplay(TI_TCA9548A* i2c_mux, Adafruit_SSD1306* Display, int channel)
 
   // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
   if (!Display->begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS)) {
-    Serial.println(F("SSD1306 allocation failed"));
+    Serial.println(F("SSD1306 allocation fwwwailed"));
     for (;;); // Don't proceed, loop forever
   }
 
