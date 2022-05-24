@@ -184,14 +184,14 @@ char screens[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M
 char screens2[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3', '4'};
 char special_screens[] = {'\'', '\"', '(', ')', '{', '}', '[', ']', '<', '>', '+', '-', '&', '#', '@', '€', '$', '£', '¥', '¨', '^', '*', '/',  '~', '\\', '|', '-', '_', ';', ':', ',', '.', '?', '!'};
 
-uint8_t keys[]  = {KEY_ESC, KEY_CANCEL, HID_DEC_BRIGHTNESS_MEDIA, HID_INC_BRIGHTNESS_MEDIA, HID_MEDIA_VOL_DOWN_MEDIA, HID_MEDIA_VOL_UP_MEDIA, HID_MIC_MEDIA, HID_CAMERA_MEDIA, KEY_SCREEN_RECORD, KEY_SCREENSHOT, KEY_PRINT, KEY_SHARE, HID_RADIO_WIRELESS_MEDIA, KEY_DELETE,
-                   SQUARE_KEY, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', BLANK, BLANK, KEY_BACKSPACE,
-                   KEY_TAB, 'a', 'z', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', BLANK, BLANK, KEY_RETURN,
-                   TRANSFORM, 'q', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', BLANK, BLANK,
-                   KEY_LEFT_SHIFT, 'w', 'x', 'c', 'v', 'b', 'n', ',' , ';', ':', '.', KEY_RIGHT_SHIFT,
-                   KEY_LEFT_CTRL, FN_KEY, KEY_LEFT_GUI, KEY_LEFT_ALT, ' ', KEY_RIGHT_ALT, KEY_RIGHT_CTRL, KEY_LEFT_ARROW, KEY_UP_ARROW, KEY_RIGHT_ARROW,
-                   KEY_DOWN_ARROW
-                  };
+uint16_t keys[]  = {KEY_ESC, KEY_CANCEL, HID_DEC_BRIGHTNESS_MEDIA, HID_INC_BRIGHTNESS_MEDIA, HID_MEDIA_VOL_DOWN_MEDIA, HID_MEDIA_VOL_UP_MEDIA, HID_MIC_MEDIA, HID_CAMERA_MEDIA, KEY_SCREEN_RECORD, KEY_SCREENSHOT, KEY_PRINT, KEY_SHARE, HID_RADIO_WIRELESS_MEDIA, KEY_DELETE,
+                    SQUARE_KEY, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', BLANK, BLANK, KEY_BACKSPACE,
+                    KEY_TAB, 'a', 'z', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', BLANK, BLANK, KEY_RETURN,
+                    TRANSFORM, 'q', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', BLANK, BLANK,
+                    KEY_LEFT_SHIFT, 'w', 'x', 'c', 'v', 'b', 'n', ',' , ';', ':', '.', KEY_RIGHT_SHIFT,
+                    KEY_LEFT_CTRL, FN_KEY, KEY_LEFT_GUI, KEY_LEFT_ALT, ' ', KEY_RIGHT_ALT, KEY_RIGHT_CTRL, KEY_LEFT_ARROW, KEY_UP_ARROW, KEY_RIGHT_ARROW,
+                    KEY_DOWN_ARROW
+                   };
 
 uint8_t function_keys[] = {KEY_F1, KEY_F2, KEY_F3, KEY_F4, KEY_F5, KEY_F6, KEY_F7, KEY_F8, KEY_F9, KEY_F10, KEY_F11, KEY_F12};
 
@@ -337,6 +337,10 @@ uint8_t capitalized = false;
 uint8_t uncapitalized = false;
 uint8_t transformed =  false;
 
+uint16_t pressed_key;
+uint8_t key_pressed = false;
+uint8_t rows1, rows2, rows3, rows4, rows5 = 0;
+
 uint32_t inputs = 0;
 
 void setup()
@@ -403,7 +407,7 @@ void loop() {
   //  if (digitalRead(PA0) == LOW)
   //  {
   //    if (!capitalized)
-  //    {oooo
+  //    {
   //      capitalized = true;
   //      uncapitalized = false;
   //
@@ -474,6 +478,15 @@ void loop() {
     }
   }
 
+
+  digitalWrite(TEST_LED, (inputs > 0) ? HIGH : LOW);
+
+  if (((rows1 == 0) && (rows2 == 0) && (rows3 == 0) && (rows4 == 0) && (rows5 == 0)) && (key_pressed == true))
+  {
+    Keyboard.releaseAll();
+    key_pressed = false;
+  }
+
 }
 
 void initDisplay(TI_TCA9548A* i2c_mux, Adafruit_SSD1306* Display, int channel)
@@ -486,7 +499,7 @@ void initDisplay(TI_TCA9548A* i2c_mux, Adafruit_SSD1306* Display, int channel)
 
   // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
   if (!Display->begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS)) {
-    Serial.println(F("SSD1306 allocation fwwwailed"));
+    Serial.println(F("SSD1306 allocation failed"));
     for (;;); // Don't proceed, loop forever
   }
 
@@ -644,6 +657,8 @@ void checkKeys()
                (digitalRead(INPUT15) << 1) |
                (digitalRead(INPUT16) << 0);
 
+      rows1 = inputs;
+
       for (int i = 0; i < 16; i++)
       {
         if ((inputs >> i) & 0b01)
@@ -712,6 +727,8 @@ void checkKeys()
                (digitalRead(INPUT14) << 2) |
                (digitalRead(INPUT15) << 1) |
                (digitalRead(INPUT16) << 0);
+
+      rows2 = inputs;
 
       if ((u_key_pressed) || (y_key_pressed) || (a_key_pressed) || (i_key_pressed) || (c_key_pressed) || (o_key_pressed) || (n_key_pressed))
       {
@@ -831,6 +848,8 @@ void checkKeys()
 
     if (output == 2)
     {
+
+      rows3 = inputs;
 
       inputs = (digitalRead(INPUT1) << 15) |
                (digitalRead(INPUT2) << 14) |
@@ -1069,6 +1088,8 @@ void checkKeys()
     if (output == 3)
     {
 
+      rows4 = inputs;
+
       inputs = (digitalRead(INPUT1) << 15) |
                (digitalRead(INPUT2) << 14) |
                (digitalRead(INPUT4) << 12) |
@@ -1206,20 +1227,20 @@ void checkKeys()
       if ((digitalRead(INPUT9) == HIGH) && (shift_key_left == false))
       {
         shift_key_left = true;
-        Keyboard.press(KEY_LEFT_SHIFT);
+        //Keyboard.press(KEY_LEFT_SHIFT);
 
         track_shift_time = millis();
       }
       else if ((digitalRead(INPUT9) == LOW) && (shift_key_left == true))
       {
         shift_key_left = false;
-        Keyboard.release(KEY_LEFT_SHIFT);
+        //Keyboard.release(KEY_LEFT_SHIFT);
 
         if ((millis() - track_shift_time) < (1000))
         {
           track_shift_time = millis();
           toggle_capslock = !toggle_capslock;
-          Keyboard.write(KEY_CAPS_LOCK);
+          //Keyboard.write(KEY_CAPS_LOCK);
         }
       }
 
@@ -1228,6 +1249,8 @@ void checkKeys()
 
     if (output == 4)
     {
+
+      rows5 = inputs;
 
       inputs = (digitalRead(INPUT1) << 15) |
                (digitalRead(INPUT2) << 14) |
@@ -1291,24 +1314,24 @@ void checkKeys()
       if (digitalRead(INPUT14) == HIGH)
       {
         shift_key_right = true;
-        Keyboard.press(KEY_RIGHT_SHIFT);
+        //Keyboard.press(KEY_RIGHT_SHIFT);
       }
       else if ((digitalRead(INPUT14) == LOW))
       {
         shift_key_right = false;
-        Keyboard.release(KEY_RIGHT_SHIFT);
+        //Keyboard.release(KEY_RIGHT_SHIFT);
       }
 
       // Left Ctrl
       if (digitalRead(INPUT13) == HIGH)
       {
         ctrl_key_left = true;
-        Keyboard.press(KEY_LEFT_CTRL);
+        //Keyboard.press(KEY_LEFT_CTRL);
       }
       else if ((digitalRead(INPUT13) == LOW))
       {
         ctrl_key_left = false;
-        Keyboard.release(KEY_LEFT_CTRL);
+        //Keyboard.release(KEY_LEFT_CTRL);
       }
 
       // fn key
@@ -1325,36 +1348,36 @@ void checkKeys()
       if (digitalRead(INPUT10) == HIGH)
       {
         alt_key_left = true;
-        Keyboard.press(KEY_LEFT_ALT);
+        //Keyboard.press(KEY_LEFT_ALT);
       }
       else if ((digitalRead(INPUT10) == LOW))
       {
         alt_key_left = false;
-        Keyboard.release(KEY_LEFT_ALT);
+        //Keyboard.release(KEY_LEFT_ALT);
       }
 
       // Right Alt
       if (digitalRead(INPUT8) == HIGH)
       {
         alt_key_right = true;
-        Keyboard.press(KEY_RIGHT_ALT);
+        //Keyboard.press(KEY_RIGHT_ALT);
       }
       else if ((digitalRead(INPUT8) == LOW))
       {
         alt_key_right = false;
-        Keyboard.release(KEY_RIGHT_ALT);
+        //Keyboard.release(KEY_RIGHT_ALT);
       }
 
       // Right Ctrl
       if (digitalRead(INPUT7) == HIGH)
       {
         ctrl_key_right = true;
-        Keyboard.press(KEY_RIGHT_CTRL);
+        //Keyboard.press(KEY_RIGHT_CTRL);
       }
       else if ((digitalRead(INPUT7) == LOW))
       {
         ctrl_key_right = false;
-        Keyboard.release(KEY_RIGHT_CTRL);
+        // Keyboard.release(KEY_RIGHT_CTRL);
       }
 
     }
@@ -1488,6 +1511,7 @@ void print_key(uint32_t key)
       Keyboard.release(KEY_LEFT_ALT);
 
       if (!last_num_lock_state)Keyboard.write(KEY_NUM_LOCK);
+
       break;
 
     case DEGREE_KEY:
@@ -2348,7 +2372,14 @@ void print_key(uint32_t key)
     // Down Arrow key
 
     default:
-      Keyboard.write(key_selected);
+
+      if (((rows1) || (rows2) || (rows3) || (rows4) || (rows5)) && (key_pressed == false))
+      {
+        Keyboard.press(key_selected);
+        pressed_key = key_selected;
+        key_pressed = true;
+      }
+
       break;
 
   }
