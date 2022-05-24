@@ -339,7 +339,7 @@ uint8_t transformed =  false;
 
 uint16_t pressed_key;
 uint8_t key_pressed = false;
-uint8_t rows1, rows2, rows3, rows4, rows5 = 0;
+uint32_t rows1, rows2, rows3, rows4, rows5 = 0;
 
 uint32_t inputs = 0;
 
@@ -483,7 +483,7 @@ void loop() {
 
   if (((rows1 == 0) && (rows2 == 0) && (rows3 == 0) && (rows4 == 0) && (rows5 == 0)) && (key_pressed == true))
   {
-    Keyboard.releaseAll();
+    Keyboard.release(pressed_key);
     key_pressed = false;
   }
 
@@ -657,6 +657,7 @@ void checkKeys()
                (digitalRead(INPUT15) << 1) |
                (digitalRead(INPUT16) << 0);
 
+      // assign inputs to rows to detect change
       rows1 = inputs;
 
       for (int i = 0; i < 16; i++)
@@ -728,8 +729,6 @@ void checkKeys()
                (digitalRead(INPUT15) << 1) |
                (digitalRead(INPUT16) << 0);
 
-      rows2 = inputs;
-
       if ((u_key_pressed) || (y_key_pressed) || (a_key_pressed) || (i_key_pressed) || (c_key_pressed) || (o_key_pressed) || (n_key_pressed))
       {
         inputs |= digitalRead(INPUT1) << 15;
@@ -739,6 +738,9 @@ void checkKeys()
       {
         inputs |= digitalRead(INPUT3) << 13;
       }
+
+      // assign inputs to rows to detect change
+      rows2 = inputs;
 
       for (int i = 0; i < 16; i++)
       {
@@ -810,6 +812,9 @@ void checkKeys()
           if (!special_a)
           {
             key_selected = 'a';
+
+            // for adding info to rows variable to detect change
+            rows2 |= 1;
           }
         }
       }
@@ -839,6 +844,9 @@ void checkKeys()
           if (!special_e)
           {
             key_selected = 'e';
+
+            // for adding info to rows variable to detect change
+            rows2 |= 1;
           }
         }
       }
@@ -848,8 +856,6 @@ void checkKeys()
 
     if (output == 2)
     {
-
-      rows3 = inputs;
 
       inputs = (digitalRead(INPUT1) << 15) |
                (digitalRead(INPUT2) << 14) |
@@ -886,6 +892,9 @@ void checkKeys()
       {
         inputs |= (digitalRead(INPUT11) << 5);
       }
+
+      // assign inputs to rows to detect change
+      rows3 = inputs;
 
       for (int i = 0; i < 16; i++)
       {
@@ -957,6 +966,9 @@ void checkKeys()
           if (!special_y)
           {
             key_selected = 'y';
+
+            // for adding info to rows variable to detect change
+            rows3 |= 1;
           }
         }
       }
@@ -986,6 +998,9 @@ void checkKeys()
           if (!special_u)
           {
             key_selected = 'u';
+
+            // for adding info to rows variable to detect change
+            rows3 |= 1;
           }
         }
       }
@@ -1015,6 +1030,9 @@ void checkKeys()
           if (!special_i)
           {
             key_selected = 'i';
+
+            // for adding info to rows variable to detect change
+            rows3 |= 1;
           }
 
         }
@@ -1062,6 +1080,9 @@ void checkKeys()
           if (!special_o)
           {
             key_selected = 'o';
+
+            // for adding info to rows variable to detect change
+            rows3 |= 1;
           }
 
         }
@@ -1088,8 +1109,6 @@ void checkKeys()
     if (output == 3)
     {
 
-      rows4 = inputs;
-
       inputs = (digitalRead(INPUT1) << 15) |
                (digitalRead(INPUT2) << 14) |
                (digitalRead(INPUT4) << 12) |
@@ -1113,6 +1132,9 @@ void checkKeys()
       {
         inputs |= (digitalRead(INPUT3) << 13) ;
       }
+
+      // assign inputs to rows to detect change
+      rows4 = inputs;
 
 
 
@@ -1190,6 +1212,9 @@ void checkKeys()
           if (!special_c)
           {
             key_selected = 'c';
+
+            // for adding info to rows variable to detect change
+            rows4 |= 1;
           }
         }
       }
@@ -1219,6 +1244,9 @@ void checkKeys()
           if (!special_n)
           {
             key_selected = 'n';
+
+            // for adding info to rows variable to detect change
+            rows4 |= 1;
           }
         }
       }
@@ -1250,8 +1278,6 @@ void checkKeys()
     if (output == 4)
     {
 
-      rows5 = inputs;
-
       inputs = (digitalRead(INPUT1) << 15) |
                (digitalRead(INPUT2) << 14) |
                (digitalRead(INPUT3) << 13) |
@@ -1262,6 +1288,9 @@ void checkKeys()
                (digitalRead(INPUT11) << 5) |
                (digitalRead(INPUT15) << 1) |
                (digitalRead(INPUT16) << 0);
+
+      // assign inputs to rows to detect change
+      rows5 = inputs;
 
       for (int i = 0; i < 16; i++)
       {
@@ -2372,9 +2401,10 @@ void print_key(uint32_t key)
     // Down Arrow key
 
     default:
-
+      //Keyboard.write(key_selected);
       if (((rows1) || (rows2) || (rows3) || (rows4) || (rows5)) && (key_pressed == false))
       {
+        digitalWrite(TEST_LED2, HIGH);
         Keyboard.press(key_selected);
         pressed_key = key_selected;
         key_pressed = true;
