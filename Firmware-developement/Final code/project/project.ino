@@ -479,7 +479,9 @@ void loop() {
   }
 
 
-  digitalWrite(TEST_LED, (inputs > 0) ? HIGH : LOW);
+  digitalWrite(TEST_LED, n_key_pressed);
+  digitalWrite(TEST_LED2, c_key_pressed);
+
 
   if (((rows1 == 0) && (rows2 == 0) && (rows3 == 0) && (rows4 == 0) && (rows5 == 0)) && (key_pressed == true))
   {
@@ -1110,7 +1112,7 @@ void checkKeys()
     {
 
       inputs = (digitalRead(INPUT1) << 15) |
-               (digitalRead(INPUT2) << 14) |
+               //(digitalRead(INPUT2) << 14) |
                (digitalRead(INPUT4) << 12) |
                (digitalRead(INPUT5) << 11) |
                (digitalRead(INPUT7) << 9)  |
@@ -1229,6 +1231,7 @@ void checkKeys()
             track_n_key_pressed_time = millis();
             initial_n_key = true;
             special_n = false;
+            digitalWrite(TEST_LED2, HIGH);
           }
 
           if ((millis() - track_n_key_pressed_time) > 1000)
@@ -1343,24 +1346,24 @@ void checkKeys()
       if (digitalRead(INPUT14) == HIGH)
       {
         shift_key_right = true;
-        //Keyboard.press(KEY_RIGHT_SHIFT);
+        Keyboard.press(KEY_RIGHT_SHIFT);
       }
       else if ((digitalRead(INPUT14) == LOW))
       {
         shift_key_right = false;
-        //Keyboard.release(KEY_RIGHT_SHIFT);
+        Keyboard.release(KEY_RIGHT_SHIFT);
       }
 
       // Left Ctrl
       if (digitalRead(INPUT13) == HIGH)
       {
         ctrl_key_left = true;
-        //Keyboard.press(KEY_LEFT_CTRL);
+        Keyboard.press(KEY_LEFT_CTRL);
       }
       else if ((digitalRead(INPUT13) == LOW))
       {
         ctrl_key_left = false;
-        //Keyboard.release(KEY_LEFT_CTRL);
+        Keyboard.release(KEY_LEFT_CTRL);
       }
 
       // fn key
@@ -1377,36 +1380,36 @@ void checkKeys()
       if (digitalRead(INPUT10) == HIGH)
       {
         alt_key_left = true;
-        //Keyboard.press(KEY_LEFT_ALT);
+        Keyboard.press(KEY_LEFT_ALT);
       }
       else if ((digitalRead(INPUT10) == LOW))
       {
         alt_key_left = false;
-        //Keyboard.release(KEY_LEFT_ALT);
+        Keyboard.release(KEY_LEFT_ALT);
       }
 
       // Right Alt
       if (digitalRead(INPUT8) == HIGH)
       {
         alt_key_right = true;
-        //Keyboard.press(KEY_RIGHT_ALT);
+        Keyboard.press(KEY_RIGHT_ALT);
       }
       else if ((digitalRead(INPUT8) == LOW))
       {
         alt_key_right = false;
-        //Keyboard.release(KEY_RIGHT_ALT);
+        Keyboard.release(KEY_RIGHT_ALT);
       }
 
       // Right Ctrl
       if (digitalRead(INPUT7) == HIGH)
       {
         ctrl_key_right = true;
-        //Keyboard.press(KEY_RIGHT_CTRL);
+        Keyboard.press(KEY_RIGHT_CTRL);
       }
       else if ((digitalRead(INPUT7) == LOW))
       {
         ctrl_key_right = false;
-        // Keyboard.release(KEY_RIGHT_CTRL);
+        Keyboard.release(KEY_RIGHT_CTRL);
       }
 
     }
