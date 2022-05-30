@@ -2,6 +2,7 @@
 #include "Wire.h"
 #include "Adafruit_GFX.h"
 #include "Adafruit_SSD1306.h"
+#include "Fonts/specialfont18pt7b.h"
 
 #define SCREEN_WIDTH 128 // OLED display width, in pixels
 #define SCREEN_HEIGHT 64 // OLED display height, in pixels
@@ -24,6 +25,11 @@ void setup() {
   // put your setup code here, to run once:
 
   WireDisplay1.begin();
+
+
+  display.setFont(&finalfont18pt7b);
+
+
 
   initDisplay1();
   initDisplay2();
@@ -162,10 +168,10 @@ void displayScreen1()
   // Clear the buffer
   display.clearDisplay();
 
-  display.setTextSize(2); // Draw 2X-scale text
+  display.setTextSize(1); // Draw 2X-scale text
   display.setTextColor(SSD1306_WHITE);
-  display.setCursor(10, 0);
-  display.println(F("A"));
+  display.setCursor(60, 40);
+  display.println(F("a"));
 
   display.display();
 }
@@ -177,10 +183,10 @@ void displayScreen2()
   // Clear the buffer
   display.clearDisplay();
 
-  display.setTextSize(2); // Draw 2X-scale text
+  display.setTextSize(1); // Draw 2X-scale text
   display.setTextColor(SSD1306_WHITE);
-  display.setCursor(10, 0);
-  display.println(F("B"));
+  display.setCursor(60, 40);
+  display.println(F("b"));
 
   display.display();
 }
@@ -192,10 +198,10 @@ void displayScreen3()
   // Clear the buffer
   display.clearDisplay();
 
-  display.setTextSize(2); // Draw 2X-scale text
+  display.setTextSize(1); // Draw 2X-scale text
   display.setTextColor(SSD1306_WHITE);
-  display.setCursor(10, 0);
-  display.println(F("C"));
+  display.setCursor(60, 40);
+  display.println(F("c"));
 
   display.display();
 }
@@ -207,10 +213,10 @@ void displayScreen4()
   // Clear the buffer
   display.clearDisplay();
 
-  display.setTextSize(2); // Draw 2X-scale text
+  display.setTextSize(1); // Draw 2X-scale text
   display.setTextColor(SSD1306_WHITE);
-  display.setCursor(10, 0);
-  display.println(F("D"));
+  display.setCursor(60, 40);
+  display.println(F("d"));
 
   display.display();
 }
@@ -222,10 +228,10 @@ void displayScreen5()
   // Clear the buffer
   display.clearDisplay();
 
-  display.setTextSize(2); // Draw 2X-scale text
+  display.setTextSize(1); // Draw 2X-scale text
   display.setTextColor(SSD1306_WHITE);
-  display.setCursor(10, 0);
-  display.println(F("E"));
+  display.setCursor(60, 40);
+  display.println(F("e"));
 
   display.display();
 }
@@ -237,10 +243,10 @@ void displayScreen6()
   // Clear the buffer
   display.clearDisplay();
 
-  display.setTextSize(2); // Draw 2X-scale text
+  display.setTextSize(1); // Draw 2X-scale text
   display.setTextColor(SSD1306_WHITE);
-  display.setCursor(10, 0);
-  display.println(F("F"));
+  display.setCursor(60, 40);
+  display.println(F("f"));
 
   display.display();
 }
@@ -252,10 +258,10 @@ void displayScreen7()
   // Clear the buffer
   display.clearDisplay();
 
-  display.setTextSize(2); // Draw 2X-scale text
+  display.setTextSize(1); // Draw 2X-scale text
   display.setTextColor(SSD1306_WHITE);
-  display.setCursor(10, 0);
-  display.println(F("G"));
+  display.setCursor(60, 40);
+  display.println(F("g"));
 
   display.display();
 }
@@ -267,10 +273,10 @@ void displayScreen8()
   // Clear the buffer
   display.clearDisplay();
 
-  display.setTextSize(2); // Draw 2X-scale text
+  display.setTextSize(1); // Draw 2X-scale text
   display.setTextColor(SSD1306_WHITE);
-  display.setCursor(10, 0);
-  display.println(F("H"));
+  display.setCursor(60, 40);
+  display.println(F("h"));
 
   display.display();
 }
