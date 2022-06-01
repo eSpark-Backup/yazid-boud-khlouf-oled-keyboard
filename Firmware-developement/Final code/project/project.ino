@@ -322,6 +322,8 @@ uint8_t initial_o_key = false;
 uint8_t n_key_pressed = false;
 uint8_t initial_n_key = false;
 
+uint8_t long_key_press =  false;
+
 uint8_t special_a = false;
 uint8_t special_e = false;
 uint8_t special_y = false;
@@ -801,17 +803,33 @@ void checkKeys()
             special_a = false;
           }
 
-          if ((millis() - track_a_key_pressed_time) > 1000)
+          if (((millis() - track_a_key_pressed_time) >= 1000) && ((millis() - track_a_key_pressed_time) < 3000))
           {
             a_key_pressed = true;
+            long_key_press =  false;
           }
+          else if ((millis() - track_a_key_pressed_time) >= 3000)
+          {
+            if (!special_a)
+            {
+              long_key_press = true;
+              a_key_pressed =  false;
+              Keyboard.press('a');
+            }
+          }
+
         }
         else if ((digitalRead(INPUT3) == LOW) && (initial_a_key == true))
         {
           a_key_pressed = false;
           initial_a_key =  false;
 
-          if (!special_a)
+          if (long_key_press)
+          {
+            long_key_press =  false;
+            Keyboard.release('a');
+          }
+          else if (!special_a)
           {
             key_selected = 'a';
 
@@ -833,17 +851,33 @@ void checkKeys()
             special_e = false;
           }
 
-          if ((millis() - track_e_key_pressed_time) > 1000)
+          if (((millis() - track_e_key_pressed_time) >= 1000) && ((millis() - track_e_key_pressed_time) < 3000))
           {
             e_key_pressed = true;
+            long_key_press =  false;
+          }
+          else if ((millis() - track_e_key_pressed_time) >= 3000)
+          {
+            if (!special_e)
+            {
+              long_key_press = true;
+              e_key_pressed =  false;
+              Keyboard.press('e');
+            }
           }
         }
+
         else if ((digitalRead(INPUT1) == LOW) && (initial_e_key == true))
         {
           e_key_pressed = false;
           initial_e_key =  false;
 
-          if (!special_e)
+          if (long_key_press)
+          {
+            long_key_press =  false;
+            Keyboard.release('e');
+          }
+          else if (!special_e)
           {
             key_selected = 'e';
 
@@ -955,15 +989,32 @@ void checkKeys()
             special_y = false;
           }
 
-          if ((millis() - track_y_key_pressed_time) > 1000)
+          if (((millis() - track_y_key_pressed_time) >= 1000) && (((millis() - track_y_key_pressed_time) < 3000)))
           {
             y_key_pressed = true;
+            long_key_press = false;
+          }
+          else if ((millis() - track_y_key_pressed_time) >= 3000)
+          {
+            if (!special_y)
+            {
+              long_key_press = true;
+              y_key_pressed =  false;
+              Keyboard.press('y');
+            }
           }
         }
+
         else if ((digitalRead(INPUT14) == LOW) && (initial_y_key == true))
         {
           y_key_pressed = false;
           initial_y_key =  false;
+
+          if (long_key_press)
+          {
+            long_key_press = false;
+            Keyboard.release('y');
+          }
 
           if (!special_y)
           {
@@ -987,9 +1038,19 @@ void checkKeys()
             special_u = false;
           }
 
-          if ((millis() - track_u_key_pressed_time) > 1000)
+          if (((millis() - track_u_key_pressed_time) >= 1000) && ((millis() - track_u_key_pressed_time) < 3000))
           {
             u_key_pressed = true;
+            long_key_press = false;
+          }
+          else if ((millis() - track_u_key_pressed_time) >= 3000)
+          {
+            if (!special_u)
+            {
+              long_key_press = true;
+              u_key_pressed =  false;
+              Keyboard.press('u');
+            }
           }
         }
         else if ((digitalRead(INPUT13) == LOW) && (initial_u_key == true))
@@ -997,7 +1058,12 @@ void checkKeys()
           u_key_pressed = false;
           initial_u_key =  false;
 
-          if (!special_u)
+          if (long_key_press)
+          {
+            long_key_press =  false;
+            Keyboard.release('u');
+          }
+          else if (!special_u)
           {
             key_selected = 'u';
 
@@ -1019,9 +1085,19 @@ void checkKeys()
             special_i = false;
           }
 
-          if ((millis() - track_i_key_pressed_time) > 1000)
+          if (((millis() - track_i_key_pressed_time) >= 1000) && ((millis() - track_i_key_pressed_time) < 3000))
           {
             i_key_pressed = true;
+            long_key_press = false;
+          }
+          else if ((millis() - track_i_key_pressed_time) >= 3000)
+          {
+            if (!special_i)
+            {
+              long_key_press = true;
+              i_key_pressed =  false;
+              Keyboard.press('i');
+            }
           }
         }
         else if ((digitalRead(INPUT12) == LOW) && (initial_i_key == true))
@@ -1029,7 +1105,12 @@ void checkKeys()
           i_key_pressed = false;
           initial_i_key =  false;
 
-          if (!special_i)
+          if (long_key_press)
+          {
+            long_key_press = false;
+            Keyboard.release('i');
+          }
+          else if (!special_i)
           {
             key_selected = 'i';
 
@@ -1069,9 +1150,19 @@ void checkKeys()
             special_o = false;
           }
 
-          if ((millis() - track_o_key_pressed_time) > 1000)
+          if (((millis() - track_o_key_pressed_time) >= 1000) && ((millis() - track_o_key_pressed_time) < 3000))
           {
             o_key_pressed = true;
+            long_key_press = false;
+          }
+          else if ((millis() - track_o_key_pressed_time) >= 3000)
+          {
+            if (!special_o)
+            {
+              long_key_press = true;
+              o_key_pressed =  false;
+              Keyboard.press('o');
+            }
           }
         }
         else if ((digitalRead(INPUT11) == LOW) && (initial_o_key == true))
@@ -1079,7 +1170,12 @@ void checkKeys()
           o_key_pressed = false;
           initial_o_key =  false;
 
-          if (!special_o)
+          if (long_key_press)
+          {
+            long_key_press =  false;
+            Keyboard.release('o');
+          }
+          else if (!special_o)
           {
             key_selected = 'o';
 
@@ -1201,17 +1297,33 @@ void checkKeys()
             special_c = false;
           }
 
-          if ((millis() - track_c_key_pressed_time) > 1000)
+          if (((millis() - track_c_key_pressed_time) >= 1000) && ((millis() - track_c_key_pressed_time) < 3000))
           {
             c_key_pressed = true;
+            long_key_press = false;
+          }
+          else if ((millis() - track_c_key_pressed_time) >= 3000)
+          {
+            if (!special_c)
+            {
+              long_key_press = true;
+              c_key_pressed =  false;
+              Keyboard.press('c');
+            }
           }
         }
+
         else if ((digitalRead(INPUT14) == LOW) && (initial_c_key == true))
         {
           c_key_pressed = false;
           initial_c_key =  false;
 
-          if (!special_c)
+          if (long_key_press)
+          {
+            long_key_press =  false;
+            Keyboard.release('c');
+          }
+          else if (!special_c)
           {
             key_selected = 'c';
 
@@ -1234,17 +1346,33 @@ void checkKeys()
             digitalWrite(TEST_LED2, HIGH);
           }
 
-          if ((millis() - track_n_key_pressed_time) > 1000)
+          if (((millis() - track_n_key_pressed_time) >= 1000) && ((millis() - track_n_key_pressed_time) < 3000))
           {
             n_key_pressed = true;
+            long_key_press = false;
+          }
+          else if ((millis() - track_n_key_pressed_time) >= 3000)
+          {
+            if (!special_n)
+            {
+              long_key_press = true;
+              n_key_pressed =  false;
+              Keyboard.press('n');
+            }
           }
         }
+
         else if ((digitalRead(INPUT3) == LOW) && (initial_n_key == true))
         {
           n_key_pressed = false;
           initial_n_key =  false;
 
-          if (!special_n)
+          if (long_key_press)
+          {
+            long_key_press =  false;
+            Keyboard.release('n');
+          }
+          else if (!special_n)
           {
             key_selected = 'n';
 
