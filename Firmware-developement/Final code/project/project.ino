@@ -21,6 +21,7 @@
 #define SCREEN_ADDRESS 0x3C ///< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
 
 
+// special characters used in transform keys
 #define BLANK 0x00
 #define SQUARE_KEY 0x01
 #define CUBE_KEY 0x02
@@ -32,6 +33,7 @@
 #define YEN_KEY 0x08
 #define DIAERESIS_KEY 0x09
 
+// self-assigned media key ids
 #define HID_DEC_BRIGHTNESS_MEDIA 0x0A
 #define HID_INC_BRIGHTNESS_MEDIA 0x0B
 #define HID_MEDIA_VOL_DOWN_MEDIA 0x0C
@@ -45,6 +47,7 @@
 #define KEY_PRINT 0x14
 #define KEY_SHARE 0x15
 
+// self-assigned A variants ids
 const uint16_t A_GRAVE = 0xA000;
 const uint16_t A_ACUTE = 0xA100;
 const uint16_t A_CIRC = 0xA200;
@@ -54,6 +57,7 @@ const uint16_t A_RING = 0xA500;
 const uint16_t A_MACRON = 0xA600;
 const uint16_t A_ELIG = 0xA700;
 
+// self-assigned E variants ids
 const uint16_t E_GRAVE = 0xB000;
 const uint16_t E_ACUTE = 0xB100;
 const uint16_t E_CIRC = 0xB200;
@@ -66,8 +70,10 @@ const uint16_t E_DOT = 0xB800;
 const uint16_t E_OGON = 0xB900;
 const uint16_t E_CARON = 0xBA00;
 
+// self-assigned Y variants ids
 const uint16_t Y_UML = 0xC101;
 
+// self-assigned U variants ids
 const uint16_t U_GRAVE = 0xC000;
 const uint16_t U_ACUTE = 0xC100;
 const uint16_t U_CIRC = 0xC200;
@@ -82,6 +88,7 @@ const uint16_t U_CARON = 0xCA00;
 const uint16_t U_DBLAC = 0xCB00;
 const uint16_t U_RING = 0xCC00;
 
+// self-assigned I variants ids
 const uint16_t I_GRAVE = 0xD000;
 const uint16_t I_ACUTE = 0xD100;
 const uint16_t I_CIRC = 0xD200;
@@ -96,6 +103,7 @@ const uint16_t I_CARON = 0xDA00;
 const uint16_t I_DBLAC = 0xDB00;
 const uint16_t I_RING = 0xDC00;
 
+// self-assigned C variants ids
 const uint16_t C_GRAVE = 0xE000;
 const uint16_t C_ACUTE = 0xE100;
 const uint16_t C_CIRC = 0xE200;
@@ -110,6 +118,7 @@ const uint16_t C_CARON = 0xEA00;
 const uint16_t C_DBLAC = 0xEB00;
 const uint16_t C_RING = 0xEC00;
 
+// self-assigned O variants ids
 const uint16_t O_GRAVE = 0xF000;
 const uint16_t O_ACUTE = 0xF100;
 const uint16_t O_CIRC = 0xF200;
@@ -124,6 +133,7 @@ const uint16_t O_CARON = 0xFA00;
 const uint16_t O_DBLAC = 0xFB00;
 const uint16_t O_RING = 0xFC00;
 
+// self-assigned N variants ids
 const uint16_t N_GRAVE = 0x1000;
 const uint16_t N_ACUTE = 0x1100;
 const uint16_t N_CIRC = 0x1200;
@@ -138,6 +148,7 @@ const uint16_t N_CARON = 0x1A00;
 const uint16_t N_DBLAC = 0x1B00;
 const uint16_t N_RING = 0x1C00;
 
+// Column GPIOs declared as inputs
 #define INPUT1 PD0
 #define INPUT2 PD1
 #define INPUT3 PD2
@@ -155,33 +166,40 @@ const uint16_t N_RING = 0x1C00;
 #define INPUT15 PC7
 #define INPUT16 PC8
 
+// Row GPIOs declared as outputs
 #define OUTPUT1 PB0
 #define OUTPUT2 PB1
 #define OUTPUT3 PB2
 #define OUTPUT4 PB3
 #define OUTPUT5 PB4
 
+// Test LEDs for debugging purpose
 #define TEST_LED PD13
 #define TEST_LED2 PD14
 
+// Delays in ms assigned for key strokes
 #define KEY_DELAY 100
 #define REPEAT_DELAY 30
 #define REPEAT_DELAY_INITIAL 500
 
+// I2C ports objects for OLEDs
 TwoWire WireDisplay1(PB9, PB8);
 //TwoWire WireDisplay2(PB11, PB10);
 //TwoWire WireDisplay3(PC9, PA8);
 
+// I2C mux object initialized
 TI_TCA9548A i2c_mux1(&WireDisplay1);
 //TI_TCA9548A i2c_mux2(&WireDisplay2);
 //TI_TCA9548A i2c_mux3(&WireDisplay3);
 TI_TCA9548A i2c_mux4(&WireDisplay1, 1);
 
+// SSD1306 Displays objects
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &WireDisplay1, OLED_RESET);
 //Adafruit_SSD1306 display2(SCREEN_WIDTH, SCREEN_HEIGHT, &WireDisplay2, OLED_RESET);
 //Adafruit_SSD1306 display3(SCREEN_WIDTH, SCREEN_HEIGHT, &WireDisplay3, OLED_RESET);
 Adafruit_SSD1306 display4(SCREEN_WIDTH, SCREEN_HEIGHT, &WireDisplay1, OLED_RESET);
 
+// Screen variants defined for different modes of keyboard
 uint16_t screens[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4'};
 uint16_t screens2[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3', '4'};
 uint16_t special_screens[] = {EURO_KEY, POUND_KEY, YEN_KEY, DIAERESIS_KEY, '{', '}', '[', ']', '<', '>', '+', '-', '&', '#', '@', '\'', '$', '\"', '(', ')', '^', '*', '/',  '~', '\\', '|', '-', '_', ';', ':', ',', '.', '?', '!'};
@@ -194,6 +212,7 @@ uint16_t c_variants_screen[] = {C_DOT, C_CARON, 'c', C_OGON, C_ACUTE, C_CIRC, 'i
 uint16_t o_variants_screen[] = {O_GRAVE, O_ACUTE, O_CIRC, O_UML, O_TILDE, O_MACRON, O_BREVE, O_DBLAC, 'o', O_ELIG, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',  ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
 uint16_t n_variants_screen[] = {N_ACUTE, N_TILDE, N_BREVE, 'n', N_OGON , ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',  ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
 
+// Key functionalities for different modes
 uint16_t keys[]  = {KEY_ESC, KEY_CANCEL, HID_DEC_BRIGHTNESS_MEDIA, HID_INC_BRIGHTNESS_MEDIA, HID_MEDIA_VOL_DOWN_MEDIA, HID_MEDIA_VOL_UP_MEDIA, HID_MIC_MEDIA, HID_CAMERA_MEDIA, KEY_SCREEN_RECORD, KEY_SCREENSHOT, KEY_PRINT, KEY_SHARE, HID_RADIO_WIRELESS_MEDIA, KEY_DELETE,
                     SQUARE_KEY, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', BLANK, BLANK, KEY_BACKSPACE,
                     KEY_TAB, 'a', 'z', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', BLANK, BLANK, KEY_RETURN,
@@ -287,11 +306,23 @@ uint16_t n_variants[]  = {KEY_ESC, BLANK, BLANK, BLANK, BLANK, BLANK, BLANK, BLA
                          };
 
 
+// Array created for output pins for easy access
 uint32_t output_pins[] = {OUTPUT1, OUTPUT2, OUTPUT3, OUTPUT4, OUTPUT5};
 
+/*
+   variables to track and record time of shift and transform key to toggle between two modes
+   e.g. holding the shift key will function as shift key and pressing shortly the shift key
+   will result in capslock functionality
+*/
 uint32_t track_shift_time = 0;
 uint32_t track_transform_time = 0;
 
+/*
+   variables to track and record time of varaint keys
+   e.g. holding very long these keys will do repetition
+   holding, but not very long will result in keys variant
+   pressing shortly will only print the pressed key
+*/
 uint32_t track_a_key_pressed_time = 0;
 uint32_t track_e_key_pressed_time = 0;
 uint32_t track_y_key_pressed_time = 0;
@@ -301,10 +332,13 @@ uint32_t track_c_key_pressed_time = 0;
 uint32_t track_o_key_pressed_time = 0;
 uint32_t track_n_key_pressed_time = 0;
 
-uint16_t key_selected = NULL;
-uint16_t last_key_selected = NULL;
-uint16_t repeat_delay = 0;
-uint8_t repeat_first = false;
+uint16_t key_selected = NULL; // Hold selected key when pressed
+uint16_t last_key_selected = NULL; // Track what key was pressed previously
+
+uint16_t repeat_delay = 0; // temporary variable to hold repeat delay
+uint8_t repeat_first = false; //
+
+// Variables to keep state of modifier kets
 uint8_t shift_key_right = false;
 uint8_t shift_key_left = false;
 uint8_t ctrl_key_right = false;
@@ -312,9 +346,14 @@ uint8_t ctrl_key_left = false;
 uint8_t alt_key_right = false;
 uint8_t alt_key_left = false;
 uint8_t transform_key = false;
+uint8_t fn_key = false;
+uint8_t capslock_key = false;
+
+// variables to keep record of capslock and transform key toggling
 uint8_t toggle_capslock = false;
 uint8_t toggle_transform = false;
 
+// Variables to keep state of variant keys
 uint8_t a_key_pressed = false;
 uint8_t initial_a_key = false;
 uint8_t e_key_pressed = false;
@@ -332,8 +371,10 @@ uint8_t initial_o_key = false;
 uint8_t n_key_pressed = false;
 uint8_t initial_n_key = false;
 
+// Variable to keep record of long key press of variant keys
 uint8_t long_key_press =  false;
 
+// variables used for locking the state of variant keys until the key released
 uint8_t special_a = false;
 uint8_t special_e = false;
 uint8_t special_y = false;
@@ -343,26 +384,30 @@ uint8_t special_c = false;
 uint8_t special_o = false;
 uint8_t special_n = false;
 
-uint8_t fn_key = false;
-uint8_t capslock_key = false;
+// variables to save states of modes
 uint8_t capitalized = false;
 uint8_t uncapitalized = false;
 uint8_t transformed =  false;
 uint8_t variants_activated =  false;
 
-uint16_t pressed_key;
-uint8_t key_pressed = false;
+uint16_t pressed_key; // ?
+uint8_t key_pressed = false; //?
+
+// variables used to indicate what row is pressed, used as helping variabeles for identifying button presses and releases
 uint32_t rows1, rows2, rows3, rows4, rows5 = 0;
 
+// variables to keep ORed inputs of all the columns
 uint32_t inputs = 0;
 
 void setup()
-// put your setup code here, to run once:
+// setup code here, to run once:
 {
+  // Initialize I2C ports
   WireDisplay1.begin();
   //  WireDisplay2.begin();
   //  WireDisplay3.begin();
 
+  // Initialized inpput pins as pull down
   pinMode(INPUT1, INPUT_PULLDOWN);
   pinMode(INPUT2, INPUT_PULLDOWN);
   pinMode(INPUT3, INPUT_PULLDOWN);
@@ -380,14 +425,21 @@ void setup()
   pinMode(INPUT15, INPUT_PULLDOWN);
   pinMode(INPUT16, INPUT_PULLDOWN);
 
+  // Initlialize output pins
   pinMode(OUTPUT1, OUTPUT);
   pinMode(OUTPUT2, OUTPUT);
   pinMode(OUTPUT3, OUTPUT);
   pinMode(OUTPUT4, OUTPUT);
   pinMode(OUTPUT5, OUTPUT);
 
+  // Initialized LEDs for testing purpose
   pinMode(TEST_LED, OUTPUT);
   pinMode(TEST_LED2, OUTPUT);
+
+  /*
+     Code below is used to access two unique MUX IC with different I2C addresses to address
+     When first I2C mux is to be accessed, fourth I2C mux needs to be disabled and vice versa
+  */
 
   i2c_mux4.setChannelMask(0);
 
@@ -403,12 +455,14 @@ void setup()
     initDisplay(&i2c_mux4, &display4 , i);
   }
 
+  // Set font types for each MUX I2C displays
   display.setFont(&FreeSerif9pt7b);
   display4.setFont(&FreeSerif9pt7b);
 
   // display.setFont(&FreeSans9pt7b);
   // display4.setFont(&FreeSans9pt7b);
 
+  // Begin Keyboard HID Class
   Keyboard.begin();
 
   //  capitalize();
@@ -447,10 +501,10 @@ void loop() {
   //uncapitalize();
   //  delay(2000);
 
+  // Poll keyboard keys
   checkKeys();
 
-  //
-
+  // Toggle display when shift or capslock key is pressed
   if ((shift_key_right) || (shift_key_left) || (toggle_capslock))
   {
     if (!capitalized)
@@ -471,6 +525,7 @@ void loop() {
     }
   }
 
+  // Toggle displays when transform key is pressed
   if ((!shift_key_right) && (!shift_key_left) && (!toggle_capslock))
   {
     if (toggle_transform || transform_key)
@@ -490,6 +545,7 @@ void loop() {
       }
     }
 
+    // Toggle displays if variant keys are pressed
     if ((a_key_pressed) || (e_key_pressed) || (y_key_pressed) || (u_key_pressed) || \
         (i_key_pressed) || (c_key_pressed) || (o_key_pressed) || (n_key_pressed))
     {
@@ -510,16 +566,18 @@ void loop() {
   }
 
 
+  // Key release functionality, release key when all the keys are released
   if (((rows1 == 0) && (rows2 == 0) && (rows3 == 0) && (rows4 == 0) && (rows5 == 0)) && (key_pressed == true))
   {
     Keyboard.release(pressed_key);
     key_pressed = false;
   }
 
-  digitalWrite(TEST_LED2, e_key_pressed);
+  //digitalWrite(TEST_LED2, e_key_pressed);
 
 }
 
+// Initialize displays with this function
 void initDisplay(TI_TCA9548A* i2c_mux, Adafruit_SSD1306* Display, int channel)
 {
 
@@ -537,6 +595,7 @@ void initDisplay(TI_TCA9548A* i2c_mux, Adafruit_SSD1306* Display, int channel)
   Display->display();
 }
 
+// Display characters
 void displayScreen(TI_TCA9548A* i2c_mux, Adafruit_SSD1306* Display, int channel, uint16_t* screen_local)
 {
   int screen_number = channel;
@@ -785,6 +844,7 @@ void displayScreen(TI_TCA9548A* i2c_mux, Adafruit_SSD1306* Display, int channel,
   Display->display();
 }
 
+// Capitalize the characters on display
 void capitalize()
 {
   //  i2c_mux1.setChannelMask(0);
@@ -817,6 +877,7 @@ void capitalize()
   //  }
 }
 
+// Uncapitalize the characters on display
 void uncapitalize()
 {
 
@@ -849,6 +910,7 @@ void uncapitalize()
   //  }
 }
 
+// Transform the characters on display for special characters
 void transform()
 {
 
@@ -869,7 +931,7 @@ void transform()
 
 }
 
-
+// Display function for key variants
 void display_variants()
 {
   if (a_key_pressed)
@@ -906,6 +968,7 @@ void display_variants()
   }
 }
 
+// Display function for 'A' key variants
 void display_a_variant()
 {
   i2c_mux4.setChannelMask(0);
@@ -923,6 +986,7 @@ void display_a_variant()
   }
 }
 
+// Display function for 'E' key variants
 void display_e_variant()
 {
   i2c_mux4.setChannelMask(0);
@@ -940,6 +1004,7 @@ void display_e_variant()
   }
 }
 
+// Display function for 'Y' key variants
 void display_y_variant()
 {
   i2c_mux4.setChannelMask(0);
@@ -957,6 +1022,7 @@ void display_y_variant()
   }
 }
 
+// Display function for 'U' key variants
 void display_u_variant()
 {
   i2c_mux4.setChannelMask(0);
@@ -974,6 +1040,7 @@ void display_u_variant()
   }
 }
 
+// Display function for 'I' key variants
 void display_i_variant()
 {
   i2c_mux4.setChannelMask(0);
@@ -991,6 +1058,7 @@ void display_i_variant()
   }
 }
 
+// Display function for 'C' key variants
 void display_c_variant()
 {
   i2c_mux4.setChannelMask(0);
@@ -1008,6 +1076,7 @@ void display_c_variant()
   }
 }
 
+// Display function for 'O' key variants
 void display_o_variant()
 {
   i2c_mux4.setChannelMask(0);
@@ -1025,6 +1094,7 @@ void display_o_variant()
   }
 }
 
+// Display function for 'N' key variants
 void display_n_variant()
 {
   i2c_mux4.setChannelMask(0);
@@ -1042,6 +1112,7 @@ void display_n_variant()
   }
 }
 
+// Function for polling matrix keyboard
 void checkKeys()
 {
 
@@ -2012,6 +2083,7 @@ void checkKeys()
   }
 }
 
+// Send keys to PC over USB HID
 void print_key(uint32_t key)
 {
   uint8_t last_num_lock_state = Keyboard.check_numlock();
