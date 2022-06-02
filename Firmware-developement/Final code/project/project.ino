@@ -490,7 +490,8 @@ void loop() {
       }
     }
 
-    if ((a_key_pressed) || (e_key_pressed))
+    if ((a_key_pressed) || (e_key_pressed) || (y_key_pressed) || (u_key_pressed) || \
+        (i_key_pressed) || (c_key_pressed) || (o_key_pressed) || (n_key_pressed))
     {
       if (!variants_activated)
       {
@@ -553,7 +554,13 @@ void displayScreen(TI_TCA9548A* i2c_mux, Adafruit_SSD1306* Display, int channel,
 
   if ((screen_local[screen_number] != DEGREE_KEY) && (screen_local[screen_number] != EURO_KEY) && (screen_local[screen_number] != POUND_KEY) && (screen_local[screen_number] != YEN_KEY) && (screen_local[screen_number] != DIAERESIS_KEY) \
       && (screen_local[screen_number] != A_GRAVE) && (screen_local[screen_number] != A_ACUTE) && (screen_local[screen_number] != A_CIRC) && (screen_local[screen_number] != A_TILDE) && (screen_local[screen_number] != A_UML) && (screen_local[screen_number] != A_RING) && (screen_local[screen_number] != A_ELIG) \
-      && (screen_local[screen_number] != E_GRAVE) && (screen_local[screen_number] != E_ACUTE) && (screen_local[screen_number] != E_CIRC) && (screen_local[screen_number] != E_DOT) && (screen_local[screen_number] != E_BREVE) && (screen_local[screen_number] != E_UML) && (screen_local[screen_number] != E_MACRON) && (screen_local[screen_number] != E_OGON))
+      && (screen_local[screen_number] != E_GRAVE) && (screen_local[screen_number] != E_ACUTE) && (screen_local[screen_number] != E_CIRC) && (screen_local[screen_number] != E_DOT) && (screen_local[screen_number] != E_BREVE) && (screen_local[screen_number] != E_UML) && (screen_local[screen_number] != E_MACRON) && (screen_local[screen_number] != E_OGON) \
+      && (screen_local[screen_number] != Y_UML) \
+      && (screen_local[screen_number] != U_GRAVE) && (screen_local[screen_number] != U_ACUTE) && (screen_local[screen_number] != U_DOT) && (screen_local[screen_number] != U_UML) && (screen_local[screen_number] != U_TILDE) && (screen_local[screen_number] != U_CIRC) && (screen_local[screen_number] != U_DBLAC) && (screen_local[screen_number] != U_OGON) && (screen_local[screen_number] != U_RING) \
+      && (screen_local[screen_number] != I_GRAVE) && (screen_local[screen_number] != I_ACUTE) && (screen_local[screen_number] != I_UML) && (screen_local[screen_number] != I_TILDE) && (screen_local[screen_number] != I_MACRON) && (screen_local[screen_number] != I_BREVE) && (screen_local[screen_number] != I_OGON) \
+      && (screen_local[screen_number] != C_DOT)   && (screen_local[screen_number] != C_BREVE) && (screen_local[screen_number] != C_OGON) && (screen_local[screen_number] != C_ACUTE) && (screen_local[screen_number] != C_CIRC) \
+      && (screen_local[screen_number] != O_GRAVE) && (screen_local[screen_number] != O_ACUTE) && (screen_local[screen_number] != O_DOT) && (screen_local[screen_number] != O_UML) && (screen_local[screen_number] != O_TILDE) && (screen_local[screen_number] != O_MACRON) && (screen_local[screen_number] != O_BREVE) && (screen_local[screen_number] != O_DBLAC) && (screen_local[screen_number] != O_ELIG) \
+      && (screen_local[screen_number] != N_ACUTE) && (screen_local[screen_number] != N_TILDE) && (screen_local[screen_number] != N_BREVE) && (screen_local[screen_number] != N_OGON))
   {
     Display->println((char)screen_local[screen_number]);
   }
@@ -650,6 +657,126 @@ void displayScreen(TI_TCA9548A* i2c_mux, Adafruit_SSD1306* Display, int channel,
       case E_OGON:
         Display->println('q');
         break;
+
+      // Y_key variants
+
+      case Y_UML:
+        Display->println('i');
+        break;
+
+      // U_key variants
+      case U_GRAVE:
+        Display->println('G');
+        break;
+
+      case U_ACUTE:
+        Display->println('H');
+        break;
+
+      case U_CIRC:
+        Display->println('I');
+        break;
+
+      case U_DBLAC:
+        Display->println('J');
+        break;
+
+      case U_UML:
+        Display->println('K');
+        break;
+
+      case U_TILDE:
+        Display->println('L');
+        break;
+
+      case U_RING:
+        Display->println('M');
+        break;
+
+      case U_MACRON:
+        Display->println('N');
+        break;
+
+      case U_BREVE:
+        Display->println('O');
+        break;
+
+      case U_OGON:
+        Display->println('P');
+        break;
+
+      // I_key variants
+      case I_GRAVE:
+        Display->println('Q');
+        break;
+
+      case I_BREVE:
+        Display->println('R');
+        break;
+
+      case I_CIRC:
+        Display->println('S');
+        break;
+
+      case I_ACUTE:
+        Display->println('T');
+        break;
+
+      case I_MACRON:
+        Display->println('U');
+        break;
+
+      case I_OGON:
+        Display->println('V');
+        break;
+
+      case I_TILDE:
+        Display->println('W');
+        break;
+
+      case I_UML:
+        Display->println('X');
+        break;
+
+      //C_key variants
+      case C_DOT:
+        Display->println('t');
+        break;
+
+      case C_BREVE:
+        Display->println('u');
+        break;
+
+      case C_OGON:
+        Display->println('v');
+        break;
+
+      case C_ACUTE:
+        Display->println('r');
+        break;
+
+      case C_CIRC:
+        Display->println('s');
+        break;
+
+      //N_key variants
+      case N_ACUTE:
+        Display->println('?');
+        break;
+
+      case N_TILDE:
+        Display->println('=');
+        break;
+
+      case N_BREVE:
+        Display->println('@');
+        break;
+
+      case N_OGON:
+        Display->println('>');
+        break;
+
+
     }
     Display->setFont(&FreeSerif9pt7b);
     Display->setTextSize(2);
@@ -753,6 +880,30 @@ void display_variants()
   {
     display_e_variant();
   }
+  else if (y_key_pressed)
+  {
+    display_y_variant();
+  }
+  else if (u_key_pressed)
+  {
+    display_u_variant();
+  }
+  else if (i_key_pressed)
+  {
+    display_i_variant();
+  }
+  else if (c_key_pressed)
+  {
+    display_c_variant();
+  }
+  else if (o_key_pressed)
+  {
+    display_o_variant();
+  }
+  else if (n_key_pressed)
+  {
+    display_n_variant();
+  }
 }
 
 void display_a_variant()
@@ -786,6 +937,108 @@ void display_e_variant()
   for (int i = 8; i < 16; i++)
   {
     displayScreen(&i2c_mux4, &display4 , i, e_variants_screen);
+  }
+}
+
+void display_y_variant()
+{
+  i2c_mux4.setChannelMask(0);
+
+  for (int i = 0; i < 8; i++)
+  {
+    displayScreen(&i2c_mux1, &display , i, y_variants_screen);
+  }
+
+  i2c_mux1.setChannelMask(0);
+
+  for (int i = 8; i < 16; i++)
+  {
+    displayScreen(&i2c_mux4, &display4 , i, y_variants_screen);
+  }
+}
+
+void display_u_variant()
+{
+  i2c_mux4.setChannelMask(0);
+
+  for (int i = 0; i < 8; i++)
+  {
+    displayScreen(&i2c_mux1, &display , i, u_variants_screen);
+  }
+
+  i2c_mux1.setChannelMask(0);
+
+  for (int i = 8; i < 16; i++)
+  {
+    displayScreen(&i2c_mux4, &display4 , i, u_variants_screen);
+  }
+}
+
+void display_i_variant()
+{
+  i2c_mux4.setChannelMask(0);
+
+  for (int i = 0; i < 8; i++)
+  {
+    displayScreen(&i2c_mux1, &display , i, i_variants_screen);
+  }
+
+  i2c_mux1.setChannelMask(0);
+
+  for (int i = 8; i < 16; i++)
+  {
+    displayScreen(&i2c_mux4, &display4 , i, i_variants_screen);
+  }
+}
+
+void display_c_variant()
+{
+  i2c_mux4.setChannelMask(0);
+
+  for (int i = 0; i < 8; i++)
+  {
+    displayScreen(&i2c_mux1, &display , i, c_variants_screen);
+  }
+
+  i2c_mux1.setChannelMask(0);
+
+  for (int i = 8; i < 16; i++)
+  {
+    displayScreen(&i2c_mux4, &display4 , i, c_variants_screen);
+  }
+}
+
+void display_o_variant()
+{
+  i2c_mux4.setChannelMask(0);
+
+  for (int i = 0; i < 8; i++)
+  {
+    displayScreen(&i2c_mux1, &display , i, o_variants_screen);
+  }
+
+  i2c_mux1.setChannelMask(0);
+
+  for (int i = 8; i < 16; i++)
+  {
+    displayScreen(&i2c_mux4, &display4 , i, o_variants_screen);
+  }
+}
+
+void display_n_variant()
+{
+  i2c_mux4.setChannelMask(0);
+
+  for (int i = 0; i < 8; i++)
+  {
+    displayScreen(&i2c_mux1, &display , i, n_variants_screen);
+  }
+
+  i2c_mux1.setChannelMask(0);
+
+  for (int i = 8; i < 16; i++)
+  {
+    displayScreen(&i2c_mux4, &display4 , i, n_variants_screen);
   }
 }
 
