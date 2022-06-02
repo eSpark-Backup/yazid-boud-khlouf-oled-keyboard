@@ -182,17 +182,17 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &WireDisplay1, OLED_RESET)
 //Adafruit_SSD1306 display3(SCREEN_WIDTH, SCREEN_HEIGHT, &WireDisplay3, OLED_RESET);
 Adafruit_SSD1306 display4(SCREEN_WIDTH, SCREEN_HEIGHT, &WireDisplay1, OLED_RESET);
 
-char screens[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4'};
-char screens2[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3', '4'};
-char special_screens[] = {EURO_KEY, POUND_KEY, YEN_KEY, DIAERESIS_KEY, '{', '}', '[', ']', '<', '>', '+', '-', '&', '#', '@', '\'', '$', '\"', '(', ')', '^', '*', '/',  '~', '\\', '|', '-', '_', ';', ':', ',', '.', '?', '!'};
-char a_variants_screen[] = {'a', A_GRAVE, A_ACUTE, A_CIRC, A_TILDE, A_UML, A_RING, A_MACRON, A_ELIG, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',  ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
-char e_variants_screen[] = {E_GRAVE, E_ACUTE, 'e', E_CIRC, E_UML, E_MACRON, E_DOT, E_OGON, E_BREVE, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',  ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
-char y_variants_screen[] = {'y', Y_UML, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',  ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
-char u_variants_screen[] = {U_GRAVE, U_ACUTE, U_CIRC, U_UML, U_TILDE, U_MACRON, 'u', U_BREVE, U_DBLAC, U_OGON, U_RING, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',  ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
-char i_variants_screen[] = {I_GRAVE, I_ACUTE, I_CIRC, I_UML, I_TILDE, I_MACRON, 'i', I_BREVE, I_OGON, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',  ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
-char c_variants_screen[] = {C_DOT, C_CARON, 'c', C_OGON, C_ACUTE, C_CIRC, 'i', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',  ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
-char o_variants_screen[] = {O_GRAVE, O_ACUTE, O_CIRC, O_UML, O_TILDE, O_MACRON, O_BREVE, O_DBLAC, 'o', O_ELIG, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',  ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
-char n_variants_screen[] = {N_ACUTE, N_TILDE, N_BREVE, 'n', N_OGON , ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',  ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
+uint16_t screens[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '1', '2', '3', '4'};
+uint16_t screens2[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '1', '2', '3', '4'};
+uint16_t special_screens[] = {EURO_KEY, POUND_KEY, YEN_KEY, DIAERESIS_KEY, '{', '}', '[', ']', '<', '>', '+', '-', '&', '#', '@', '\'', '$', '\"', '(', ')', '^', '*', '/',  '~', '\\', '|', '-', '_', ';', ':', ',', '.', '?', '!'};
+uint16_t a_variants_screen[] = {'a', A_GRAVE, A_ACUTE, A_CIRC, A_TILDE, A_UML, A_RING, A_MACRON, A_ELIG, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',  ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
+uint16_t e_variants_screen[] = {E_GRAVE, E_ACUTE, 'e', E_CIRC, E_UML, E_MACRON, E_DOT, E_OGON, E_BREVE, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',  ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
+uint16_t y_variants_screen[] = {'y', Y_UML, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',  ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
+uint16_t u_variants_screen[] = {U_GRAVE, U_ACUTE, U_CIRC, U_UML, U_TILDE, U_MACRON, 'u', U_BREVE, U_DBLAC, U_OGON, U_RING, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',  ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
+uint16_t i_variants_screen[] = {I_GRAVE, I_ACUTE, I_CIRC, I_UML, I_TILDE, I_MACRON, 'i', I_BREVE, I_OGON, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',  ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
+uint16_t c_variants_screen[] = {C_DOT, C_CARON, 'c', C_OGON, C_ACUTE, C_CIRC, 'i', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',  ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
+uint16_t o_variants_screen[] = {O_GRAVE, O_ACUTE, O_CIRC, O_UML, O_TILDE, O_MACRON, O_BREVE, O_DBLAC, 'o', O_ELIG, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',  ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
+uint16_t n_variants_screen[] = {N_ACUTE, N_TILDE, N_BREVE, 'n', N_OGON , ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',  ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
 
 uint16_t keys[]  = {KEY_ESC, KEY_CANCEL, HID_DEC_BRIGHTNESS_MEDIA, HID_INC_BRIGHTNESS_MEDIA, HID_MEDIA_VOL_DOWN_MEDIA, HID_MEDIA_VOL_UP_MEDIA, HID_MIC_MEDIA, HID_CAMERA_MEDIA, KEY_SCREEN_RECORD, KEY_SCREENSHOT, KEY_PRINT, KEY_SHARE, HID_RADIO_WIRELESS_MEDIA, KEY_DELETE,
                     SQUARE_KEY, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', BLANK, BLANK, KEY_BACKSPACE,
@@ -515,6 +515,8 @@ void loop() {
     key_pressed = false;
   }
 
+  digitalWrite(TEST_LED2, e_key_pressed);
+
 }
 
 void initDisplay(TI_TCA9548A* i2c_mux, Adafruit_SSD1306* Display, int channel)
@@ -534,7 +536,7 @@ void initDisplay(TI_TCA9548A* i2c_mux, Adafruit_SSD1306* Display, int channel)
   Display->display();
 }
 
-void displayScreen(TI_TCA9548A* i2c_mux, Adafruit_SSD1306* Display, int channel, char* screen_local)
+void displayScreen(TI_TCA9548A* i2c_mux, Adafruit_SSD1306* Display, int channel, uint16_t* screen_local)
 {
   int screen_number = channel;
   if ((channel >= 8) && (channel < 16)) channel -= 8;
@@ -550,13 +552,15 @@ void displayScreen(TI_TCA9548A* i2c_mux, Adafruit_SSD1306* Display, int channel,
   Display->setCursor(10, 40);
 
   if ((screen_local[screen_number] != DEGREE_KEY) && (screen_local[screen_number] != EURO_KEY) && (screen_local[screen_number] != POUND_KEY) && (screen_local[screen_number] != YEN_KEY) && (screen_local[screen_number] != DIAERESIS_KEY) \
-      (screen_local[screen_number] != A_GRAVE) && (screen_local[screen_number] != A_ACUTE) && (screen_local[screen_number] != A_CIRC) && (screen_local[screen_number] != A_TILDE) && )
+      && (screen_local[screen_number] != A_GRAVE) && (screen_local[screen_number] != A_ACUTE) && (screen_local[screen_number] != A_CIRC) && (screen_local[screen_number] != A_TILDE) && (screen_local[screen_number] != A_UML) && (screen_local[screen_number] != A_RING) && (screen_local[screen_number] != A_ELIG) \
+      && (screen_local[screen_number] != E_GRAVE) && (screen_local[screen_number] != E_ACUTE) && (screen_local[screen_number] != E_CIRC) && (screen_local[screen_number] != E_DOT) && (screen_local[screen_number] != E_BREVE) && (screen_local[screen_number] != E_UML) && (screen_local[screen_number] != E_MACRON) && (screen_local[screen_number] != E_OGON))
   {
-    Display->println(screen_local[screen_number]);
+    Display->println((char)screen_local[screen_number]);
   }
   else
   {
     Display->setFont(&finalversion118pt7b);
+    Display->setTextSize(1);
     switch (screen_local[screen_number])
     {
       case DEGREE_KEY:
@@ -578,8 +582,77 @@ void displayScreen(TI_TCA9548A* i2c_mux, Adafruit_SSD1306* Display, int channel,
       case DIAERESIS_KEY:
         Display->println('C');
         break;
+
+      // A_key variants
+
+      case A_GRAVE:
+        Display->println('a');
+        break;
+
+      case A_ACUTE:
+        Display->println('b');
+        break;
+
+      case A_CIRC:
+        Display->println('c');
+        break;
+
+      case A_TILDE:
+        Display->println('d');
+        break;
+
+      case A_UML:
+        Display->println('e');
+        break;
+
+      case A_RING:
+        Display->println('f');
+        break;
+
+      case A_MACRON:
+        Display->println('h');
+        break;
+
+      case A_ELIG:
+        Display->println('g');
+        break;
+
+      // E_key variants
+
+      case E_GRAVE:
+        Display->println('i');
+        break;
+
+      case E_ACUTE:
+        Display->println('j');
+        break;
+
+      case E_CIRC:
+        Display->println('k');
+        break;
+
+      case E_DOT:
+        Display->println('l');
+        break;
+
+      case E_BREVE:
+        Display->println('m');
+        break;
+
+      case E_UML:
+        Display->println('o');
+        break;
+
+      case E_MACRON:
+        Display->println('p');
+        break;
+
+      case E_OGON:
+        Display->println('q');
+        break;
     }
     Display->setFont(&FreeSerif9pt7b);
+    Display->setTextSize(2);
   }
 
   Display->display();
@@ -1446,7 +1519,6 @@ void checkKeys()
             track_n_key_pressed_time = millis();
             initial_n_key = true;
             special_n = false;
-            digitalWrite(TEST_LED2, HIGH);
           }
 
           if (((millis() - track_n_key_pressed_time) >= 1000) && ((millis() - track_n_key_pressed_time) < 3000))
@@ -2638,7 +2710,6 @@ void print_key(uint32_t key)
       //Keyboard.write(key_selected);
       if (((rows1) || (rows2) || (rows3) || (rows4) || (rows5)) && (key_pressed == false))
       {
-        digitalWrite(TEST_LED2, HIGH);
         Keyboard.press(key_selected);
         pressed_key = key_selected;
         key_pressed = true;
