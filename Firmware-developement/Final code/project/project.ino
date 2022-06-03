@@ -606,6 +606,7 @@ uint8_t initDisplay(TI_TCA9548A* i2c_mux, Adafruit_SSD1306* Display, int channel
   Display->display();
 
   return 1;
+
 }
 
 
@@ -621,7 +622,7 @@ uint8_t initDisplay(TI_TCA9548A* i2c_mux, Adafruit_SSD1306* Display, int channel
 
     returns: uint8_t indicating SUCCESS of FAILED
 */
-void displayScreen(TI_TCA9548A* i2c_mux, Adafruit_SSD1306* Display, int channel, uint16_t* screen_local)
+uint8_t displayScreen(TI_TCA9548A* i2c_mux, Adafruit_SSD1306* Display, int channel, uint16_t* screen_local)
 {
   int screen_number = channel;
 
@@ -909,6 +910,8 @@ void displayScreen(TI_TCA9548A* i2c_mux, Adafruit_SSD1306* Display, int channel,
   }
 
   Display->display();
+
+  return 1;
 }
 
 /*
@@ -989,6 +992,8 @@ uint8_t uncapitalize()
   //  {
   //    displayScreen(&i2c_mux3, &display3 , i, screens2);
   //  }
+
+  return 1;
 }
 
 /*
@@ -1017,7 +1022,6 @@ uint8_t transform()
   }
 
   return 1;
-
 }
 
 
@@ -1116,6 +1120,7 @@ uint8_t display_e_variant()
   }
 
   return 1;
+
 }
 
 /*
@@ -1142,6 +1147,7 @@ uint8_t display_y_variant()
   }
 
   return 1;
+
 }
 
 /*
@@ -1195,6 +1201,7 @@ uint8_t display_i_variant()
   }
 
   return 1;
+
 }
 
 /*
@@ -1221,6 +1228,7 @@ uint8_t display_c_variant()
   }
 
   return 1;
+
 }
 
 /*
@@ -1230,7 +1238,7 @@ uint8_t display_c_variant()
 
      returns: uint8_t indicating SUCCESS or FAILED
 */
-void display_o_variant()
+uint8_t display_o_variant()
 {
   i2c_mux4.setChannelMask(0);
 
@@ -1245,6 +1253,8 @@ void display_o_variant()
   {
     displayScreen(&i2c_mux4, &display4 , i, o_variants_screen);
   }
+
+  return 1;
 }
 
 /*
@@ -1254,7 +1264,7 @@ void display_o_variant()
 
      returns: uint8_t indicating SUCCESS or FAILED
 */
-void display_n_variant()
+uint8_t display_n_variant()
 {
   i2c_mux4.setChannelMask(0);
 
@@ -1269,6 +1279,8 @@ void display_n_variant()
   {
     displayScreen(&i2c_mux4, &display4 , i, n_variants_screen);
   }
+
+  return 1;
 }
 
 /*
