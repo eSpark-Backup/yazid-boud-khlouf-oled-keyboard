@@ -208,7 +208,7 @@ uint16_t e_variants_screen[] = {E_GRAVE, E_ACUTE, 'e', E_CIRC, E_UML, E_MACRON, 
 uint16_t y_variants_screen[] = {'y', Y_UML, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',  ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
 uint16_t u_variants_screen[] = {U_GRAVE, U_ACUTE, U_CIRC, U_UML, U_TILDE, U_MACRON, 'u', U_BREVE, U_DBLAC, U_OGON, U_RING, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',  ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
 uint16_t i_variants_screen[] = {I_GRAVE, I_ACUTE, I_CIRC, I_UML, I_TILDE, I_MACRON, 'i', I_BREVE, I_OGON, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',  ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
-uint16_t c_variants_screen[] = {C_DOT, C_CARON, 'c', C_OGON, C_ACUTE, C_CIRC, 'i', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',  ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
+uint16_t c_variants_screen[] = {C_DOT, C_CARON, 'c', C_OGON, C_ACUTE, C_CIRC, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',  ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
 uint16_t o_variants_screen[] = {O_GRAVE, O_ACUTE, O_CIRC, O_UML, O_TILDE, O_MACRON, O_BREVE, O_DBLAC, 'o', O_ELIG, ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',  ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
 uint16_t n_variants_screen[] = {N_ACUTE, N_TILDE, N_BREVE, 'n', N_OGON , ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',  ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
 
@@ -612,12 +612,12 @@ void displayScreen(TI_TCA9548A* i2c_mux, Adafruit_SSD1306* Display, int channel,
   Display->setCursor(10, 40);
 
   if ((screen_local[screen_number] != DEGREE_KEY) && (screen_local[screen_number] != EURO_KEY) && (screen_local[screen_number] != POUND_KEY) && (screen_local[screen_number] != YEN_KEY) && (screen_local[screen_number] != DIAERESIS_KEY) \
-      && (screen_local[screen_number] != A_GRAVE) && (screen_local[screen_number] != A_ACUTE) && (screen_local[screen_number] != A_CIRC) && (screen_local[screen_number] != A_TILDE) && (screen_local[screen_number] != A_UML) && (screen_local[screen_number] != A_RING) && (screen_local[screen_number] != A_ELIG) \
+      && (screen_local[screen_number] != A_GRAVE) && (screen_local[screen_number] != A_ACUTE) && (screen_local[screen_number] != A_CIRC) && (screen_local[screen_number] != A_TILDE) && (screen_local[screen_number] != A_UML) && (screen_local[screen_number] != A_RING) && (screen_local[screen_number] != A_MACRON) && (screen_local[screen_number] != A_ELIG) \
       && (screen_local[screen_number] != E_GRAVE) && (screen_local[screen_number] != E_ACUTE) && (screen_local[screen_number] != E_CIRC) && (screen_local[screen_number] != E_DOT) && (screen_local[screen_number] != E_BREVE) && (screen_local[screen_number] != E_UML) && (screen_local[screen_number] != E_MACRON) && (screen_local[screen_number] != E_OGON) \
       && (screen_local[screen_number] != Y_UML) \
-      && (screen_local[screen_number] != U_GRAVE) && (screen_local[screen_number] != U_ACUTE) && (screen_local[screen_number] != U_DOT) && (screen_local[screen_number] != U_UML) && (screen_local[screen_number] != U_TILDE) && (screen_local[screen_number] != U_CIRC) && (screen_local[screen_number] != U_DBLAC) && (screen_local[screen_number] != U_OGON) && (screen_local[screen_number] != U_RING) \
-      && (screen_local[screen_number] != I_GRAVE) && (screen_local[screen_number] != I_ACUTE) && (screen_local[screen_number] != I_UML) && (screen_local[screen_number] != I_TILDE) && (screen_local[screen_number] != I_MACRON) && (screen_local[screen_number] != I_BREVE) && (screen_local[screen_number] != I_OGON) \
-      && (screen_local[screen_number] != C_DOT)   && (screen_local[screen_number] != C_BREVE) && (screen_local[screen_number] != C_OGON) && (screen_local[screen_number] != C_ACUTE) && (screen_local[screen_number] != C_CIRC) \
+      && (screen_local[screen_number] != U_GRAVE) && (screen_local[screen_number] != U_ACUTE) && (screen_local[screen_number] != U_DOT) && (screen_local[screen_number] != U_UML) && (screen_local[screen_number] != U_TILDE) && (screen_local[screen_number] != U_CIRC) && (screen_local[screen_number] != U_DBLAC) && (screen_local[screen_number] != U_OGON) && (screen_local[screen_number] != U_RING) && (screen_local[screen_number] != U_MACRON) && (screen_local[screen_number] != U_BREVE) \
+      && (screen_local[screen_number] != I_GRAVE) && (screen_local[screen_number] != I_ACUTE) && (screen_local[screen_number] != I_UML) && (screen_local[screen_number] != I_TILDE) && (screen_local[screen_number] != I_MACRON) && (screen_local[screen_number] != I_BREVE) && (screen_local[screen_number] != I_OGON) && (screen_local[screen_number] != I_CIRC) \
+      && (screen_local[screen_number] != C_DOT)   && (screen_local[screen_number] != C_CARON) && (screen_local[screen_number] != C_OGON) && (screen_local[screen_number] != C_ACUTE) && (screen_local[screen_number] != C_CIRC) \
       && (screen_local[screen_number] != O_GRAVE) && (screen_local[screen_number] != O_ACUTE) && (screen_local[screen_number] != O_DOT) && (screen_local[screen_number] != O_UML) && (screen_local[screen_number] != O_TILDE) && (screen_local[screen_number] != O_MACRON) && (screen_local[screen_number] != O_BREVE) && (screen_local[screen_number] != O_DBLAC) && (screen_local[screen_number] != O_ELIG) \
       && (screen_local[screen_number] != N_ACUTE) && (screen_local[screen_number] != N_TILDE) && (screen_local[screen_number] != N_BREVE) && (screen_local[screen_number] != N_OGON))
   {
@@ -802,7 +802,7 @@ void displayScreen(TI_TCA9548A* i2c_mux, Adafruit_SSD1306* Display, int channel,
         Display->println('t');
         break;
 
-      case C_BREVE:
+      case C_CARON:
         Display->println('u');
         break;
 
@@ -833,6 +833,44 @@ void displayScreen(TI_TCA9548A* i2c_mux, Adafruit_SSD1306* Display, int channel,
 
       case N_OGON:
         Display->println('>');
+        break;
+
+
+      //O_key variants
+      case O_GRAVE:
+        Display->println('?');
+        break;
+
+      case O_ACUTE:
+        Display->println('?');
+        break;
+
+      case O_CIRC:
+        Display->println('x');
+        break;
+
+      case O_UML:
+        Display->println('}');
+        break;
+
+      case O_TILDE:
+        Display->println('|');
+        break;
+
+      case O_MACRON:
+        Display->println('{');
+        break;
+
+      case O_BREVE:
+        Display->println('w');
+        break;
+
+      case O_DBLAC:
+        Display->println('y');
+        break;
+
+      case O_ELIG:
+        Display->println('z');
         break;
 
 
