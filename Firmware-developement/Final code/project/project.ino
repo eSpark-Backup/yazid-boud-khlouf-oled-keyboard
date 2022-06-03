@@ -577,10 +577,21 @@ void loop() {
 
 }
 
-// Initialize displays with this function
-void initDisplay(TI_TCA9548A* i2c_mux, Adafruit_SSD1306* Display, int channel)
+/*
+   Function: initDisplay
+   --------------------
+   Initialize displays with this function
+
+   i2c_mux: I2C mux used
+   Display: Adafruit SSD1306 display object
+   channel: channel number of mux to print display on (values adjust for 0-7)
+
+   returns: uint8_t indicating SUCCESS of FAILED
+*/
+uint8_t initDisplay(TI_TCA9548A* i2c_mux, Adafruit_SSD1306* Display, int channel)
 {
 
+  // Adjusts channel number in the range of 0-7
   if ((channel >= 8) && (channel < 16)) channel -= 8;
   if ((channel >= 16) && (channel < 24))channel -= 16;
   if ((channel >= 24) && (channel < 32))channel -= 24;
@@ -593,12 +604,28 @@ void initDisplay(TI_TCA9548A* i2c_mux, Adafruit_SSD1306* Display, int channel)
   }
 
   Display->display();
+
+  return 1;
 }
 
-// Display characters
+
+/*
+    Function: displayScreen
+    --------------------
+    Display characters on screens
+
+    i2c_mux: I2C mux used
+    Display: Adafruit SSD1306 display object
+    channel: channel number of mux to print display on (values adjust for 0-7)
+    screen_local: screen type to print
+
+    returns: uint8_t indicating SUCCESS of FAILED
+*/
 void displayScreen(TI_TCA9548A* i2c_mux, Adafruit_SSD1306* Display, int channel, uint16_t* screen_local)
 {
   int screen_number = channel;
+
+  // Adjusts channel into the range of 0-7
   if ((channel >= 8) && (channel < 16)) channel -= 8;
   if ((channel >= 16) && (channel < 24))channel -= 16;
   if ((channel >= 24) && (channel < 32))channel -= 24;
@@ -611,6 +638,7 @@ void displayScreen(TI_TCA9548A* i2c_mux, Adafruit_SSD1306* Display, int channel,
   Display->setTextColor(SSD1306_WHITE);
   Display->setCursor(10, 40);
 
+  // Print normal key screen only if special key screen not selected
   if ((screen_local[screen_number] != DEGREE_KEY) && (screen_local[screen_number] != EURO_KEY) && (screen_local[screen_number] != POUND_KEY) && (screen_local[screen_number] != YEN_KEY) && (screen_local[screen_number] != DIAERESIS_KEY) \
       && (screen_local[screen_number] != A_GRAVE) && (screen_local[screen_number] != A_ACUTE) && (screen_local[screen_number] != A_CIRC) && (screen_local[screen_number] != A_TILDE) && (screen_local[screen_number] != A_UML) && (screen_local[screen_number] != A_RING) && (screen_local[screen_number] != A_MACRON) && (screen_local[screen_number] != A_ELIG) \
       && (screen_local[screen_number] != E_GRAVE) && (screen_local[screen_number] != E_ACUTE) && (screen_local[screen_number] != E_CIRC) && (screen_local[screen_number] != E_DOT) && (screen_local[screen_number] != E_BREVE) && (screen_local[screen_number] != E_UML) && (screen_local[screen_number] != E_MACRON) && (screen_local[screen_number] != E_OGON) \
@@ -623,6 +651,7 @@ void displayScreen(TI_TCA9548A* i2c_mux, Adafruit_SSD1306* Display, int channel,
   {
     Display->println((char)screen_local[screen_number]);
   }
+  // Special key printing
   else
   {
     Display->setFont(&finalversion118pt7b);
@@ -882,8 +911,14 @@ void displayScreen(TI_TCA9548A* i2c_mux, Adafruit_SSD1306* Display, int channel,
   Display->display();
 }
 
-// Capitalize the characters on display
-void capitalize()
+/*
+     Function: capitalize
+     --------------------
+     Capitalize the characters on display
+
+     returns: uint8_t indicating SUCCESS or FAILED
+*/
+uint8_t capitalize()
 {
   //  i2c_mux1.setChannelMask(0);
   //
@@ -913,10 +948,18 @@ void capitalize()
   //  {
   //    displayScreen(&i2c_mux3, &display3 , i, screens);
   //  }
+
+  return 1;
 }
 
-// Uncapitalize the characters on display
-void uncapitalize()
+/*
+     Function: uncapitalize
+     --------------------
+     Uncapitalize the characters on display
+
+     returns: uint8_t indicating SUCCESS or FAILED
+*/
+uint8_t uncapitalize()
 {
 
   //  i2c_mux1.setChannelMask(0);
@@ -948,8 +991,14 @@ void uncapitalize()
   //  }
 }
 
-// Transform the characters on display for special characters
-void transform()
+/*
+     Function: transform
+     --------------------
+     Transform the characters on display for special characters
+
+     returns: uint8_t indicating SUCCESS or FAILED
+*/
+uint8_t transform()
 {
 
 
@@ -967,10 +1016,19 @@ void transform()
     displayScreen(&i2c_mux4, &display4 , i, special_screens);
   }
 
+  return 1;
+
 }
 
-// Display function for key variants
-void display_variants()
+
+/*
+     Function: display_variants
+     --------------------
+     Display function for key variants
+
+     returns: uint8_t indicating SUCCESS or FAILED
+*/
+uint8_t display_variants()
 {
   if (a_key_pressed)
   {
@@ -1004,10 +1062,18 @@ void display_variants()
   {
     display_n_variant();
   }
+
+  return 1;
 }
 
-// Display function for 'A' key variants
-void display_a_variant()
+/*
+     Function: display_a_variant
+     --------------------
+     Display function for 'A' key variants
+
+     returns: uint8_t indicating SUCCESS or FAILED
+*/
+uint8_t display_a_variant()
 {
   i2c_mux4.setChannelMask(0);
 
@@ -1022,10 +1088,18 @@ void display_a_variant()
   {
     displayScreen(&i2c_mux4, &display4 , i, a_variants_screen);
   }
+
+  return 1;
 }
 
-// Display function for 'E' key variants
-void display_e_variant()
+/*
+     Function: display_e_variant
+     --------------------
+     Display function for 'E' key variants
+
+     returns: uint8_t indicating SUCCESS or FAILED
+*/
+uint8_t display_e_variant()
 {
   i2c_mux4.setChannelMask(0);
 
@@ -1040,10 +1114,18 @@ void display_e_variant()
   {
     displayScreen(&i2c_mux4, &display4 , i, e_variants_screen);
   }
+
+  return 1;
 }
 
-// Display function for 'Y' key variants
-void display_y_variant()
+/*
+     Function: display_y_variant
+     --------------------
+     Display function for 'Y' key variants
+
+     returns: uint8_t indicating SUCCESS or FAILED
+*/
+uint8_t display_y_variant()
 {
   i2c_mux4.setChannelMask(0);
 
@@ -1058,10 +1140,18 @@ void display_y_variant()
   {
     displayScreen(&i2c_mux4, &display4 , i, y_variants_screen);
   }
+
+  return 1;
 }
 
-// Display function for 'U' key variants
-void display_u_variant()
+/*
+     Function: display_u_variant
+     --------------------
+     Display function for 'U' key variants
+
+     returns: uint8_t indicating SUCCESS or FAILED
+*/
+uint8_t display_u_variant()
 {
   i2c_mux4.setChannelMask(0);
 
@@ -1076,10 +1166,19 @@ void display_u_variant()
   {
     displayScreen(&i2c_mux4, &display4 , i, u_variants_screen);
   }
+
+  return 1;
 }
 
-// Display function for 'I' key variants
-void display_i_variant()
+
+/*
+     Function: display_i_variant
+     --------------------
+     Display function for 'I' key variants
+
+     returns: uint8_t indicating SUCCESS or FAILED
+*/
+uint8_t display_i_variant()
 {
   i2c_mux4.setChannelMask(0);
 
@@ -1094,10 +1193,18 @@ void display_i_variant()
   {
     displayScreen(&i2c_mux4, &display4 , i, i_variants_screen);
   }
+
+  return 1;
 }
 
-// Display function for 'C' key variants
-void display_c_variant()
+/*
+     Function: display_c_variant
+     --------------------
+     Display function for 'C' key variants
+
+     returns: uint8_t indicating SUCCESS or FAILED
+*/
+uint8_t display_c_variant()
 {
   i2c_mux4.setChannelMask(0);
 
@@ -1112,9 +1219,17 @@ void display_c_variant()
   {
     displayScreen(&i2c_mux4, &display4 , i, c_variants_screen);
   }
+
+  return 1;
 }
 
-// Display function for 'O' key variants
+/*
+     Function: display_o_variant
+     --------------------
+     Display function for 'O' key variants
+
+     returns: uint8_t indicating SUCCESS or FAILED
+*/
 void display_o_variant()
 {
   i2c_mux4.setChannelMask(0);
@@ -1132,7 +1247,13 @@ void display_o_variant()
   }
 }
 
-// Display function for 'N' key variants
+/*
+     Function: display_n_variant
+     --------------------
+     Display function for 'N' key variants
+
+     returns: uint8_t indicating SUCCESS or FAILED
+*/
 void display_n_variant()
 {
   i2c_mux4.setChannelMask(0);
@@ -1150,7 +1271,19 @@ void display_n_variant()
   }
 }
 
-// Function for polling matrix keyboard
+/*
+    Function: checkKeys
+    --------------------
+    Function for polling matrix keyboard
+
+    Polling works as:
+    Sends HIGH to rows of the keyboard one row at a time and send LOW to others
+    Column pins read for inputs and ORes all the HIGHs to determine the input pressed
+    Except the modifier keys, they are direclty read instead of ORing to reduce latency
+
+   returns: void
+*/
+
 void checkKeys()
 {
 
@@ -1167,21 +1300,23 @@ void checkKeys()
   //  }
 
 
-  // Other than modifier keys
   for (int output = 0; output < 5; output++)
   {
     // Delay for scan voltage to settle
     delay(5);
 
+    // Set pin HIGH when its turn and set others LOW
     digitalWrite(output_pins[0], output == 0);
     digitalWrite(output_pins[1], output == 1);
     digitalWrite(output_pins[2], output == 2);
     digitalWrite(output_pins[3], output == 3);
     digitalWrite(output_pins[4], output == 4);
 
+    // Reads all the 16 inputs for first row
     if (output == 0)
     {
 
+      // Reads all the 16 inputs
       inputs = (digitalRead(INPUT1) << 15) |
                (digitalRead(INPUT2) << 14) |
                (digitalRead(INPUT3) << 13) |
@@ -1199,9 +1334,10 @@ void checkKeys()
                (digitalRead(INPUT15) << 1) |
                (digitalRead(INPUT16) << 0);
 
-      // assign inputs to rows to detect change
+      // assign inputs to rows to detect change, used for detecting pressing and releasing of buttons
       rows1 = inputs;
 
+      // Select key mode based on mode selected
       for (int i = 0; i < 16; i++)
       {
         if ((inputs >> i) & 0b01)
@@ -1253,9 +1389,11 @@ void checkKeys()
 
     }
 
+    // Reads all the 16 inputs for second row
     if (output == 1)
     {
 
+      // Reads all the 16 inputs
       inputs = (digitalRead(INPUT2) << 14) |
                (digitalRead(INPUT4) << 12) |
                (digitalRead(INPUT5) << 11) |
@@ -1271,19 +1409,23 @@ void checkKeys()
                (digitalRead(INPUT15) << 1) |
                (digitalRead(INPUT16) << 0);
 
+      // Technique to make 'e' key a variant key when any other variant key is called
       if ((u_key_pressed) || (y_key_pressed) || (a_key_pressed) || (i_key_pressed) || (c_key_pressed) || (o_key_pressed) || (n_key_pressed))
       {
         inputs |= digitalRead(INPUT1) << 15;
       }
 
+      // Technique to make 'a' key a variant key when any other variant key is called
       if ((u_key_pressed) || (y_key_pressed) || (e_key_pressed) || (i_key_pressed) || (c_key_pressed) || (o_key_pressed) || (n_key_pressed))
       {
         inputs |= digitalRead(INPUT3) << 13;
       }
 
-      // assign inputs to rows to detect change
+      // assign inputs to rows to detect change, used for detecting pressing and releasing of buttons
       rows2 = inputs;
 
+
+      // Select key mode based on mode selected
       for (int i = 0; i < 16; i++)
       {
         if ((inputs >> i) & 0b01)
@@ -1329,6 +1471,11 @@ void checkKeys()
         }
       }
 
+      /*
+         Functionality implementation for:
+         1. a key variants
+         2. very long key press
+      */
       if ((!u_key_pressed) && (!y_key_pressed) && (!e_key_pressed) && (!i_key_pressed) && (!c_key_pressed) && (!o_key_pressed) && (!n_key_pressed))
       {
         // 'a' key pressed?
@@ -1377,6 +1524,12 @@ void checkKeys()
         }
       }
 
+      /*
+
+         Functionality implementation for:
+         1. e key variants
+         2. very long key press
+      */
       if ((!u_key_pressed) && (!a_key_pressed) && (!y_key_pressed) && (!i_key_pressed) && (!c_key_pressed) && (!o_key_pressed) && (!n_key_pressed))
       {
         // 'e' key pressed?
@@ -1428,6 +1581,7 @@ void checkKeys()
 
     }
 
+    // Reads all the 16 inputs for third row
     if (output == 2)
     {
 
@@ -1443,25 +1597,25 @@ void checkKeys()
                (digitalRead(INPUT15) << 1) |
                (digitalRead(INPUT16) << 0);
 
-      // u key
+      // Technique to make 'u' key a variant key when any other variant key is called
       if (y_key_pressed || a_key_pressed || e_key_pressed || i_key_pressed || c_key_pressed || o_key_pressed || n_key_pressed)
       {
         inputs |= digitalRead(INPUT13) << 3;
       }
 
-      // y key
+      // Technique to make 'y' key a variant key when any other variant key is called
       if (u_key_pressed || a_key_pressed || e_key_pressed || i_key_pressed || c_key_pressed || o_key_pressed || n_key_pressed)
       {
         inputs |= digitalRead(INPUT14) << 2;
       }
 
-      // i key
+      // Technique to make 'i' key a variant key when any other variant key is called
       if (u_key_pressed || a_key_pressed || e_key_pressed || y_key_pressed || c_key_pressed || o_key_pressed || n_key_pressed)
       {
         inputs |= digitalRead(INPUT12) << 4;
       }
 
-      // o key
+      // Technique to make 'o' key a variant key when any other variant key is called
       if (u_key_pressed || a_key_pressed || e_key_pressed || y_key_pressed || c_key_pressed || i_key_pressed || n_key_pressed)
       {
         inputs |= (digitalRead(INPUT11) << 5);
@@ -1470,6 +1624,7 @@ void checkKeys()
       // assign inputs to rows to detect change
       rows3 = inputs;
 
+      // Select key mode based on mode selected
       for (int i = 0; i < 16; i++)
       {
         if ((inputs >> i) & 0b01)
@@ -1515,6 +1670,11 @@ void checkKeys()
         }
       }
 
+      /*
+         Functionality implementation for:
+         1. 'y' key variants
+         2. very long key press
+      */
       if ((!u_key_pressed) && (!a_key_pressed) && (!e_key_pressed) && (!i_key_pressed) && (!c_key_pressed) && (!o_key_pressed) && (!n_key_pressed))
       {
         // 'y' key pressed?
@@ -1611,6 +1771,11 @@ void checkKeys()
         }
       }
 
+      /*
+         Functionality implementation for:
+         1. 'i' key variants
+         2. very long key press
+      */
       if ((!y_key_pressed) && (!a_key_pressed) && (!e_key_pressed) && (!u_key_pressed) && (!c_key_pressed) && (!o_key_pressed) && (!n_key_pressed))
       {
         // 'i' key pressed?
@@ -1676,6 +1841,11 @@ void checkKeys()
 
       }
 
+      /*
+         Functionality implementation for:
+         1. 'o' key variants
+         2. very long key press
+      */
       if ((!y_key_pressed) && (!a_key_pressed) && (!e_key_pressed) && (!u_key_pressed) && (!c_key_pressed) && (!i_key_pressed) && (!n_key_pressed))
       {
         // 'o' key pressed?
@@ -1742,6 +1912,7 @@ void checkKeys()
       }
     }
 
+    // Reads all the 16 inputs for fourth row
     if (output == 3)
     {
 
@@ -1759,11 +1930,13 @@ void checkKeys()
                (digitalRead(INPUT15) << 1) |
                (digitalRead(INPUT16) << 0);
 
+      // Technique to make 'c' key a variant key when any other variant key is called
       if (u_key_pressed || a_key_pressed || e_key_pressed || y_key_pressed || i_key_pressed || o_key_pressed || n_key_pressed)
       {
         inputs |= digitalRead(INPUT6) << 10;
       }
 
+      // Technique to make 'n' key a variant key when any other variant key is called
       if (u_key_pressed || a_key_pressed || e_key_pressed || y_key_pressed || i_key_pressed || o_key_pressed || c_key_pressed)
       {
         inputs |= (digitalRead(INPUT3) << 13) ;
@@ -1773,7 +1946,7 @@ void checkKeys()
       rows4 = inputs;
 
 
-
+      // Select key mode based on mode selected
       for (int i = 0; i < 16; i++)
       {
         if ((inputs >> i) & 0b01)
@@ -1823,6 +1996,11 @@ void checkKeys()
         }
       }
 
+      /*
+         Functionality implementation for:
+         1. 'c' key variants
+         2. very long key press
+      */
       if ((!u_key_pressed) && (!a_key_pressed) && (!e_key_pressed) && (!i_key_pressed) && (!y_key_pressed) && (!o_key_pressed) && (!n_key_pressed))
       {
         // 'c' key pressed?
@@ -1871,6 +2049,11 @@ void checkKeys()
         }
       }
 
+      /*
+         Functionality implementation for:
+         1. 'n' key variants
+         2. very long key press
+      */
       if ((!u_key_pressed) && (!a_key_pressed) && (!e_key_pressed) && (!i_key_pressed) && (!y_key_pressed) && (!o_key_pressed) && (!c_key_pressed))
       {
         // 'n' key pressed?
@@ -1919,7 +2102,7 @@ void checkKeys()
         }
       }
 
-      // Left shift key
+      // Left shift key press
       if ((digitalRead(INPUT9) == HIGH) && (shift_key_left == false))
       {
         shift_key_left = true;
@@ -1927,6 +2110,7 @@ void checkKeys()
 
         track_shift_time = millis();
       }
+      // Left shift key release
       else if ((digitalRead(INPUT9) == LOW) && (shift_key_left == true))
       {
         shift_key_left = false;
@@ -1943,6 +2127,7 @@ void checkKeys()
     }
 
 
+    // Reads all the 16 inputs for fifth row
     if (output == 4)
     {
 
@@ -2079,7 +2264,7 @@ void checkKeys()
 
     }
 
-
+    // technique to detect if key repeated
     if (last_key_selected == key_selected)
     {
       if (!repeat_first)
@@ -2107,13 +2292,14 @@ void checkKeys()
       if ((!shift_key_right) && (!shift_key_left) && (!ctrl_key_left) && (!ctrl_key_right)  /
           (!alt_key_left) && (!alt_key_right))
       {
-        delay(repeat_delay);
+        delay(repeat_delay);  //delay added in repetition key for smoother experience
       }
 
 
       //    Serial.println("hello");
       //    Serial.println(key_selected);
 
+      // Print the requested key
       print_key(key_selected);
 
       key_selected = NULL;
@@ -2121,7 +2307,15 @@ void checkKeys()
   }
 }
 
-// Send keys to PC over USB HID
+/*
+    Function: print_key
+    --------------------
+    function for sending keys to PC over USB HID
+
+    detects the key summoned and send to PC over USB HID after processing
+
+    returns: void
+*/
 void print_key(uint32_t key)
 {
   uint8_t last_num_lock_state = Keyboard.check_numlock();
