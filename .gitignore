@@ -20,7 +20,6 @@ library/debug.log
 __Previews
 *.PrjPcbStructure
 *.Dat
-*.REP 
 *.TLT
 *.LOG
 *.log
