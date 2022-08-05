@@ -89,11 +89,13 @@
 #define HID_MEDIA_STOP  0xB7
 #define HID_MEDIA_EJECT 0xB8
 #define HID_MEDIA_VOL_UP 0xE9
-#define HID_MEDIA_VOL_DONW 0xEA
+#define HID_MEDIA_VOL_DOWN 0xEA
 #define HID_MEDIA_PLAY  0xCD // play/pause
 #define HID_MIC  0x04 // play/pause
 #define HID_CAMERA  0x78 // play/pause
-#define  HID_RADIO_WIRELESS 0xC6
+#define HID_RADIO_WIRELESS 0xC6
+#define HID_INC_BRIGHTNESS 0x6F
+#define HID_DEC_BRIGHTNESS 0x70
 #define  HID_MEDIA_REPORT  2
 #define HID_WIRELESS_REPORT 3
 
