@@ -1,0 +1,171 @@
+Protel Design System Design Rule Check
+PCB File : E:\YazidBoukhlouf-OLEDKeyboard\Design-Files\Membrane_Board\Membrane_Board.PcbDoc
+Date     : 9/22/2022
+Time     : 6:08:29 PM
+
+Processing Rule : Clearance Constraint (Gap=7mil) (All),(All)
+   Violation between Clearance Constraint: (6.142mil < 7mil) Between Track (3108.615mil,1247.385mil)(3211mil,1145mil) on Bottom Layer And Track (3127mil,1249mil)(3127mil,1552mil) on Bottom Layer 
+   Violation between Clearance Constraint: (6.142mil < 7mil) Between Track (3108.615mil,1247.385mil)(3211mil,1145mil) on Bottom Layer And Track (3127mil,1249mil)(3207mil,1169mil) on Bottom Layer 
+   Violation between Clearance Constraint: (6.142mil < 7mil) Between Track (3108.615mil,1247.385mil)(3211mil,1145mil) on Bottom Layer And Track (3207mil,1169mil)(3241mil,1169mil) on Bottom Layer 
+Rule Violations :3
+
+Processing Rule : Short-Circuit Constraint (Allowed=No) (All),(All)
+Rule Violations :0
+
+Processing Rule : Un-Routed Net Constraint ( (All) )
+   Violation between Un-Routed Net Constraint: Net VDD Between Pad J10-1(8770.315mil,2679.291mil) on Bottom Layer And Via (9183.945mil,3044mil) from Top Layer to Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Pad J104-1(2448.63mil,152.921mil) on Bottom Layer And Pad J75-24(3145.465mil,35mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Track (1702.63mil,155.551mil)(1702.63mil,306.291mil) on Bottom Layer And Pad J104-1(2448.63mil,152.921mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (1801.63mil,225.417mil)(1801.63mil,298.291mil) on Bottom Layer And Pad J104-2(2548.63mil,223.787mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Pad J109-2(7470.685mil,224.787mil) on Bottom Layer And Track (8220.63mil,226.866mil)(8220.63mil,296.661mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Pad J114-1(7117.945mil,1185.291mil) on Bottom Layer And Track (7295.575mil,1672.551mil)(7295.575mil,1823.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Pad J117-1(4123.945mil,1185.291mil) on Bottom Layer And Track (4302.945mil,1672.551mil)(4302.945mil,1823.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Pad J118-1(7862.315mil,1184.291mil) on Bottom Layer And Track (8043.26mil,1671.551mil)(8043.26mil,1822.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Pad J121-1(4871.26mil,1184.291mil) on Bottom Layer And Track (5050.26mil,1671.551mil)(5050.26mil,1822.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Pad J122-1(8611.63mil,1183.291mil) on Bottom Layer And Track (8791.575mil,1672.551mil)(8791.575mil,1823.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Pad J125-1(5618.945mil,1184.291mil) on Bottom Layer And Track (5799.63mil,1672.551mil)(5799.63mil,1823.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Track (9539.63mil,1671.551mil)(9539.63mil,1822.291mil) on Bottom Layer And Pad J126-1(9912.575mil,1183.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Pad J129-1(6368.26mil,1184.291mil) on Bottom Layer And Track (6547.575mil,1672.551mil)(6547.575mil,1823.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Pad J130-1(364.63mil,416.291mil) on Bottom Layer And Track (599.945mil,922.551mil)(599.945mil,1073.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Via (9183.945mil,3044mil) from Top Layer to Bottom Layer And Pad J13-1(9517.63mil,2679.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Track (304.575mil,2419.551mil)(304.575mil,2570.291mil) on Bottom Layer And Pad J16-1(561.26mil,1931.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (403.575mil,2489.417mil)(403.575mil,2562.291mil) on Bottom Layer And Pad J16-2(580.945mil,1931.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Track (1880.26mil,2419.551mil)(1880.26mil,2570.291mil) on Bottom Layer And Pad J48-1(2215.26mil,1931.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Track (205.945mil,3167.551mil)(205.945mil,3318.291mil) on Bottom Layer And Pad J5-1(462.575mil,2679.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (304.945mil,3237.417mil)(304.945mil,3310.291mil) on Bottom Layer And Pad J5-2(482.26mil,2679.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Track (1861.26mil,3425.291mil)(1861.26mil,3486.425mil) on Bottom Layer And Pad J57-1(2053.945mil,3912.921mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (1406.37mil,3983.787mil)(1408mil,3985.417mil) on Bottom Layer And Pad J57-2(2153.945mil,3983.787mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Pad J57-2(2153.945mil,3983.787mil) on Bottom Layer And Track (2905mil,3986.417mil)(2905mil,4059.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Pad J60-1(1881.63mil,1182.291mil) on Bottom Layer And Track (2057.26mil,1671.551mil)(2057.26mil,1822.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Pad J65-1(2629.575mil,1183.291mil) on Bottom Layer And Track (2807.63mil,1670.551mil)(2807.63mil,1821.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Pad J69-1(8281.26mil,415.291mil) on Bottom Layer And Track (8453.63mil,923.551mil)(8453.63mil,1074.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Track (1723.63mil,922.551mil)(1723.63mil,1073.291mil) on Bottom Layer And Pad J70-1(1860.63mil,415.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Track (2471.575mil,923.551mil)(2471.575mil,1074.291mil) on Bottom Layer And Pad J72-1(2609.26mil,415.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Pad J74-1(7531.315mil,416.291mil) on Bottom Layer And Track (7704.315mil,924.551mil)(7704.315mil,1075.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (9346mil,226.866mil)(9346mil,296.661mil) on Bottom Layer And Track (10002mil,227.236mil)(10002mil,297.032mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Track (9754.575mil,923.551mil)(9754.575mil,1074.291mil) on Bottom Layer And Track (10062.63mil,340.661mil)(10062.63mil,415.661mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (9853.575mil,993.417mil)(9853.575mil,1066.291mil) on Bottom Layer And Track (10082.315mil,320.519mil)(10082.315mil,415.661mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (9635.315mil,3988.417mil)(9635.315mil,4061.291mil) on Bottom Layer And Track (10383.63mil,3987.417mil)(10383.63mil,4060.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (1052.575mil,226.417mil)(1052.575mil,299.291mil) on Bottom Layer And Track (1801.63mil,225.417mil)(1801.63mil,298.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (305.63mil,226.417mil)(305.63mil,299.291mil) on Bottom Layer And Track (1052.575mil,226.417mil)(1052.575mil,299.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (1052.575mil,3238.417mil)(1052.575mil,3311.291mil) on Bottom Layer And Track (1802.26mil,3235.417mil)(1802.26mil,3308.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (304.945mil,3237.417mil)(304.945mil,3310.291mil) on Bottom Layer And Track (1052.575mil,3238.417mil)(1052.575mil,3311.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Track (1130.63mil,2419.551mil)(1130.63mil,2570.291mil) on Bottom Layer And Track (1880.26mil,2419.551mil)(1880.26mil,2570.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (1229.63mil,2489.417mil)(1229.63mil,2562.291mil) on Bottom Layer And Track (1979.26mil,2489.417mil)(1979.26mil,2562.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (403.575mil,2489.417mil)(403.575mil,2562.291mil) on Bottom Layer And Track (1229.63mil,2489.417mil)(1229.63mil,2562.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Track (1309.945mil,1671.551mil)(1309.945mil,1822.291mil) on Bottom Layer And Track (2057.26mil,1671.551mil)(2057.26mil,1822.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (1408.945mil,1741.417mil)(1408.945mil,1814.291mil) on Bottom Layer And Track (2156.26mil,1741.417mil)(2156.26mil,1814.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (502.26mil,1741.417mil)(502.26mil,1814.291mil) on Bottom Layer And Track (1408.945mil,1741.417mil)(1408.945mil,1814.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Track (953.575mil,156.551mil)(953.575mil,307.291mil) on Bottom Layer And Track (1702.63mil,155.551mil)(1702.63mil,306.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (1802.26mil,3235.417mil)(1802.26mil,3308.291mil) on Bottom Layer And Track (2550.26mil,3237.417mil)(2550.26mil,3310.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (1822.63mil,992.417mil)(1822.63mil,1065.291mil) on Bottom Layer And Track (2156.26mil,1741.417mil)(2156.26mil,1814.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (1822.63mil,992.417mil)(1822.63mil,1065.291mil) on Bottom Layer And Track (2570.575mil,993.417mil)(2570.575mil,1066.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Track (1880.26mil,2419.551mil)(1880.26mil,2570.291mil) on Bottom Layer And Track (2627.945mil,2419.551mil)(2627.945mil,2570.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (1979.26mil,2489.417mil)(1979.26mil,2562.291mil) on Bottom Layer And Track (2726.945mil,2489.417mil)(2726.945mil,2562.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Track (206.63mil,156.551mil)(206.63mil,307.291mil) on Bottom Layer And Track (953.575mil,156.551mil)(953.575mil,307.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (2156.26mil,1741.417mil)(2156.26mil,1814.291mil) on Bottom Layer And Track (2906.63mil,1740.417mil)(2906.63mil,1813.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Track (2471.575mil,923.551mil)(2471.575mil,1074.291mil) on Bottom Layer And Track (3217.945mil,924.551mil)(3227.37mil,933.977mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (2550.26mil,3237.417mil)(2550.26mil,3310.291mil) on Bottom Layer And Track (3298.945mil,3237.417mil)(3298.945mil,3310.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (2570.575mil,993.417mil)(2570.575mil,1066.291mil) on Bottom Layer And Track (3316.945mil,994.417mil)(3316.945mil,1083.945mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (2570.575mil,993.417mil)(2570.575mil,1066.291mil) on Bottom Layer And Via (2688mil,538mil) from Top Layer to Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Track (2627.945mil,2419.551mil)(2627.945mil,2570.291mil) on Bottom Layer And Track (3373.945mil,2418.551mil)(3373.945mil,2569.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (2726.945mil,2489.417mil)(2726.945mil,2562.291mil) on Bottom Layer And Track (3472.945mil,2488.417mil)(3472.945mil,2561.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (2905mil,3986.417mil)(2905mil,4059.291mil) on Bottom Layer And Track (3652mil,3987.417mil)(3652mil,4060.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (2906.63mil,1740.417mil)(2906.63mil,1813.291mil) on Bottom Layer And Track (3654.63mil,1741.417mil)(3654.63mil,1814.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Track (3227.37mil,933.977mil)(3227.37mil,1087.37mil) on Bottom Layer And Track (3965.945mil,925.551mil)(3965.945mil,1076.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (3298.945mil,3237.417mil)(3298.945mil,3310.291mil) on Bottom Layer And Track (4047.945mil,3237.417mil)(4047.945mil,3310.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (3316.945mil,994.417mil)(3316.945mil,1083.945mil) on Bottom Layer And Track (4064.945mil,995.417mil)(4064.945mil,1068.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Track (3373.945mil,2418.551mil)(3373.945mil,2569.291mil) on Bottom Layer And Track (4123.945mil,2420.551mil)(4123.945mil,2571.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (3472.945mil,2488.417mil)(3472.945mil,2561.291mil) on Bottom Layer And Track (4222.945mil,2490.417mil)(4222.945mil,2563.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Track (3555.63mil,1671.551mil)(3555.63mil,1822.291mil) on Bottom Layer And Track (4302.945mil,1672.551mil)(4302.945mil,1823.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (3652mil,3987.417mil)(3652mil,4060.291mil) on Bottom Layer And Track (4400mil,3984.417mil)(4400mil,4057.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (3654.63mil,1741.417mil)(3654.63mil,1814.291mil) on Bottom Layer And Track (4401.945mil,1742.417mil)(4401.945mil,1815.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (4047.945mil,3237.417mil)(4047.945mil,3310.291mil) on Bottom Layer And Track (4795.315mil,3237.417mil)(4795.315mil,3310.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (4064.945mil,995.417mil)(4064.945mil,1068.291mil) on Bottom Layer And Track (4812.26mil,994.417mil)(4812.26mil,1067.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Track (4123.945mil,2420.551mil)(4123.945mil,2571.291mil) on Bottom Layer And Track (4872.63mil,2419.551mil)(4872.63mil,2570.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (4222.945mil,2490.417mil)(4222.945mil,2563.291mil) on Bottom Layer And Track (4971.63mil,2489.417mil)(4971.63mil,2562.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Track (4302.945mil,1672.551mil)(4302.945mil,1823.291mil) on Bottom Layer And Track (5050.26mil,1671.551mil)(5050.26mil,1822.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (4400mil,3984.417mil)(4400mil,4057.291mil) on Bottom Layer And Track (5147.945mil,3987.417mil)(5147.945mil,4060.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (4401.945mil,1742.417mil)(4401.945mil,1815.291mil) on Bottom Layer And Track (5149.26mil,1741.417mil)(5149.26mil,1814.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Track (4713.26mil,924.551mil)(4713.26mil,1075.291mil) on Bottom Layer And Track (5460.945mil,924.551mil)(5460.945mil,1075.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (4795.315mil,3237.417mil)(4795.315mil,3310.291mil) on Bottom Layer And Track (5541.26mil,3237.417mil)(5541.26mil,3310.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (4812.26mil,994.417mil)(4812.26mil,1067.291mil) on Bottom Layer And Track (5559.945mil,994.417mil)(5559.945mil,1067.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Track (4872.63mil,2419.551mil)(4872.63mil,2570.291mil) on Bottom Layer And Track (5614.63mil,2416.551mil)(5614.63mil,2567.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (4971.63mil,2489.417mil)(4971.63mil,2562.291mil) on Bottom Layer And Track (5713.63mil,2486.417mil)(5713.63mil,2559.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (502.26mil,1741.417mil)(502.26mil,1814.291mil) on Bottom Layer And Track (698.945mil,992.417mil)(698.945mil,1065.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (5147.945mil,3987.417mil)(5147.945mil,4060.291mil) on Bottom Layer And Track (5896.63mil,3986.417mil)(5896.63mil,4059.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (5149.26mil,1741.417mil)(5149.26mil,1814.291mil) on Bottom Layer And Track (5898.63mil,1742.417mil)(5898.63mil,1815.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (5541.26mil,3237.417mil)(5541.26mil,3310.291mil) on Bottom Layer And Track (6289.945mil,3238.417mil)(6289.945mil,3311.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (5559.945mil,994.417mil)(5559.945mil,1067.291mil) on Bottom Layer And Track (6309.26mil,994.417mil)(6309.26mil,1067.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Track (5614.63mil,2416.551mil)(5614.63mil,2567.291mil) on Bottom Layer And Track (6368.945mil,2419.551mil)(6368.945mil,2570.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (5713.63mil,2486.417mil)(5713.63mil,2559.291mil) on Bottom Layer And Track (6467.945mil,2489.417mil)(6467.945mil,2562.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Track (5766.685mil,3498mil)(5766.961mil,3498.276mil) on Bottom Layer And Track (5797.63mil,3916.551mil)(5797.63mil,4067.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Track (5799.63mil,1672.551mil)(5799.63mil,1823.291mil) on Bottom Layer And Track (6547.575mil,1672.551mil)(6547.575mil,1823.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (5896.63mil,3986.417mil)(5896.63mil,4059.291mil) on Bottom Layer And Track (6642mil,3983.417mil)(6642mil,4056.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (5898.63mil,1742.417mil)(5898.63mil,1815.291mil) on Bottom Layer And Track (6646.575mil,1742.417mil)(6646.575mil,1815.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (6289.945mil,3238.417mil)(6289.945mil,3311.291mil) on Bottom Layer And Track (6642mil,3983.417mil)(6642mil,4056.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (6289.945mil,3238.417mil)(6289.945mil,3311.291mil) on Bottom Layer And Track (7039.63mil,3238.417mil)(7039.63mil,3311.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (6309.26mil,994.417mil)(6309.26mil,1067.291mil) on Bottom Layer And Track (7058.945mil,995.417mil)(7058.945mil,1068.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Track (6368.945mil,2419.551mil)(6368.945mil,2570.291mil) on Bottom Layer And Track (7117mil,2419.551mil)(7117mil,2570.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (6467.945mil,2489.417mil)(6467.945mil,2562.291mil) on Bottom Layer And Track (7216mil,2489.417mil)(7216mil,2562.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Track (6547.575mil,1672.551mil)(6547.575mil,1823.291mil) on Bottom Layer And Track (7295.575mil,1672.551mil)(7295.575mil,1823.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (6642mil,3983.417mil)(6642mil,4056.291mil) on Bottom Layer And Track (7392mil,3987.417mil)(7392mil,4060.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (6646.575mil,1742.417mil)(6646.575mil,1815.291mil) on Bottom Layer And Track (7394.575mil,1742.417mil)(7394.575mil,1815.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Track (6959.945mil,925.551mil)(6959.945mil,1047.945mil) on Bottom Layer And Track (7704.315mil,924.551mil)(7704.315mil,1075.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (7039.63mil,3238.417mil)(7039.63mil,3311.291mil) on Bottom Layer And Track (7786.945mil,3238.417mil)(7786.945mil,3311.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (7058.945mil,995.417mil)(7058.945mil,1068.291mil) on Bottom Layer And Track (7803.315mil,994.417mil)(7803.315mil,1067.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Track (7117mil,2419.551mil)(7117mil,2570.291mil) on Bottom Layer And Track (7865mil,2418.551mil)(7865mil,2569.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (7216mil,2489.417mil)(7216mil,2562.291mil) on Bottom Layer And Track (7964mil,2488.417mil)(7964mil,2561.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (7392mil,3987.417mil)(7392mil,4060.291mil) on Bottom Layer And Track (8138.26mil,3987.417mil)(8138.26mil,4060.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (7394.575mil,1742.417mil)(7394.575mil,1815.291mil) on Bottom Layer And Track (8142.26mil,1741.417mil)(8142.26mil,1814.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (7786.945mil,3238.417mil)(7786.945mil,3311.291mil) on Bottom Layer And Track (8535.945mil,3237.417mil)(8535.945mil,3310.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (7803.315mil,994.417mil)(7803.315mil,1067.291mil) on Bottom Layer And Track (8552.63mil,993.417mil)(8552.63mil,1066.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Track (7865mil,2418.551mil)(7865mil,2569.291mil) on Bottom Layer And Track (8612.315mil,2419.551mil)(8612.315mil,2570.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (7964mil,2488.417mil)(7964mil,2561.291mil) on Bottom Layer And Track (8711.315mil,2489.417mil)(8711.315mil,2562.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Track (8043.26mil,1671.551mil)(8043.26mil,1822.291mil) on Bottom Layer And Track (8791.575mil,1672.551mil)(8791.575mil,1823.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (8138.26mil,3987.417mil)(8138.26mil,4060.291mil) on Bottom Layer And Track (8890.63mil,3984.417mil)(8890.63mil,4057.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (8142.26mil,1741.417mil)(8142.26mil,1814.291mil) on Bottom Layer And Track (8890.575mil,1742.417mil)(8890.575mil,1815.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (8220.63mil,226.866mil)(8220.63mil,296.661mil) on Bottom Layer And Track (8552.63mil,993.417mil)(8552.63mil,1066.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (8535.945mil,3237.417mil)(8535.945mil,3310.291mil) on Bottom Layer And Track (9282.945mil,3237.417mil)(9282.945mil,3310.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (8711.315mil,2489.417mil)(8711.315mil,2562.291mil) on Bottom Layer And Track (9458.63mil,2489.417mil)(9458.63mil,2562.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Track (8791.575mil,1672.551mil)(8791.575mil,1823.291mil) on Bottom Layer And Track (9539.63mil,1671.551mil)(9539.63mil,1822.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (8890.575mil,1742.417mil)(8890.575mil,1815.291mil) on Bottom Layer And Track (9638.63mil,1741.417mil)(9638.63mil,1814.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (8890.63mil,3984.417mil)(8890.63mil,4057.291mil) on Bottom Layer And Track (9635.315mil,3988.417mil)(9635.315mil,4061.291mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VDD Between Track (9246mil,156mil)(9246mil,303.661mil) on Bottom Layer And Track (9902mil,156.37mil)(9902mil,304.032mil) on Bottom Layer 
+   Violation between Un-Routed Net Constraint: Net VCC_3V3 Between Track (9638.63mil,1741.417mil)(9638.63mil,1814.291mil) on Bottom Layer And Track (9853.575mil,993.417mil)(9853.575mil,1066.291mil) on Bottom Layer 
+Rule Violations :120
+
+Processing Rule : Modified Polygon (Allow modified: No), (Allow shelved: No)
+Rule Violations :0
+
+Processing Rule : Width Constraint (Min=8mil) (Max=40mil) (Preferred=8mil) (All)
+Rule Violations :0
+
+Processing Rule : Power Plane Connect Rule(Relief Connect )(Expansion=20mil) (Conductor Width=10mil) (Air Gap=10mil) (Entries=4) (All)
+Rule Violations :0
+
+Processing Rule : Hole Size Constraint (Min=1mil) (Max=1000mil) (All)
+Rule Violations :0
+
+Processing Rule : Hole To Hole Clearance (Gap=0mil) (All),(All)
+Rule Violations :0
+
+Processing Rule : Minimum Solder Mask Sliver (Gap=0mil) (All),(All)
+Rule Violations :0
+
+Processing Rule : Silk To Solder Mask (Clearance=0mil) (IsPad),(All)
+Rule Violations :0
+
+Processing Rule : Silk to Silk (Clearance=0mil) (All),(All)
+Rule Violations :0
+
+Processing Rule : Net Antennae (Tolerance=0mil) (All)
+Rule Violations :0
+
+Processing Rule : Height Constraint (Min=0mil) (Max=1000mil) (Prefered=500mil) (All)
+Rule Violations :0
+
+
+Violations Detected : 123
+Waived Violations : 0
+Time Elapsed        : 00:00:04
