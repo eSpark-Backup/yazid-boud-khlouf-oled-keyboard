@@ -1,8 +1,8 @@
 Board Information Report
 Filename     : C:\Users\LiberDB\Documents\GitHub\YazidBoukhlouf-OLEDKeyboard\Design-Files\Membrane_Board\Membrane_Board.PcbDoc
-Date         : 9/30/2022
-Time         : 7:06:48 PM
-Time Elapsed : 00:00:00
+Date         : 10/4/2022
+Time         : 9:41:49 PM
+Time Elapsed : 00:00:01
 
 General
     Board Size, 11535.433milsx4569.291mils
@@ -17,11 +17,11 @@ Routing Information
 count : 4
 
 Layer, Arcs, Pads, Vias, Tracks, Texts, Fills, Regions, ComponentBodies
-    Top Layer, 0, 0, 0, 1171, 0, 0, 0, 0
-    Bottom Layer, 0, 1056, 0, 3712, 0, 15, 0, 0
+    Top Layer, 0, 0, 0, 1278, 0, 0, 0, 0
+    Bottom Layer, 0, 1056, 0, 3868, 0, 19, 0, 0
     Mechanical 1, 83, 0, 0, 8, 1, 0, 0, 147
     Mechanical 2, 0, 0, 0, 319, 0, 0, 3, 0
-    Multi-Layer, 0, 44, 611, 0, 0, 0, 74, 0
+    Multi-Layer, 0, 44, 701, 0, 0, 0, 74, 0
     Top Paste, 0, 0, 0, 0, 0, 0, 0, 0
     Top Overlay, 21, 0, 0, 0, 42, 0, 0, 0
     Top Solder, 0, 0, 0, 0, 0, 0, 0, 0
