@@ -64,7 +64,7 @@ GenerateClassCluster=0
 DocumentUniqueId=XWYPSIKG
 
 [Document2]
-DocumentPath=PCB1.PcbDoc
+DocumentPath=PCB_Flex_26.PcbDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
