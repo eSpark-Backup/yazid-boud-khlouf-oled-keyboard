@@ -149,7 +149,7 @@ GenerateClassCluster=0
 DocumentUniqueId=OZWKSREO
 
 [Document7]
-DocumentPath=Membrane_Board.PcbDoc
+DocumentPath=Membrane_Board_Latest.PcbDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
